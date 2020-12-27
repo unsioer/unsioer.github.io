@@ -144,15 +144,15 @@
   
   <entry>
     <title>CentOS安裝WordPress</title>
-    <link href="/Linux/CentOSWordPress/"/>
-    <url>/Linux/CentOSWordPress/</url>
+    <link href="/centos/CentOSWordPress/"/>
+    <url>/centos/CentOSWordPress/</url>
     
     <content type="html"><![CDATA[<p></p><a id="more"></a><p>原早only配過Ubuntu server兮WordPress，今伺服器系統是CentOS 7，也來試下。</p><h2>基礎工課</h2><p>CentOS默認有mariadb（mysql一款分支）</p><pre><code class="hljs Bash">yum install -y httpd mariadb-server mysql wordpress php php-mysqlsystemctl start httpd <span class="hljs-comment">#service httpd start嘛解使</span>systemctl <span class="hljs-built_in">enable</span> httpd <span class="hljs-comment">#開機自啓動</span>systemctl start mariadbsystemctl <span class="hljs-built_in">enable</span> mariadb</code></pre><h2>配mysql</h2><pre><code class="hljs sql">mysql -u root -p<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> wordpress;<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> wordpressuser@localhost;<span class="hljs-keyword">SET</span> <span class="hljs-keyword">PASSWORD</span> <span class="hljs-keyword">FOR</span> wordpressuser@localhost= <span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&quot;password&quot;</span>);</code></pre><p>然後對應修改<code>/usr/share/wordpress/wp-config.php</code></p><pre><code class="hljs php"><span class="hljs-comment">// ** MySQL settings - You can get this info from your web host ** //</span><span class="hljs-comment">/** The name of the database for WordPress */</span>define(<span class="hljs-string">&#x27;DB_NAME&#x27;</span>, <span class="hljs-string">&#x27;wordpress&#x27;</span>);<span class="hljs-comment">/** MySQL database username */</span>define(<span class="hljs-string">&#x27;DB_USER&#x27;</span>, <span class="hljs-string">&#x27;wordpressuser&#x27;</span>);<span class="hljs-comment">/** MySQL database password */</span>define(<span class="hljs-string">&#x27;DB_PASSWORD&#x27;</span>, <span class="hljs-string">&#x27;password&#x27;</span>);</code></pre><h2>改httpd</h2><p>修改 <code>/etc/httpd/conf/httpd.conf</code>。<br>比如汝欲將wordpress放佇<code>/wordpress</code>路徑：</p><pre><code class="hljs Shell">AcceptFilter http noneAcceptFilter https noneAlias /wordpress /usr/share/wordpress&lt;Directory /usr/share/wordpress&gt;    Options FollowSymLinks    AllowOverride Limit Options FileInfo    DirectoryIndex index.php    Require all granted &lt;/Directory&gt;&lt;Directory /usr/share/wordpress/wp-content&gt;    Options FollowSymLinks    Require all granted&lt;/Directory&gt;</code></pre><p>佇Apache 2.4版本，單</p><pre><code class="hljs Shell">Order allow, denyAllow from all</code></pre><p>兩句袂行（報權限錯誤403），只好加</p><pre><code class="hljs Shell">Require all granted</code></pre>]]></content>
     
     
     <categories>
       
-      <category>Linux</category>
+      <category>CentOS</category>
       
     </categories>
     
