@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Enatsu">
+  <meta name="keywords" content="">
+  <title>彙編語言複習筆記1：基礎知識 - Enatsu&#39;s Site</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Enatsu's Site</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                歸檔
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+      <div class="text-center"><button id="btn-simplify" type="button" class="navbar-convert">繁</button></div>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-01-06 09:48">
+      2020年1月6日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      凡 1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <blockquote>
+<p>彙整自個人OneNote筆記。<br>
+僅記錄重點，不記例題。</p>
+</blockquote>
+<a id="more"></a>
+<h1>二進制編碼</h1>
+<p>位 字節 字<br>
+進制 進制轉換<br>
+(略)</p>
+<ul>
+<li><strong>原碼</strong>：最高位表示符號（正0負1），其他位直接表示數值大小。</li>
+<li><strong>反碼</strong>：正數反碼與原碼相同；負數反碼爲它的相反數（正數）各位（含符號位）按位取反而形成。</li>
+<li><strong>補碼</strong>：正數反碼與原碼相同；負數反碼爲它的相反數（正數）補碼取反再加1。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">十進制數</th>
+<th style="text-align:center">原碼</th>
+<th style="text-align:center">反碼</th>
+<th style="text-align:center">補碼</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center">00010101</td>
+<td style="text-align:center">00010101</td>
+<td style="text-align:center">00010101</td>
+</tr>
+<tr>
+<td style="text-align:center">-21</td>
+<td style="text-align:center">10010101</td>
+<td style="text-align:center">11101010</td>
+<td style="text-align:center">11101011</td>
+</tr>
+</tbody>
+</table>
+<h1>BCD碼（8421 BCD碼）</h1>
+<p>十進制數位用4位二進制（1位十六進制）編碼表示，如用<code>88H</code>代表十進制的88。</p>
+<ul>
+<li><strong>非壓縮BCD</strong>：1字節表達1位BCD碼（高4位爲0）。</li>
+<li><strong>壓縮BCD</strong>：1字節表達2位BCD碼。</li>
+</ul>
+<h1>ASCII</h1>
+<p>（略）</p>
+<h1>8086寄存器</h1>
+<h2>通用寄存器</h2>
+<h3>數據寄存器</h3>
+<ul>
+<li><code>AX</code> (<code>AH</code>/<code>AL</code>) 累加器：算術、邏輯運算，與外設傳送信息</li>
+<li><code>BX</code> (<code>BH</code>/<code>BL</code>) 基址寄存器：存放存儲器地址</li>
+<li><code>CX</code> (<code>CH</code>/<code>CL</code>) 計數器：循環操作等指令中的計數器</li>
+<li><code>DX</code> (<code>DH</code>/<code>DL</code>) 數據寄存器：存放數據，在輸入輸出指令中存放外設端口地址</li>
+</ul>
+<h3>變址寄存器</h3>
+<ul>
+<li><code>SI</code> 源變址寄存器： 指向源操作數</li>
+<li><code>DI</code> 目的變址寄存器：指向目的操作數</li>
+</ul>
+<h3>指針寄存器</h3>
+<ul>
+<li><code>BP</code> 基址指針：默認指向堆棧數據，主要用於子程序中訪問通過堆棧傳遞的參數和局部變量</li>
+<li><code>SP</code> 堆棧指針：總是指向堆棧頂部，在涉及堆棧操作的指令中會自動增加或減少</li>
+</ul>
+<h2>標誌寄存器 <code>FLAGS</code></h2>
+<p>6狀態標誌 3控制標誌</p>
+<table>
+<thead>
+<tr>
+<th>11</th>
+<th>10</th>
+<th>9</th>
+<th>8</th>
+<th>7</th>
+<th>6</th>
+<th>4</th>
+<th>2</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OF</td>
+<td>DF</td>
+<td>IF</td>
+<td>TF</td>
+<td>SF</td>
+<td>ZF</td>
+<td>AF</td>
+<td>PF</td>
+<td>CF</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>進位標誌 <code>CF</code> (Carry Flag)：反映（無符號數）加減運算最高位（$D_7$）有無進位/借位，有爲1。</li>
+<li>奇偶標誌 <code>PF</code> (Parity Flag)：最低字節1的奇偶個數，偶數爲1。</li>
+<li>零標誌 <code>ZF</code> (Zero Flag)：運算結果是否爲0，是爲1。</li>
+<li>符號標誌 <code>SF</code> (Sign Flag)：運算結果最高位爲1，<code>SF</code>=1；否則<code>SF</code>=0。對有符號數來說，相當於判斷正負。</li>
+<li>溢出標誌 <code>OF</code> (Overflow Flag)：反映（有符號數）運算結果是否溢出，有爲1。</li>
+<li>輔助進位標誌/調整標誌 <code>AF</code> (Auxiliary Carry Flag/Adjust Flag)：反映加減運算最低半字節（$D_3$向$D_4$）有無進位/借位，有爲1（由處理器內部使用，一般不必關心）。</li>
+<li>方向標誌 <code>DF</code> (Direction Flag)：用於串操作指令中控制地址的變化方向，0爲自動增加，1爲自動減少。
+<ul>
+<li><code>CLD</code>指令復位：<code>DF</code>=0</li>
+<li><code>STD</code>指令置位：<code>DF</code>=1</li>
+</ul>
+</li>
+<li>中斷允許標誌 <code>IF</code> (Interrupt-enable Flag)：控制外部可屏蔽中斷是否可以被處理器響應，1爲允許中斷，0爲禁止中斷。
+<ul>
+<li><code>CLI</code>指令復位：<code>IF</code>=0</li>
+<li><code>STI</code>指令置位：<code>IF</code>=1</li>
+</ul>
+</li>
+<li>陷阱標誌 <code>TF</code> (Trap Flag)：控制處理器是否進入單步操作方式，0爲正常工作，1爲單步執行指令。</li>
+</ul>
+<h2>指令指針寄存器 <code>IP</code></h2>
+<p>與代碼段寄存器<code>CS</code>聯用，確定下一條指令的物理地址。<br>
+計算機通過<code>CS:IP</code>控制指令序列執行流程。<br>
+而<code>IP</code>具有自動增量功能，不能直接賦值修改。</p>
+<h2>段寄存器</h2>
+<ul>
+<li><code>CS</code> 代碼段寄存器：指明代碼段起始地址</li>
+<li><code>SS</code> 堆棧段寄存器：指明堆棧段起始地址</li>
+<li><code>DS</code> 數據段寄存器：指明數據段起始地址</li>
+<li><code>ES</code> 附加段寄存器：指明附加段起始地址</li>
+</ul>
+<h1>存儲器組織</h1>
+<h2>數據存儲格式</h2>
+<ul>
+<li>Word 字：2字節</li>
+<li>Double Word 雙字：4字節</li>
+</ul>
+<p>小端方式：字或雙字存放時，低字節存入低地址，高字節存入高地址；字或雙字單元的地址用它的低地址表示。<br>
+邊界對齊（Align）：16位2字節數據起始偶地址，32位4字節數據起始模4地址。</p>
+<h2>分段管理</h2>
+<p>8086CPU用16位字長可表達16位存儲器地址（0000H~FFFFH），即$2^{16}\rm{B}=64\rm{KB}$容量。但是，8086CPU的地址線有20位，最大可尋址空間爲$2^{20}\rm{B}=1\rm{MB}$，其物理地址範圍爲00000H~FFFFFH。</p>
+<p>邏輯段（Segment）：最大64KB。<br>
+段基地址（段地址）：邏輯段在主存中的起始位置。8086段地址必須是模16地址，即<code>xxxx0H</code>形式。<br>
+段內偏移地址：距離段起始位置的偏移量。</p>
+<p><strong>物理地址</strong>（絕對地址）：每個存儲器單元唯一的20位地址。<br>
+<strong>邏輯地址</strong>：形式爲「<code>段地址:偏移地址</code>」。如，邏輯地址<code>1460H:100H</code>表示物理地址<code>14700H</code>。</p>
+<h3>段超越前綴指令</h3>
+<pre><code class="hljs Assembly">cs:                         ; 代碼段超越，使用代碼段數據
+ss:                         ; 堆棧段超越，使用堆棧段數據
+ds:                         ; 數據段超越，使用數據段數據
+es:                         ; 附加段超越，使用附加段數據</code></pre>
+<h1>尋址方式</h1>
+<h2>8086的機器代碼格式</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">1/2字節</th>
+<th style="text-align:center">0/1字節</th>
+<th style="text-align:center">0/1/2字節</th>
+<th style="text-align:center">0/1/2字節</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">操作碼</td>
+<td style="text-align:center">mod reg r/m</td>
+<td style="text-align:center">位移量</td>
+<td style="text-align:center">立即數</td>
+</tr>
+<tr>
+<td style="text-align:center">指令</td>
+<td style="text-align:center">尋址方式</td>
+<td style="text-align:center">某些尋址方式需要的偏移量</td>
+<td style="text-align:center">立即尋址方式需要的數值本身</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="hljs Assembly">mov     dest, src</code></pre>
+<h2>立即數尋址方式</h2>
+<pre><code class="hljs Assembly">mov     al, 05h
+mov     ax, 0102h</code></pre>
+<h2>寄存器尋址方式</h2>
+<pre><code class="hljs Assembly">mov     ax, 1234h
+mov     bx, ax</code></pre>
+<h2>存儲器尋址方式</h2>
+<h3>直接尋址方式</h3>
+<pre><code class="hljs Assembly">mov     ax, [2000h]</code></pre>
+<p>默認情況下，有效地址要與<code>DS</code>一起構成操作數所在物理單元的物理地址。<br>
+數據也可存放於附加段、代碼段、堆棧段中，此時指令應指明段超越前綴。</p>
+<pre><code class="hljs Assembly">mov     ax, es:[2000h]</code></pre>
+<h3>寄存器間接尋址方式</h3>
+<p>有效地址存放在寄存器中（<code>BX</code>/<code>SI</code>/<code>DI</code>），默認段地址在<code>DS</code>段寄存器中。</p>
+<pre><code class="hljs Assembly">mov     ax, [si]</code></pre>
+<h3>寄存器相對尋址方式</h3>
+<p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>/<code>SI</code>/<code>DI</code>+8/16位位移量。<br>
+基址寄存器使用<code>BX</code>/<code>SI</code>/<code>DI</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。</p>
+<pre><code class="hljs Assembly">mov     ax, [di+06h]
+mov     ax, [bp+06h]
+mov     ax, [bp]</code></pre>
+<h3>基址變址尋址方式</h3>
+<p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>+<code>SI</code>/<code>DI</code>。<br>
+基址寄存器使用<code>BX</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。</p>
+<pre><code class="hljs Assembly">mov     ax, [bx+si]
+mov     ax, [bp]</code></pre>
+<h3>相對基址變址尋址方式</h3>
+<p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>+<code>SI</code>/<code>DI</code>+8/16位位移量。<br>
+基址寄存器使用<code>BX</code>/<code>SI</code>/<code>DI</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。</p>
+<pre><code class="hljs Assembly">mov     ax, [bx+si+06h]</code></pre>
+<p><strong>注意</strong>：<br>
+位移量可用符號表示，如<code>mov      ax, [si+count]</code>。<br>
+統一尋址方式可寫成不同方式。</p>
+<h2>數據尋址的結合</h2>
+<pre><code class="hljs Assembly">指令助記符  reg, imm&#x2F;reg&#x2F;mem
+指令助記符  mem, imm&#x2F;reg</code></pre>
+<h1>常用<code>debug</code>指令</h1>
+<h2><code>a</code>（彙編）</h2>
+<pre><code class="hljs Assembly">-a                      ; 不指定地址  
+-a [addr]               ; 指定地址</code></pre>
+<h2><code>u</code>（反彙編）</h2>
+<pre><code class="hljs Assembly">-u [start_addr]
+-u [start_addr end_addr]</code></pre>
+<h2><code>t</code>（跟蹤）（單步執行）</h2>
+<pre><code class="hljs Assembly">-t                      ; 執行一條指令
+-t 10                   ; 執行下面10H(16)條指令
+-t&#x3D;3 2                  ; 從指定IP&#x3D;0003開始執行下面2條指令</code></pre>
+<h2><code>g</code>（斷點執行）</h2>
+<pre><code class="hljs Assembly">-g                      ; 從程序當前位置執行至斷點處，若無斷點則直到程序結束
+-g 200                  ; 從程序當前位置執行至斷點處（200H）結束
+-g&#x3D;200 260              ; 從指定地址（200H）執行至斷點處（260H）結束</code></pre>
+<h2><code>d</code>（數據顯示）</h2>
+<pre><code class="hljs Assembly">-d                      ; 顯示從上一次結果處開始80H個字節的內容    
+-d 200                  ; 顯示從DS:200H處開始80H個字節的內容
+...</code></pre>
+<h2><code>e</code>（修改數據）</h2>
+<pre><code class="hljs Assembly">-e                      ; 修改數據
+-e 200 (xx..)           ; 修改從DS:200H處的內容爲兩位十六進制數xx（可修改多個）
+...</code></pre>
+<h2><code>r</code>（寄存器）</h2>
+<pre><code class="hljs Assembly">-r                      ; 顯示所有寄存器內容  
+...</code></pre>
+<h2><code>h</code>（十六進制運算）</h2>
+<pre><code class="hljs Assembly">-h 20 19                ; 輸出兩個數的加減運算結果
+0039 0007</code></pre>
+<h2><code>q</code>（退出）</h2>
+<pre><code class="hljs Assembly">-q</code></pre>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/asm/">Assembly</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/asm/">Assembly</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本站所有文章除特別聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/asm/AsmNotes-2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">彙編語言複習筆記2：指令系統</span>
+                        <span class="visible-mobile">前篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/poem/Near2020/">
+                        <span class="hidden-mobile">己亥臨元旦書懷步賴和韻</span>
+                        <span class="visible-mobile">後篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">檢索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵詞</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a target="_blank" rel="noopener" href="https://blog.enatsu.top">Enatsu's Site</a>
+      <span> © 2020</span>
+    </div>
+    <div>
+      <span>Powered by</span>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+  
+<script src="/js/jquery.cookie.js"></script>
+<script src="/js/jquery.t2s.js"></script>
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "彙編語言複習筆記1：基礎知識&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

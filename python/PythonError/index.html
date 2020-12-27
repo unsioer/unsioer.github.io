@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Enatsu">
+  <meta name="keywords" content="">
+  <title>Python異常類型彙整 - Enatsu&#39;s Site</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Enatsu's Site</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                歸檔
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+      <div class="text-center"><button id="btn-simplify" type="button" class="navbar-convert">繁</button></div>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-04-18 20:20">
+      2020年4月18日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      凡 683 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p></p>
+<a id="more"></a>
+<p>（本文所述Python版本：3.7）</p>
+<p>Python的所有異常均繼承自<code>BaseExpection</code>類。</p>
+<p>以<code>try ... expect ...</code>語句可對異常作相應處理。</p>
+<p>用戶也可基於內置異常類派生新的異常類。如：</p>
+<pre><code class="hljs Python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Networkerror</span>(<span class="hljs-params">RuntimeError</span>):</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, arg</span>):</span>
+        self.args = arg</code></pre>
+<h2>常用內置標準異常類</h2>
+<p>參考：<a target="_blank" rel="noopener" href="https://docs.python.org/3.7/library/exceptions.html">官方文檔</a>或<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-exceptions.html">菜鳥教程</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">異常名稱</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">BaseException</td>
+<td style="text-align:left">所有異常的基類</td>
+</tr>
+<tr>
+<td style="text-align:left">SystemExit</td>
+<td style="text-align:left">解釋器請求退出</td>
+</tr>
+<tr>
+<td style="text-align:left">KeyboardInterrupt</td>
+<td style="text-align:left">用戶中斷執行(通常是輸入^C)</td>
+</tr>
+<tr>
+<td style="text-align:left">GeneratorExit</td>
+<td style="text-align:left">生成器(generator)發生異常來通知退出</td>
+</tr>
+<tr>
+<td style="text-align:left">Exception</td>
+<td style="text-align:left">常規錯誤的基類（非系統異常）</td>
+</tr>
+<tr>
+<td style="text-align:left">ArithmeticError</td>
+<td style="text-align:left">所有數值計算錯誤的基類</td>
+</tr>
+<tr>
+<td style="text-align:left">BufferError</td>
+<td style="text-align:left">緩衝區相關操作無法執行</td>
+</tr>
+<tr>
+<td style="text-align:left">LookupError</td>
+<td style="text-align:left">無效數據查詢的基類</td>
+</tr>
+<tr>
+<td style="text-align:left">StopIteration</td>
+<td style="text-align:left">迭代器沒有更多的值</td>
+</tr>
+<tr>
+<td style="text-align:left">StandardError</td>
+<td style="text-align:left">所有的內建標準異常的基類</td>
+</tr>
+<tr>
+<td style="text-align:left">FloatingPointError</td>
+<td style="text-align:left">浮點計算錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">OverflowError</td>
+<td style="text-align:left">數值運算超出最大限制</td>
+</tr>
+<tr>
+<td style="text-align:left">ZeroDivisionError</td>
+<td style="text-align:left">除(或取模)零 (所有數據類型)</td>
+</tr>
+<tr>
+<td style="text-align:left">AssertionError</td>
+<td style="text-align:left">斷言語句失敗</td>
+</tr>
+<tr>
+<td style="text-align:left">AttributeError</td>
+<td style="text-align:left">對象沒有這個屬性</td>
+</tr>
+<tr>
+<td style="text-align:left">EOFError</td>
+<td style="text-align:left">沒有內建輸入,到達EOF 標記</td>
+</tr>
+<tr>
+<td style="text-align:left">EnvironmentError</td>
+<td style="text-align:left">操作系統錯誤的基類</td>
+</tr>
+<tr>
+<td style="text-align:left">IOError</td>
+<td style="text-align:left">輸入/輸出操作失敗</td>
+</tr>
+<tr>
+<td style="text-align:left">OSError</td>
+<td style="text-align:left">操作系統錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">WindowsError</td>
+<td style="text-align:left">系統調用失敗</td>
+</tr>
+<tr>
+<td style="text-align:left">ImportError</td>
+<td style="text-align:left">導入模塊/對象失敗</td>
+</tr>
+<tr>
+<td style="text-align:left">IndexError</td>
+<td style="text-align:left">序列中沒有此索引(index)</td>
+</tr>
+<tr>
+<td style="text-align:left">KeyError</td>
+<td style="text-align:left">映射中沒有這個鍵</td>
+</tr>
+<tr>
+<td style="text-align:left">MemoryError</td>
+<td style="text-align:left">內存溢出錯誤(對於Python 解釋器不是致命的)</td>
+</tr>
+<tr>
+<td style="text-align:left">NameError</td>
+<td style="text-align:left">未聲明/初始化對象 (沒有屬性)</td>
+</tr>
+<tr>
+<td style="text-align:left">UnboundLocalError</td>
+<td style="text-align:left">訪問未初始化的本地變量</td>
+</tr>
+<tr>
+<td style="text-align:left">ReferenceError</td>
+<td style="text-align:left">弱引用(Weak reference)試圖訪問已經垃圾回收了的對象</td>
+</tr>
+<tr>
+<td style="text-align:left">RuntimeError</td>
+<td style="text-align:left">一般的運行時錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">NotImplementedError</td>
+<td style="text-align:left">尚未實現的方法</td>
+</tr>
+<tr>
+<td style="text-align:left">SyntaxError</td>
+<td style="text-align:left">Python 語法錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">IndentationError</td>
+<td style="text-align:left">縮進錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">TabError</td>
+<td style="text-align:left">Tab 和空格混用</td>
+</tr>
+<tr>
+<td style="text-align:left">SystemError</td>
+<td style="text-align:left">一般的解釋器系統錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">TypeError</td>
+<td style="text-align:left">對類型無效的操作</td>
+</tr>
+<tr>
+<td style="text-align:left">ValueError</td>
+<td style="text-align:left">傳入無效的參數</td>
+</tr>
+<tr>
+<td style="text-align:left">UnicodeError</td>
+<td style="text-align:left">Unicode 相關的錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">UnicodeDecodeError</td>
+<td style="text-align:left">Unicode 解碼時的錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">UnicodeEncodeError</td>
+<td style="text-align:left">Unicode 編碼時錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">UnicodeTranslateError</td>
+<td style="text-align:left">Unicode 轉換時錯誤</td>
+</tr>
+<tr>
+<td style="text-align:left">Warning</td>
+<td style="text-align:left">警告的基類</td>
+</tr>
+<tr>
+<td style="text-align:left">DeprecationWarning</td>
+<td style="text-align:left">關於被棄用的特徵的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">FutureWarning</td>
+<td style="text-align:left">關於構造將來語義會有改變的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">OverflowWarning</td>
+<td style="text-align:left">舊的關於自動提升爲長整型(long)的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">PendingDeprecationWarning</td>
+<td style="text-align:left">關於特性將會被廢棄的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">RuntimeWarning</td>
+<td style="text-align:left">可疑的運行時行爲(runtime behavior)的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">SyntaxWarning</td>
+<td style="text-align:left">可疑的語法的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">UserWarning</td>
+<td style="text-align:left">用戶代碼生成的警告</td>
+</tr>
+</tbody>
+</table>
+<h2>Errno（派生自OSError）</h2>
+<p>源自C語言的<code>errno</code>。</p>
+<p>另，Python的<code>error</code>模塊復刻了Linux C的<code>errno.h</code>。</p>
+<p>比如socket套接的IP地址權限不足，則會提示：</p>
+<pre><code class="hljs Bash">[Errno 99] Cannot assign requested address.</code></pre>
+<h2>WinError（派生自OSError）</h2>
+<p>Windows系統下，提供Windows錯誤碼。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes">所有的Win32錯誤信息（英文）</a></p>
+<p>比如在Windows系統socket套接8080端口，則會提示：</p>
+<pre><code class="hljs Bash">[WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。</code></pre>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">Python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/socket/">socket</a>
+                    
+                      <a class="hover-with-bg" href="/tags/exception/">異常處理</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本站所有文章除特別聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/Linux/CentOSWordPress/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CentOS安裝WordPress</span>
+                        <span class="visible-mobile">前篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/git/GitNotes-2/">
+                        <span class="hidden-mobile">Git雜記2：復刻的repo怎拉取原repo的commit更新</span>
+                        <span class="visible-mobile">後篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">檢索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵詞</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a target="_blank" rel="noopener" href="https://blog.enatsu.top">Enatsu's Site</a>
+      <span> © 2020</span>
+    </div>
+    <div>
+      <span>Powered by</span>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+  
+<script src="/js/jquery.cookie.js"></script>
+<script src="/js/jquery.t2s.js"></script>
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Python異常類型彙整&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

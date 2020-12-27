@@ -1,0 +1,30 @@
+body {
+	line-height: 200%;
+}
+p {
+    margin: 0 0 25px 0;
+}
+.markdown-body .highlight pre, .markdown-body pre {
+    /*padding: 16px;
+    overflow: auto;*/
+    font-size: 95%;
+    /*line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;*/
+}
+ruby > rt {
+    font-size: 80%;
+}
+img { 
+    transform: scale(0.95);
+}
+
+.navbar-convert {
+    background-color: transparent;
+    border-color:#2f4154;
+    border-style: hidden;
+    border-radius: 20px;
+    color: #ffffff;
+    padding-left: 0;
+    padding-right: 0;
+}
