@@ -64,33 +64,6 @@
   
   
   <entry>
-    <title>Git雜記3：git push一寡代誌</title>
-    <link href="/git/GitNotes-3/"/>
-    <url>/git/GitNotes-3/</url>
-    
-    <content type="html"><![CDATA[<p></p><a id="more"></a><p>在GitHub新建了一個私有repo，想把本地git內容push上去，中規中矩操作：</p><pre><code class="hljs Bash">git initgit add .git commit -m <span class="hljs-string">&quot;init&quot;</span>git remote add <span class="hljs-built_in">source</span> git@github.com:unsioer/private.gitgit push origin master</code></pre><p>想欲push，RSA鑰匙也yes矣，毋允准：</p><pre><code class="hljs Bash">git@github.com: Permission denied (publickey).fatal: Could not <span class="hljs-built_in">read</span> from remote repository.Please make sure you have the correct access rightsand the repository exists.</code></pre><p>佇網頂看着解決方案攏是叫儂佇本地生成SSH公鑰(<code>id_rsa.pub</code>)，添入GitHub個人設定。<br>好是好，按呢敢是事？若咱正常git clone了後push都無這款代誌。<br>毋死心，終於佇stackoverflow揣着較好兮方案：</p><pre><code class="hljs Bash">git remote <span class="hljs-built_in">set</span>-url origin https://github.com/unsioer/private.git</code></pre>]]></content>
-    
-    
-    <categories>
-      
-      <category>Git</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Git</tag>
-      
-      <tag>GitHub</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>來自17世紀兮漳州音</title>
     <link href="/hokkien/CameFrom17thCentury/"/>
     <url>/hokkien/CameFrom17thCentury/</url>
@@ -107,9 +80,9 @@
     
     <tags>
       
-      <tag>歷史</tag>
-      
       <tag>漳州</tag>
+      
+      <tag>歷史</tag>
       
     </tags>
     
@@ -159,11 +132,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>CentOS</tag>
       
       <tag>WordPress</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -404,13 +377,13 @@
     
     <tags>
       
-      <tag>Visual Studio</tag>
-      
       <tag>C++</tag>
       
       <tag>OpenCV</tag>
       
       <tag>CMake</tag>
+      
+      <tag>Visual Studio</tag>
       
     </tags>
     
