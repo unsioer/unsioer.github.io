@@ -265,7 +265,7 @@
 <pre><code class="hljs js"><span class="hljs-comment">// templates/app.html 共用的HTML模板</span>
 $.ajax(&#123;
     url: <span class="hljs-built_in">window</span>.location.href&#123;% <span class="hljs-keyword">if</span> host_link %&#125;.replace(<span class="hljs-regexp">/(https?:\/\/)?[^\/]+(\/.+)/i</span>,<span class="hljs-string">&#x27;&#123;&#123; host_link &#125;&#125;$2&#x27;</span>,<span class="hljs-number">1</span>)&#123;% endif %&#125;.replace(<span class="hljs-string">&#x27;/app&#x27;</span>, <span class="hljs-string">&#x27;/api/folder/basic&#x27;</span>, <span class="hljs-number">1</span>)，
-...
+    ...
 &#125;);</code></pre>
 <p>服务器端对应的Python代码未提供<code>host_link</code>，则不会被解析；客户端提供了<code>host_link</code>，在对应位置会被替换为指定的服务器端URL，由JavaScript的字符串替换功能改为正确的服务器端API的URL。</p>
 <p><strong>服务器端</strong>：</p>
