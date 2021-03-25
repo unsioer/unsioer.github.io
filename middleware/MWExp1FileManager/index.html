@@ -264,7 +264,7 @@
     <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&#x27;app.html&#x27;</span>)</code></pre>
 <pre><code class="hljs js"><span class="hljs-comment">// templates/app.html 共用的HTML模板</span>
 $.ajax(&#123;
-	url: <span class="hljs-built_in">window</span>.location.href&#123;% <span class="hljs-keyword">if</span> host_link %&#125;.replace(<span class="hljs-regexp">/(https?:\/\/)?[^\/]+(\/.+)/i</span>,<span class="hljs-string">&#x27;&#123;&#123; host_link &#125;&#125;$2&#x27;</span>,<span class="hljs-number">1</span>)&#123;% endif %&#125;.replace(<span class="hljs-string">&#x27;/app&#x27;</span>, <span class="hljs-string">&#x27;/api/folder/basic&#x27;</span>, <span class="hljs-number">1</span>)，
+    url: <span class="hljs-built_in">window</span>.location.href&#123;% <span class="hljs-keyword">if</span> host_link %&#125;.replace(<span class="hljs-regexp">/(https?:\/\/)?[^\/]+(\/.+)/i</span>,<span class="hljs-string">&#x27;&#123;&#123; host_link &#125;&#125;$2&#x27;</span>,<span class="hljs-number">1</span>)&#123;% endif %&#125;.replace(<span class="hljs-string">&#x27;/app&#x27;</span>, <span class="hljs-string">&#x27;/api/folder/basic&#x27;</span>, <span class="hljs-number">1</span>)，
 ...
 &#125;);</code></pre>
 <p>服务器端对应的Python代码未提供<code>host_link</code>，则不会被解析；客户端提供了<code>host_link</code>，在对应位置会被替换为指定的服务器端URL，由JavaScript的字符串替换功能改为正确的服务器端API的URL。</p>
@@ -274,7 +274,7 @@ $.ajax(&#123;
 <pre><code class="hljs Python"><span class="hljs-meta">@app.route(&quot;/api/folder/basic/&lt;path:folderPath&gt;&quot;, methods=[&#x27;GET&#x27;])</span>
 <span class="hljs-meta">@cross_origin()</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span>(<span class="hljs-params">folderPath</span>):</span>
-	...</code></pre>
+    ...</code></pre>
 <p><code>@app.route()</code>指定了路径和请求方法；</p>
 <p><code>@cross_origin()</code>则是为了实现API的跨域访问，使得客户端Web界面得以操作服务器端的API。</p>
 <h3>服务器端路由</h3>
@@ -290,16 +290,16 @@ $.ajax(&#123;
 <p>获取指定目录下的文件（包含文件夹）信息。</p>
 <p><strong>返回JSON格式</strong>：</p>
 <pre><code class="hljs json">&#123;
-	<span class="hljs-attr">&quot;files&quot;</span>:[
-		&#123;
+    <span class="hljs-attr">&quot;files&quot;</span>:[
+        &#123;
             <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;FileName&quot;</span>, <span class="hljs-comment">//文件名</span>
             <span class="hljs-attr">&quot;path&quot;</span>: <span class="hljs-string">&quot;pathx/pathy&quot;</span>, <span class="hljs-comment">//文件所在路径 </span>
             <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-comment">//文件类型，分为三类：0为文件夹，1为文件，2为其他</span>
-            <span class="hljs-attr">&quot;size&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-comment">//文件大小，单位为字节。该属性不对type===1（即文件夹）有效</span>
+            <span class="hljs-attr">&quot;size&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-comment">//文件大小，单位为字节。该属性不对type===0（即文件夹）有效</span>
             <span class="hljs-attr">&quot;mtime&quot;</span>: <span class="hljs-string">&quot;2021-03-24 22:39:32&quot;</span> <span class="hljs-comment">//文件修改时间</span>
         &#125;,
         ...
-	]
+    ]
 &#125;</code></pre>
 <h4>GET <code>/api/folder/basic/</code></h4>
 <p>获取根目录下的文件信息。</p>
