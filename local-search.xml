@@ -5,15 +5,15 @@
   
   <entry>
     <title>GitHub Webhook远程服务器自动部署杂记</title>
-    <link href="/GitHub/WebhookStart/"/>
-    <url>/GitHub/WebhookStart/</url>
+    <link href="/git/WebhookStart/"/>
+    <url>/git/WebhookStart/</url>
     
     <content type="html"><![CDATA[<p>也来试试GitHub的自动部署？</p><a id="more"></a><h2>GitHub项目仓库配置</h2><p>在GitHub项目仓库的<code>Settings</code>-<code>Webhooks</code>里，选择<code>Add webhook</code>。<br>填写Payload URL和Secret，保存。</p><p><img src="/images/AddWebhook.png" alt="Add Webhook"></p><h2>远程服务器配置</h2><p>在远程服务器某一位置（如<code>/home/deploy</code>）创建Node.js项目。</p><p>首先安装<code>github-webhook-handler</code>包：</p><pre><code class="hljs bash">npm i --save github-webhook-handler</code></pre><p>在同一目录下新建一个<code>deploy.js</code>，内容如：</p><pre><code class="hljs js"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>)<span class="hljs-keyword">var</span> createHandler = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;github-webhook-handler&#x27;</span>)<span class="hljs-keyword">var</span> handler = createHandler(&#123;     path: <span class="hljs-string">&#x27;/pushCode&#x27;</span>, <span class="hljs-comment">// 与GitHub后台设置的Payload URL最后部分一致</span>    secret: <span class="hljs-string">&#x27;123456&#x27;</span> <span class="hljs-comment">// 与GitHub后台设置的Secret一致</span>&#125;)  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run_cmd</span>(<span class="hljs-params">cmd, args, callback</span>) </span>&#123;  <span class="hljs-keyword">var</span> spawn = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;child_process&#x27;</span>).spawn;  <span class="hljs-keyword">var</span> child = spawn(cmd, args);  <span class="hljs-keyword">var</span> resp = <span class="hljs-string">&quot;&quot;</span>;   child.stdout.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">buffer</span>) </span>&#123; resp += buffer.toString(); &#125;);  child.stdout.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123; callback (resp) &#125;);&#125; http.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>&#123;  handler(req, res, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>&#123;    res.statusCode = <span class="hljs-number">404</span>    res.end(<span class="hljs-string">&#x27;no such location&#x27;</span>)  &#125;)&#125;).listen(<span class="hljs-number">3000</span>) <span class="hljs-comment">//远程服务器本地绑定的端口</span> handler.on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>&#123;  <span class="hljs-built_in">console</span>.error(<span class="hljs-string">&#x27;Error:&#x27;</span>, err.message)&#125;) handler.on(<span class="hljs-string">&#x27;push&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Received a push event for %s to %s&#x27;</span>,    event.payload.repository.name,    event.payload.ref);  run_cmd(<span class="hljs-string">&#x27;sh&#x27;</span>, [<span class="hljs-string">&#x27;./deploy.sh&#x27;</span>], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">text</span>)</span>&#123; <span class="hljs-built_in">console</span>.log(text) &#125;); <span class="hljs-comment">//要部署的脚本</span>&#125;)</code></pre><p>编写部署脚本（如<code>deploy.sh</code>）。尝试执行</p><pre><code class="hljs bash">sh ./deploy.sh</code></pre><p>确认脚本无误。</p><p>全局安装<code>forever</code>，启动进程，检查进程列表：</p><pre><code class="hljs bash">npm i -g foreverforever start /home/deploy/deploy.jsforever list</code></pre><p>如果一切正常，输出格式形如：</p><pre><code class="hljs bash">data:        uid  <span class="hljs-built_in">command</span>       script       forever pid   id logfile                 uptime                    data:    [0] MHwN /usr/bin/node deploy.js 46226   46293    /root/.forever/MHwN.log 0:0:2:2.253999999999905</code></pre><h3>附注：常用的<code>forever</code>指令</h3><pre><code class="hljs bash">// 简单的启动进程forever start app.js// 关闭进程forever stop app.jsforever stop 0 // 关闭指定标号进程，如上述[0]号进程forever stopall// 重启进程forever restart app.jsforever restartall// 指定forever信息输出文件forever start -l forever.log app.js// 指定app.js中的日志信息和错误日志输出文件。// -o 为console.log输出的信息，// -e 为console.error输出的信息forever start -o out.log -e err.log app.js// 追加日志，forever默认不能覆盖上次的启动日志，// 如果第二次启动不加-a，则会报错// -a 等应置于脚本文件名称之前，否则不起作用forever start -l forever.log -a app.js// 监听当前文件夹下的所有文件改动forever start -w app.js//查看forever进程列表forever list</code></pre><h3>附注：SSH对远程服务器localhost端口的映射</h3><p>本地执行：</p><pre><code class="hljs powershell"><span class="hljs-comment"># ssh -L &#123;本地映射端口&#125;:&#123;远程端口绑定的ip&#125;:$&#123;需要代理的远程端口&#125; &#123;远程ip&#125;</span>ssh <span class="hljs-literal">-L</span> <span class="hljs-number">1234</span>:localhost:<span class="hljs-number">3000</span> xxx.xxx.xxxx.xxx</code></pre><p>输入<code>root</code>密码后，本地的<code>1234</code>端口即可监听远程<code>3000</code>端口的内容。</p><h2>Nginx 公网映射</h2><pre><code class="hljs txt">server &#123;    server_name example.com;    ...    listen 443 ssl;     ...    location /pushCode &#123;            proxy_pass http://127.0.0.1:3000;    &#125;&#125;</code></pre><p>重启Nginx：</p><pre><code class="hljs bash">pkill -9 nginxnginx</code></pre><p>如无误，即可访问<code>https://example.com/pushCode</code>，得到<code>deploy.js</code>返回的内容：</p><pre><code class="hljs txt">no such location</code></pre><p>最后，尝试<code>git push</code>你的项目仓库，如一切正常，则能在对应的webhook页能找到部署成功的记录，大功告成。</p><p><img src="/images/WebhookSuccess.png" alt="Success"></p>]]></content>
     
     
     <categories>
       
-      <category>GitHub</category>
+      <category>git</category>
       
     </categories>
     
@@ -55,9 +55,9 @@
       
       <tag>詞</tag>
       
-      <tag>平水韻</tag>
-      
       <tag>八聲甘州</tag>
+      
+      <tag>平水韻</tag>
       
       <tag>廈門大學</tag>
       
@@ -119,9 +119,9 @@
       
       <tag>詞</tag>
       
-      <tag>念奴嬌</tag>
-      
       <tag>平水韻</tag>
+      
+      <tag>念奴嬌</tag>
       
       <tag>集美</tag>
       
