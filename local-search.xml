@@ -13,7 +13,7 @@
     
     <categories>
       
-      <category>git</category>
+      <category>Git</category>
       
     </categories>
     
@@ -55,9 +55,9 @@
       
       <tag>詞</tag>
       
-      <tag>八聲甘州</tag>
-      
       <tag>平水韻</tag>
+      
+      <tag>八聲甘州</tag>
       
       <tag>廈門大學</tag>
       
@@ -115,13 +115,13 @@
     
     <tags>
       
-      <tag>廈門</tag>
-      
       <tag>詞</tag>
+      
+      <tag>念奴嬌</tag>
       
       <tag>平水韻</tag>
       
-      <tag>念奴嬌</tag>
+      <tag>廈門</tag>
       
       <tag>集美</tag>
       
@@ -262,11 +262,11 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>CentOS</tag>
       
       <tag>WordPress</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -507,13 +507,13 @@
     
     <tags>
       
-      <tag>Visual Studio</tag>
-      
       <tag>C++</tag>
       
       <tag>OpenCV</tag>
       
       <tag>CMake</tag>
+      
+      <tag>Visual Studio</tag>
       
     </tags>
     
