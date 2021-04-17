@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 769 字
+      凡 771 字
     </span>
   
 
@@ -295,10 +295,10 @@ forever start -w app.js
 
 //查看forever进程列表
 forever list</code></pre>
-<h3>附注：SSH对远程服务器localhost端口的映射</h3>
+<h3>附注：SSH对远程服务器localhost端口的映射代理</h3>
 <p>本地执行：</p>
 <pre><code class="hljs powershell"><span class="hljs-comment"># ssh -L &#123;本地映射端口&#125;:&#123;远程端口绑定的ip&#125;:$&#123;需要代理的远程端口&#125; &#123;远程ip&#125;</span>
-ssh <span class="hljs-literal">-L</span> <span class="hljs-number">1234</span>:localhost:<span class="hljs-number">3000</span> xxx.xxx.xxxx.xxx</code></pre>
+ssh <span class="hljs-literal">-L</span> <span class="hljs-number">1234</span>:localhost:<span class="hljs-number">3000</span> xxx.xxx.xxx.xxx</code></pre>
 <p>输入<code>root</code>密码后，本地的<code>1234</code>端口即可监听远程<code>3000</code>端口的内容。</p>
 <h2>Nginx 公网映射</h2>
 <pre><code class="hljs txt">server &#123;
