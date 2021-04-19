@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Enatsu">
+  <meta name="keywords" content="">
+  <title>《中间件技术》实验2：RMI远程文件管理 - Enatsu&#39;s Site</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Enatsu's Site</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                歸檔
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="text-center navbar-convert-div"><button id="btn-simplify" type="button" class="navbar-convert">繁</button></div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/images/RMI.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-04-08 19:40">
+      2021年4月8日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      凡 1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <blockquote>
+<p><em>粗 制 滥 造</em></p>
+</blockquote>
+<a id="more"></a>
+<h2>引言</h2>
+<p>掌握远程过程调用原理，基于java RMI进行远程编程和控制。要求定义远程接口类及实现类：定义相应的处理方法；客户端利用RMI实现远程调用服务。同时，在在两台机器之间验证结果正确。</p>
+<p>基于实验一的内容，基于RMI的远程调用，改写你的程序。</p>
+<p>（2.2 实现A机器的程序，可以管理（增加、删除、改等）B机器上的某个文件夹或者目录）</p>
+<p>项目仓库地址：<a target="_blank" rel="noopener" href="https://github.com/unsioer/RmiFileManager">https://github.com/unsioer/RmiFileManager</a></p>
+<h2>环境</h2>
+<p>开发环境：</p>
+<ul>
+<li>JDK 11</li>
+<li>IDEA 社区版（本地代码开发）</li>
+<li>Visual Studio Code（远程SSH代码开发）</li>
+<li>Apache Maven 3.6.3（包管理）</li>
+<li>Swing （客户端GUI）</li>
+<li><code>commons-io</code>（<code>FileUtils</code>类含扩展的文件操作）</li>
+<li>Git（代码管理）</li>
+</ul>
+<h2>详细设计</h2>
+<h3>概要</h3>
+<p>本实验的服务器端和客户端均采用了Java RMI技术。</p>
+<p>服务器端绑定注册RMI服务，实现对应的接口方法。客户端访问建立的URL，在指定的远程主机上查找RMI服务对象，找到后转换为本地接口，从而可以实现远程操作。</p>
+<p>提交的实验代码中，服务器端有控制台版本，客户端则有控制台和GUI两种版本。</p>
+<h3>服务器端</h3>
+<h4>跨平台远程连接的服务器端设置（重点）</h4>
+<p>本实验测试双机通信时，远程服务器系统为Ubuntu 20.04 LTS。由于ECS服务器存在内网和公网IP，服务器端应用就必须注意相应的处理，才能实现远程调用。</p>
+<p>否则，就会出现如图所示的情况，出现远程内网IP：</p>
+<p><img src="/images/MW2-%E5%87%BA%E7%8E%B0%E8%BF%9C%E7%A8%8B%E5%86%85%E7%BD%91IP.png" srcset="/img/loading.gif" alt=""></p>
+<p>解决方案的代码形如：</p>
+<pre><code class="hljs java">...
+System.setProperty(<span class="hljs-string">&quot;java.rmi.server.hostname&quot;</span>, hostname); <span class="hljs-comment">//设置公网IP</span>
+...
+<span class="hljs-keyword">try</span> &#123;
+    RMISocketFactory.setSocketFactory(<span class="hljs-keyword">new</span> MyRMISocket()); <span class="hljs-comment">//定义内网数据传输端口</span>
+
+    Registry registry = LocateRegistry.createRegistry(port); <span class="hljs-comment">//定义数据传输端口</span>
+
+    FileManager fileManager = <span class="hljs-keyword">new</span> FileManagerImpl(); <span class="hljs-comment">//</span>
+
+    registry.rebind(<span class="hljs-string">&quot;file&quot;</span>, fileManager); <span class="hljs-comment">//注册</span>
+
+    Context namingContext = <span class="hljs-keyword">new</span> InitialContext();
+
+    System.out.println(Inet4Address.getLocalHost().getHostAddress());
+    namingContext.rebind(<span class="hljs-string">&quot;rmi://&quot;</span> + Inet4Address.getLocalHost().getHostAddress() + <span class="hljs-string">&quot;:&quot;</span> + port + <span class="hljs-string">&quot;/file&quot;</span>, fileManager); <span class="hljs-comment">//对象，把对象与一个名字绑定在内网IP上</span>
+&#125; <span class="hljs-keyword">catch</span> (IOException | NamingException e) &#123; <span class="hljs-comment">//捕获异常</span>
+    e.printStackTrace();
+&#125;</code></pre>
+<h3>接口的实现</h3>
+<p>服务器端需要实现的RMI接口方法如下：</p>
+<pre><code class="hljs java"><span class="hljs-function">String <span class="hljs-title">hello</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> RemoteException</span>; <span class="hljs-comment">//返回&quot;Hello World!&quot;，检查连接是否正常</span>
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 获取指定路径文件（夹）本身的信息。</span>
+<span class="hljs-comment"> * 如不存在，返回null</span>
+<span class="hljs-comment"> * 参数：srcPath 文件路径</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">File <span class="hljs-title">getFile</span><span class="hljs-params">(String srcPath)</span> <span class="hljs-keyword">throws</span> RemoteException</span>; 
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 获取指定路径文件（夹）本身的信息。</span>
+<span class="hljs-comment"> * 返回：FileInfoImpl文件信息自定义类，包含文件名、是否是文件夹等内容</span>
+<span class="hljs-comment"> * 如不存在，返回null</span>
+<span class="hljs-comment"> * 参数：srcPath 文件路径</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">FileInfo <span class="hljs-title">getFileInfo</span><span class="hljs-params">(String srcPath)</span> <span class="hljs-keyword">throws</span> RemoteException</span>; 
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 获取指定目录下的文件（夹）信息</span>
+<span class="hljs-comment"> * 参数：srcDir 目录路径（若为空或”/&quot;则返回根目录下的文件（夹）信息）</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">ResponseImpl <span class="hljs-title">getFileList</span><span class="hljs-params">(String srcDir)</span> <span class="hljs-keyword">throws</span> RemoteException</span>;
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 创建文件夹</span>
+<span class="hljs-comment"> * 参数：srcDir 目录路径</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">ResponseImpl <span class="hljs-title">createFolder</span><span class="hljs-params">(String srcDir)</span> <span class="hljs-keyword">throws</span> RemoteException</span>;
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 移动文件（夹）到指定的目录下</span>
+<span class="hljs-comment"> * 参数：srcPath 要移动的文件（夹）路径</span>
+<span class="hljs-comment"> *      dstName 要移动到的目标目录路径</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">ResponseImpl <span class="hljs-title">moveFile</span><span class="hljs-params">(String srcPath, String dstDir)</span> <span class="hljs-keyword">throws</span> RemoteException</span>;  
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 复制文件（夹）到指定的目录下</span>
+<span class="hljs-comment"> * 参数：srcPath 要复制的文件（夹）路径</span>
+<span class="hljs-comment"> *      dstName 要粘贴到的目标目录路径</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">ResponseImpl <span class="hljs-title">copyFile</span><span class="hljs-params">(String srcPath, String dstDir)</span> <span class="hljs-keyword">throws</span> RemoteException</span>;
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 重命名文件（夹）</span>
+<span class="hljs-comment"> * 参数：srcPath 要重命名的文件（夹）路径</span>
+<span class="hljs-comment"> *      dstName 新的文件（夹）名称</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">ResponseImpl <span class="hljs-title">renameFile</span><span class="hljs-params">(String srcPath, String dstName)</span> <span class="hljs-keyword">throws</span> RemoteException</span>;
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 删除文件（夹）</span>
+<span class="hljs-comment"> * 参数：srcPath 要删除的文件（夹）路径</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">ResponseImpl <span class="hljs-title">deleteFile</span><span class="hljs-params">(String srcPath)</span> <span class="hljs-keyword">throws</span> RemoteException</span>;
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * 上传文件到指定的路径</span>
+<span class="hljs-comment"> * 参数：info FileInfoImpl文件信息自定义类，包含文件名、要上传的路径、文件字节内容</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">ResponseImpl <span class="hljs-title">uploadFile</span><span class="hljs-params">(FileInfoImpl info)</span> <span class="hljs-keyword">throws</span> RemoteException</span>;</code></pre>
+<p>以上的<code>ResponseImpl</code>类为自定义<code>Response</code>接口的实现，主要含有成员：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResponseImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Response</span> </span>&#123;
+    Boolean status = <span class="hljs-keyword">false</span>;<span class="hljs-comment">//操作状态</span>
+
+    String message = <span class="hljs-keyword">null</span>;<span class="hljs-comment">//提示信息</span>
+
+    File[] files = <span class="hljs-keyword">null</span>;<span class="hljs-comment">//文件对象列表</span>
+    ...
+&#125;</code></pre>
+<p>以及对应的<code>get</code> <code>set</code>方法。</p>
+<h4>合法性检验</h4>
+<p>对于传入的字符串，如果是文件路径，不允许出现<code>?</code> <code>*</code>  <code>&lt;</code> <code>&gt;</code> <code>:</code> <code>..</code>（最后两个限制是防止操作根目录之外的文件夹）名。</p>
+<p>如果是文件名，还不允许出现<code>/</code> 或 <code>\</code>。</p>
+<h3>客户端</h3>
+<p>客户端分为控制台版本和GUI版本。控制台部分，输入一行操作名称，再输入一至二行相应参数，最后执行操作。</p>
+<h4>控制台版本操作</h4>
+<ul>
+<li>ls：列目录</li>
+<li>mkdir：新建文件夹</li>
+<li>rm：删除</li>
+<li>mv：移动</li>
+<li>cp：复制</li>
+<li>ren：重命名</li>
+<li>upload：上传文件</li>
+</ul>
+<p>GUI版本见下文。</p>
+<h2>GUI界面展示</h2>
+<p>GUI采用了swing。这里做了简要截图，也可详见演示视频。</p>
+<h3>基本界面</h3>
+<p>首先需要输入RMI服务的URL：</p>
+<p><img src="/images/MW2-%E5%88%9D%E5%A7%8B%E8%BE%93%E5%85%A5%E6%A1%86.png" srcset="/img/loading.gif" alt=""></p>
+<p>成功连接：</p>
+<p><img src="images/MW2-%E6%88%90%E5%8A%9F%E8%BF%9E%E6%8E%A5.png" srcset="/img/loading.gif" alt=""></p>
+<h4>主界面</h4>
+<p><img src="/images/MW2-%E4%B8%BB%E7%95%8C%E9%9D%A2.png" srcset="/img/loading.gif" alt=""></p>
+<p>基本界面窗口显示标题和对应的RMI URL。</p>
+<p>上方的工具条分别为：根目录按钮、上传按钮、输入框（输入并回车后直接访问指定目录）</p>
+<p>主体部分是指定目录下的文件目录树。</p>
+<h4>右键菜单</h4>
+<p><img src="/images/MW2-%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95.png" srcset="/img/loading.gif" alt="右键菜单"></p>
+<h4>上传</h4>
+<p><img src="/images/MW2-%E4%B8%8A%E4%BC%A0.png" srcset="/img/loading.gif" alt="上传"></p>
+<h4>新建文件夹</h4>
+<p><img src="/images/MW2-%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9.png" srcset="/img/loading.gif" alt="新建文件夹"></p>
+<h4>重命名</h4>
+<p><img src="/images/MW2-%E9%87%8D%E5%91%BD%E5%90%8D.png" srcset="/img/loading.gif" alt="重命名"></p>
+<p>剪切、复制、粘贴等不便在文档显示，详见视频。</p>
+<h2>技术总结</h2>
+<p>本次实验实现了一个最简单的基于Java RMI的远程文件管理应用，完成了实验所有要求并做了一些合法性检测，设计了相对简洁的GUI界面。</p>
+<p>由于只是简易实现功能，尚有以下不足之处：</p>
+<ul>
+<li>
+<p>请求和返回内容设计较为随意</p>
+</li>
+<li>
+<p>远程操作时，得到的文件对象许多属性丢失，导致对应的目录树均识别为文件，不利于查看（但仍可通过输入框访问指定的目录进行操作）</p>
+</li>
+<li>
+<p>未进行充分测试</p>
+</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/middleware/">中間件</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/RMI/">RMI</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Swing/">Swing</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本站所有文章除特別聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/git/WebhookStart/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">GitHub Webhook远程服务器自动部署杂记</span>
+                        <span class="visible-mobile">前篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/poem/XMU100/">
+                        <span class="hidden-mobile">八聲甘州·頌廈大百年華誕</span>
+                        <span class="visible-mobile">後篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">檢索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵詞</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a target="_blank" rel="noopener" href="https://blog.enatsu.top">Enatsu's Site</a>
+      <span> © 2019-2021</span>
+    </div>
+    <div>
+      <span>Powered by</span>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+  
+<script src="/js/jquery.cookie.js"></script>
+<script src="/js/jquery.t2s.js"></script>
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "《中间件技术》实验2：RMI远程文件管理&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
