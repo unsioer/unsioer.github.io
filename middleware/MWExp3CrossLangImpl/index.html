@@ -223,7 +223,7 @@
 <h2>问题分析</h2>
 <p>首先，如果不考虑利用其他框架来进行跨语言调用，最简单的办法自然是直接调用控制台输出。或者，设计RESTful API也可满足要求。</p>
 <p>不过，对于Python调用Java，我们容易找到<code>jpype</code>这个工具，通过开启JVM，调用已经编译好的jar包中的类。另外，C++也可利用JNI来调用jar包。</p>
-<p>此外，通过Apache Thrift这一一个远程过程调用（RPC）框架，约定传输的类，建立相应的C/S程序，我们也可以很容易地实现跨语言的编程与调用。</p>
+<p>此外，通过Apache Thrift这一个远程过程调用（RPC）框架，约定传输的类，建立相应的C/S程序，我们也可以很容易地实现跨语言的编程与调用。</p>
 <p>对于加密和解密功能，由于Base64过于简单，这里选择了AES加密算法。通过约定相同的密钥进行加密和加密。</p>
 <p>项目仓库地址：<a target="_blank" rel="noopener" href="https://github.com/unsioer/EncryptorDecryptor">https://github.com/unsioer/EncryptorDecryptor</a></p>
 <h2>环境</h2>
@@ -242,15 +242,9 @@
 </ul>
 <p>包管理工具：</p>
 <ul>
-<li>
-<p>maven（Java）</p>
-</li>
-<li>
-<p>vcpkg（C++）</p>
-</li>
-<li>
-<p>pip（Python）</p>
-</li>
+<li>maven（Java）</li>
+<li>vcpkg（C++）</li>
+<li>pip（Python）</li>
 </ul>
 <h2>详细设计</h2>
 <h3>概要</h3>
