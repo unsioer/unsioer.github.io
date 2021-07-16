@@ -347,7 +347,7 @@ $.ajax(&#123;
 <li>请求体不合法：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;No data given&quot;&#125;</code>或<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;No source file or destination file given&quot;&#125;</code></li>
 <li>文件（夹）名称有特殊字符：<code>&#123;&quot;status&quot;: 403, &quot;msg&quot;: &quot;Illegal file or folder name&quot;&#125;</code></li>
 <li>源文件不存在：<code>&#123;&quot;status&quot;: 404, &quot;msg&quot;: &quot;Source file does not exist&quot;&#125;</code></li>
-<li>新名称与当前目录下其他文件的名称冲突：<code>&quot;status&quot;: 400, &quot;msg&quot;: &quot;Destination file exists&quot;&#125;</code></li>
+<li>新名称与当前目录下其他文件的名称冲突：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;Destination file exists&quot;&#125;</code></li>
 </ul>
 <h4>PUT <code>/api/folder/basic/</code></h4>
 <p>为根目录下的指定文件（夹）<strong>重命名</strong>。</p>
@@ -360,7 +360,7 @@ $.ajax(&#123;
 <li>删除成功，或原名称与新名称相同：<code>&#123;&quot;status&quot;: 200&#125;</code></li>
 <li>请求体不合法：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;No data given&quot;&#125;</code>或<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;No source file or destination file given&quot;&#125;</code></li>
 <li>源文件不存在：<code>&#123;&quot;status&quot;: 404, &quot;msg&quot;: &quot;Source file does not exist&quot;&#125;</code></li>
-<li>没有删除权限：<code>&quot;status&quot;: 400, &quot;msg&quot;: &quot;Permission refused&quot;&#125;</code></li>
+<li>没有删除权限：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;Permission refused&quot;&#125;</code></li>
 </ul>
 <h4>DELETE <code>/api/folder/basic/</code></h4>
 <p><strong>删除</strong>根目录下的指定文件（夹）。</p>
@@ -382,7 +382,7 @@ $.ajax(&#123;
 <p>文件夹名称有特殊字符：<code>&#123;&quot;status&quot;: 403, &quot;msg&quot;: &quot;Illegal folder name&quot;&#125;</code></p>
 </li>
 <li>
-<p>文件夹名称与当前目录下其他文件夹的名称冲突：<code>&quot;status&quot;: 400, &quot;msg&quot;: &quot;Destination folder exists&quot;&#125;</code></p>
+<p>文件夹名称与当前目录下其他文件夹的名称冲突：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;Destination folder exists&quot;&#125;</code></p>
 </li>
 </ul>
 <h4>POST <code>/api/folder/new/</code></h4>

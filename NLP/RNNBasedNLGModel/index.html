@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Enatsu">
+  <meta name="keywords" content="">
+  <title>基于RNN的语言生成模型 - Enatsu&#39;s Site</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Enatsu's Site</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首頁
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                歸檔
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                標籤
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                關於
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友站
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="text-center navbar-convert-div"><button id="btn-simplify" type="button" class="navbar-convert">繁</button></div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/20130730041.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-07-15 15:51">
+      2021年7月15日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      凡 2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>本篇介绍RNN的基本原理及其在NLP的应用。</p>
+<p>（待补充）</p>
+<a id="more"></a>
+
+<h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><p>循坏神经网络（Recurrent Neural Network, RNN）为带层间反馈的神经网络模型。其算法框架包含<strong>输入层</strong>、<strong>隐藏层</strong>和<strong>输出层</strong>。</p>
+<h2 id="基本原理（前馈计算）"><a href="#基本原理（前馈计算）" class="headerlink" title="基本原理（前馈计算）"></a>基本原理（前馈计算）</h2><p><strong>输入层</strong>：</p>
+<p>给定一个词向量序列${\pmb X} = ({\pmb e}(w_1),{\pmb e}(w_2),…,{\pmb e}(w_n))$，其中${\pmb e}(w_i)\in{\Bbb R}_k$为单词$w_i$的向量表示，$k$为向量维度。</p>
+<p><strong>隐藏层</strong>：</p>
+<p>RNN隐状态${\pmb h}_t \in {\Bbb R}_d$（$d$为隐状态向量维度）的更新：</p>
+<p>$$<br>{\pmb h}_t=<br>\begin{cases}<br>\begin{array}{ll}<br>0, &amp; t=0 \\ f_r({\pmb h}_{t-1}, {\pmb e}(w_t) ), &amp; t\ge 1<br>\end{array}<br>\end{cases}<br>$$</p>
+<p>其中$f_r$为RNN隐藏层中的循环函数。RNN的记忆能力来源于RNN隐藏层每一时刻的输入包括上一时刻隐藏层的输出${\pmb h}_{t-1}$。</p>
+<p>RNN中最简单的循环函数为</p>
+<p>$$f_r({\pmb h}_{t-1},{\pmb e}(w_t))=f({\pmb Uh}_{t-1} + {\pmb We}(w_t) + {\pmb b} )$$</p>
+<p>其中$f$为激活函数（如${\rm tanh}$或ReLU函数），${\pmb U}\in {\Bbb R}^{d\times d}$和${\pmb W}\in {\Bbb R}^{d\times k}$为可训练的网络权重，${\pmb b}\in{\Bbb R}^d$为偏置向量。</p>
+<p><strong>输出层</strong>：</p>
+<p>接收隐藏层的输出${\pmb h}_t$作为输入，根据输出函数$g_r$产生$t$时刻的输出${\pmb y}_t=g_r({\pmb h}_t)$，一般为类别集合或词表上的概率分布。</p>
+<p>以上过程，循环的时间步数可变，但$f_r$和$g_r$的网络参数不随时间变化（在不同时刻使用同一套参数计算隐状态和输出）。</p>
+<h2 id="训练算法（待理解扩充）"><a href="#训练算法（待理解扩充）" class="headerlink" title="训练算法（待理解扩充）"></a>训练算法（待理解扩充）</h2><p>RNN输入的每个训练样本为一个时间序列，每一时刻都可能有输出，进而计算模型输出相对于真实标签的误差。</p>
+<p>RNN在时间步$t$的损失函数$J_t$即RNN的输出与目标输出之间的误差，是${\pmb y}_t$的函数，可用$J_t={\cal L}({\pmb y}_t)$表示。</p>
+<p>RNN在所有时间步上的整体损失函数$J=\sum_{i=1}^T J_t$。</p>
+<h1 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h1><p>长短期记忆（Long Short-term Memory, LSTM）神经网络可进一步改善RNN的记忆能力，并减轻梯度爆炸和梯度消失问题。</p>
+<p>对RNN的主要修改：将循环函数$f_r$从全连接改进为使用三个控制门的记忆单元。</p>
+<p>控制门：对于向量${\pmb y}$，希望通过向量${\pmb x}$来控制${\pmb y}$所保留的信息。</p>
+<p>$${\pmb o} = \sigma({\pmb x})\otimes{\pmb y}$$</p>
+<ul>
+<li>$\otimes$：逐元素的向量乘法</li>
+<li>$\sigma({\pmb x})$：sigmoid函数</li>
+</ul>
+<p>LSTM的循环函数可写为：</p>
+<p>$$<br>\begin{array}{c}<br>{\pmb h}_t = {\pmb o}_t \otimes {\rm tanh}({\pmb c}_t) \\ {\pmb c}_t = {\pmb f}_t \otimes {\pmb c}_{t-1} + {\pmb i}_t \otimes {\hat {\pmb c}}_t \\ {\hat {\pmb c}}_t = {\rm tanh}({\pmb W}_c{\pmb e}(w_t)+{\pmb U}_c{\pmb h}_{t-1}+{\pmb b}_c)<br>\end{array}<br>$$</p>
+<ul>
+<li>${\pmb c}_t$：$t$时刻RNN的单元状态（Cell State），含序列历史信息。</li>
+<li>${\pmb i}_t$, ${\pmb o}_t$, ${\pmb f}_t$：分别称为输入门、输出门、遗忘门。</li>
+</ul>
+<p>$$<br>\begin{array}{c}<br>{\pmb i}_t = \sigma({\pmb W}_i {\pmb e} (w_t) + {\pmb U}_i {\pmb h}_{t-1} + {\pmb b}_i) \\ {\pmb o}_t = \sigma({\pmb W}_o {\pmb e} (w_t) + {\pmb U}_o {\pmb h}_{t-1} + {\pmb b}_o)  \\ {\pmb f}_t = \sigma({\pmb W}_f {\pmb e} (w_t) + {\pmb U}_f {\pmb h}_{t-1} + {\pmb b}_f)<br>\end{array}<br>$$</p>
+<p>LSTM在每个时间步上对当前输入和记忆的历史信息进行重新组合，有效减轻梯度爆炸/消失等问题。关键在于：</p>
+<ul>
+<li>更复杂的循环函数：使得梯度在回传过程中经历更多导数较小的激活函数，降低梯度爆炸发生的可能性。</li>
+<li>遗忘门的使用（待补充）。</li>
+</ul>
+<h2 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h2><p>门控循环单元（Gated Recurrent Units, GRU）：简化LSTM神经网络的循环函数，达到相似的效果和时空效率。</p>
+<p>$$<br>\begin{array}{c}<br>{\pmb h}_t = ( 1 - {\pmb z}_t ) \otimes {\pmb h}_{t-1} + {\pmb z}_t \otimes {\hat {\pmb c}}_t \\ {\hat {\pmb h}}_t = {\rm tanh}({\pmb W}_c{\pmb e}(w_t)+{\pmb U}_c( {\pmb r}_t \otimes {\pmb h}_{t-1} ) )<br>\end{array}<br>$$</p>
+<ul>
+<li>${\pmb r}_t$, ${\pmb z}_t$：分别称为重置门（Reset Gate）、更新门（Update Gate）。</li>
+</ul>
+<p>$$<br>\begin{array}{c}<br>{\pmb r}_t = \sigma({\pmb W}_r {\pmb e} (w_t) + {\pmb U}_r {\pmb h}_{t-1} ) \\ {\pmb z}_t = \sigma({\pmb W}_z {\pmb e} (w_t) + {\pmb U}_z {\pmb h}_{t-1} )<br>\end{array}<br>$$</p>
+<h1 id="RNN的架构设计"><a href="#RNN的架构设计" class="headerlink" title="RNN的架构设计"></a>RNN的架构设计</h1><h2 id="多层RNN"><a href="#多层RNN" class="headerlink" title="多层RNN"></a>多层RNN</h2><h2 id="双向RNN"><a href="#双向RNN" class="headerlink" title="双向RNN"></a>双向RNN</h2><h1 id="基于RNN的语言模型"><a href="#基于RNN的语言模型" class="headerlink" title="基于RNN的语言模型"></a>基于RNN的语言模型</h1><h1 id="Seq2Seq（待扩充）"><a href="#Seq2Seq（待扩充）" class="headerlink" title="Seq2Seq（待扩充）"></a>Seq2Seq（待扩充）</h1><p>序列到序列（Sequence to Sequence, Seq2seq）模型</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>组成：编码器和解码器</p>
+<ul>
+<li>训练：教师强制（teacher-forcing）</li>
+<li>测试：自由运行（free-run）</li>
+</ul>
+<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><p>一般采用两个RNN分别作为编码器和解码器。在每个时间步$t$，编解码状态都由RNN隐状态表示：</p>
+<p>$${\pmb h}_t=\mathrm{RNN} ( {\pmb h}_{t-1}, {\pmb h} )$$</p>
+<p>$$P(y_t|Y_{&lt;t},X)=\mathrm{softmax} ( \mathrm{MLP} ( {\pmb s}_t ) ) |_{y_t}$$</p>
+<h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><p>使用Seq2Seq模型生成文本时，$X$中越靠后的词对解码器生成文本的影响越大，而靠前的词容易被忽略。<br>原因：最终编码状态${\pmb h}_m$更容易记住靠后的词的信息。</p>
+<p>注意力机制（Attention mechanism）的提出正是为了解决这一问题。解码器在解码时的每一步都会评价$X$中每个词对当前词的重要性，从而使解码器在预测每个词时能动态地关注到$X$的不同部分。</p>
+<p>根据Bahdanau等提出的注意力机制：</p>
+<p>计算时间步$t$的解码状态${\pmb s}_t$时，输入${\pmb s}_{t-1}$和上一步解码生成的词$y_{t-1}$，同时考虑注意力机制基于编码器的$m$个编码状态计算出的上下文向量${\pmb c}_t$。</p>
+<p>$${\pmb s}_t=\mathrm{RNN} ( {\pmb s}_{t-1}, {\pmb e} ( y_{t-1}, {\pmb c}_t ) )$$</p>
+<p>其中${\pmb c}_t$为上下文向量，是对所有编码隐状态$\{ {\pmb h}_1,…,{\pmb h}_m \}$的动态加权和：</p>
+<p>$${\pmb c}_t=\sum_{i=1}^{m}\alpha_{it}{\pmb h}_i$$</p>
+<p>$$\alpha_{it}=\frac{ \exp (e_{it}) }{ \sum_{k=1}^m \exp (e_{kt}) }$$</p>
+<p>$$e_{it}={\pmb V}_a\cdot \tanh ( {\pmb W}_a {\pmb s}_{t-1} + {\pmb U}_a {\pmb h}_i ) $$</p>
+<ul>
+<li>可训练参数：${\pmb V}_a \in {\Bbb R}^d$, ${\pmb W}_a \in {\Bbb R}^{d\times d}$, ${\pmb U}_a \in {\Bbb R}^{d\times d}$</li>
+<li>$e_{it}$表示$t$时刻解码状态${\pmb s}_{t-1}$受编码状态${\pmb h}_i$的影响程度（对齐函数，描述上下文对齐关系）</li>
+<li>$\alpha_{it}$：${\pmb s}_{t-1}$对所有编码的注意力权重</li>
+<li>查询（<strong>Query</strong>）向量：${\pmb s}_{t-1}$</li>
+<li>键（<strong>Key</strong>）和值（<strong>Value</strong>）向量：$\{ {\pmb h}_1,…,{\pmb h}_m \}$中的向量</li>
+</ul>
+<p>注意力机制：Query向量对每个Key向量分别计算影响度（即注意力分布），并在（softmax）归一化后将其作为权重对$m$个Value向量加权求和，得到基于注意力的上下文向量。得到解码器隐状态${\pmb s}_t$后，计算条件概率$P(y_t|Y_{&lt;t},X)$的方法与普通Seq2Seq模型相同。</p>
+<p>作用：解码器在生成每个词时都能动态关注到不同位置的编码状态，从而使得模型具有更好的拟合能力和更强的可解释性。</p>
+<h2 id="扩充和改进（略）"><a href="#扩充和改进（略）" class="headerlink" title="扩充和改进（略）"></a>扩充和改进（略）</h2><h1 id="解码器的解码方法"><a href="#解码器的解码方法" class="headerlink" title="解码器的解码方法"></a>解码器的解码方法</h1><p>生成文本时需要解决的问题：求一个单词序列${\hat Y}$，使其生成概率$P({\hat Y}|X)$最大。</p>
+<ul>
+<li>搜索空间大小：$|{\cal V}|^T$</li>
+<li>$|{\cal V}|$：词表大小</li>
+<li>$T$：句子的最大长度</li>
+</ul>
+<h2 id="基于搜索的解码方法"><a href="#基于搜索的解码方法" class="headerlink" title="基于搜索的解码方法"></a>基于搜索的解码方法</h2><h3 id="贪心搜索"><a href="#贪心搜索" class="headerlink" title="贪心搜索"></a>贪心搜索</h3><p>每个时间步$t$都选取当前概率分布最大的词，即$\hat{y}_t={\rm argmax}_y P(y|\hat{Y}_{&lt;t},X)$，直到$\hat{y}_t$为<code>&lt;EOS&gt;</code>时停止生成。</p>
+<ul>
+<li>复杂度低</li>
+<li>不保证全局最优</li>
+</ul>
+<h3 id="集束搜索"><a href="#集束搜索" class="headerlink" title="集束搜索"></a>集束搜索</h3><p>集束搜索（柱状搜索，Beam Search）扩大搜索范围，有超参数$B$即束宽（Beam Size）。</p>
+<p>$${\cal Y}_{[t]}={\rm argmax}_{Y_{[t]}^1,…,Y_{[t]}^B\in S_t} \sum_{b=1}^B\log P(Y_{[t]}^b|X) $$</p>
+<p>缺点：容易生成不断重复的语句（人类文本并非总在文本序列的每个位置上都取最高概率的词）。</p>
+<h2 id="基于采样的解码方法"><a href="#基于采样的解码方法" class="headerlink" title="基于采样的解码方法"></a>基于采样的解码方法</h2><h3 id="随机采样"><a href="#随机采样" class="headerlink" title="随机采样"></a>随机采样</h3><p>在生成时的每一步都从当前概率分布$P(y|Y_{&lt;t},X)$按照概率随机采样一个词，即${\hat y}\sim P(y|Y_{&lt;t},X)$。</p>
+<ul>
+<li><strong>优点</strong>：通常具有更高的多样性；一定程度上缓解生成通用或重复文本的问题。</li>
+<li><strong>缺点</strong>：上下文不连贯。</li>
+</ul>
+<h3 id="带温度的随机采样"><a href="#带温度的随机采样" class="headerlink" title="带温度的随机采样"></a>带温度的随机采样</h3><p>目的：避免采样到低概率的词，导致上下文不连贯。</p>
+<p>设置一个大于0的实数温度参数$\tau$，控制概率分布的弥漫程度。</p>
+<p>$$P(y|Y_{&lt;t},X)={\rm softmax}(MLP({\hat {\pmb s}}_t ) / \tau ) |_y$$</p>
+<p>其中${\hat {\pmb s}}_t$为使用模型生成的前缀${\hat Y}_{&lt;t}$而非解码器隐状态。</p>
+<p>合理设置$\tau \in (0,1)$可避免随机采到概率较小的词。</p>
+<h3 id="Top-k-采样"><a href="#Top-k-采样" class="headerlink" title="Top-$k$采样"></a>Top-$k$采样</h3><p>选择概率最高的$k$个词作为候选词，根据相对概率随机采样。</p>
+<p>设在$t$时刻模型预测的在词表${\cal V}$上的概率分布为$P(y|{\hat Y}_{&lt;t},X)$，则它的Top-$k$词表为${\cal V}^{(k)} = {\rm argmax}_{ {\cal V}’^{(k)} }\sum _{y \in {\cal V} ^{(k)} } P(y|{ Y}_{&lt;t},X) $，其中${\cal V}’^{(k)}\subset {\cal V}$。</p>
+<p>得新概率分布：</p>
+<p>$$<br>{\tilde P}(y|{\hat Y}_{&lt;t},X)=<br>\begin{cases}<br>    \begin{array}{ll}<br>        \frac{P(y_t|{ Y}_{&lt;t},X)}{\sum _{y\in {\cal V}^{(k)} } P(y|{ Y}_{&lt;t},X)}, &amp; y_t\in {\cal V}^{(k)} \\ 0, &amp; 其他<br>    \end{array}<br>\end{cases}<br>$$</p>
+<p>再按照概率随机采样得$\hat{y}_t$即可。</p>
+<h3 id="Top-p-采样"><a href="#Top-p-采样" class="headerlink" title="Top-$p$采样"></a>Top-$p$采样</h3><p>Top-$k$采样对于不同的模型，常数$k$难以进行一致的设定。</p>
+<ul>
+<li>在概率分布较为<strong>平坦</strong>的情况下，词概率相差不大，实际可能存在超过$k$个合理的词。如果仍限制仅从Top-$k$个候选词中采样，可能会增加生成重复文本的风险。</li>
+<li>在概率分布<strong>集中</strong>的情况下，合理的可选词可能会少于$k$个。如果仍从Top-$k$个候选词中采样，可能得到与上下文无关的词。</li>
+</ul>
+<p>Top-$p$采样：修改采样范围为${\cal V}^{(p)}$，即满足$\sum _{y \in {\cal V}’^{(p)}} P(y|{\hat Y}_{&lt;t},X) \ge p$的所有${\cal V}’^{(p)}$中最小的集合，其中$p\in (0,1)$为预先设定的超参数。</p>
+<h1 id="copy机制（待补充）"><a href="#copy机制（待补充）" class="headerlink" title="copy机制（待补充）"></a>copy机制（待补充）</h1><h1 id="Seq2Seq模型存在的问题"><a href="#Seq2Seq模型存在的问题" class="headerlink" title="Seq2Seq模型存在的问题"></a>Seq2Seq模型存在的问题</h1><ul>
+<li>一般基于RNN，编解码序列需按自回归方式从左至右依次进行，难以并行，处理较长序列时间复杂度较高（解决方案：CNN或Transformer作为编码器，非自回归语言生成模型作为解码器）</li>
+<li>RNN按照时间轴方向依次递归，位置较远的单词之间的隐状态关联衰减严重（Transformer全连接self-attention更佳，可直接建模序列中任意两个单词之间的依赖关系）</li>
+<li>使用最大似然估计（Maximum Likelihood Estimation, MLE）训练的自回归语言模型存在暴露偏差（Export Bias）问题，且随句子长度增加而增大，最终导致模型生成文本质量下降。<ul>
+<li>训练：教师强制，解码每个位置的token，输入$Y_{&lt;t}$为训练数据的真实前缀</li>
+<li>生成：输入为之前解码的前缀</li>
+</ul>
+</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>黄民烈等. 《现代自然语言生成》. 电子工业出版社, 2021.</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/NLP/">NLP</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ML/">ML</a>
+                    
+                      <a class="hover-with-bg" href="/tags/NLP/">NLP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/NLG/">NLG</a>
+                    
+                      <a class="hover-with-bg" href="/tags/RNN/">RNN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/LSTM/">LSTM</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Seq2Seq/">Seq2Seq</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Attention/">Attention</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本站所有文章除特別聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/middleware/MWExp3CrossLangImpl/">
+                        <span class="hidden-mobile">《中间件技术》实验3：跨语言加密解密调用</span>
+                        <span class="visible-mobile">後篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">檢索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">關鍵詞</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a target="_blank" rel="noopener" href="https://blog.enatsu.top">Enatsu's Site</a>
+      <span> © 2019-2021</span>
+    </div>
+    <div>
+      <span>Powered by</span>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+  
+<script src="/js/jquery.cookie.js"></script>
+<script src="/js/jquery.t2s.js"></script>
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "基于RNN的语言生成模型&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
