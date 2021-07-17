@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 242 字
+      凡 243 字
     </span>
   
 
@@ -220,21 +220,21 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>　</p>
+              <p></p>
 <a id="more"></a>
 <p>原早only配過Ubuntu server兮WordPress，今伺服器系統是CentOS 7，也來試下。</p>
-<h2 id="基礎工課"><a href="#基礎工課" class="headerlink" title="基礎工課"></a>基礎工課</h2><p>CentOS默認有mariadb（mysql一款分支）</p>
+<h2>基礎工課</h2>
+<p>CentOS默認有mariadb（mysql一款分支）</p>
 <pre><code class="hljs Bash">yum install -y httpd mariadb-server mysql wordpress php php-mysql
 systemctl start httpd <span class="hljs-comment">#service httpd start嘛解使</span>
 systemctl <span class="hljs-built_in">enable</span> httpd <span class="hljs-comment">#開機自啓動</span>
 systemctl start mariadb
 systemctl <span class="hljs-built_in">enable</span> mariadb</code></pre>
-
-<h2 id="配mysql"><a href="#配mysql" class="headerlink" title="配mysql"></a>配mysql</h2><pre><code class="hljs sql">mysql -u root -p
+<h2>配mysql</h2>
+<pre><code class="hljs sql">mysql -u root -p
 <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> wordpress;
 <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> wordpressuser@localhost;
 <span class="hljs-keyword">SET</span> <span class="hljs-keyword">PASSWORD</span> <span class="hljs-keyword">FOR</span> wordpressuser@localhost= <span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&quot;password&quot;</span>);</code></pre>
-
 <p>然後對應修改<code>/usr/share/wordpress/wp-config.php</code></p>
 <pre><code class="hljs php"><span class="hljs-comment">// ** MySQL settings - You can get this info from your web host ** //</span>
 <span class="hljs-comment">/** The name of the database for WordPress */</span>
@@ -245,8 +245,9 @@ define(<span class="hljs-string">&#x27;DB_USER&#x27;</span>, <span class="hljs-s
 
 <span class="hljs-comment">/** MySQL database password */</span>
 define(<span class="hljs-string">&#x27;DB_PASSWORD&#x27;</span>, <span class="hljs-string">&#x27;password&#x27;</span>);</code></pre>
-
-<h2 id="改httpd"><a href="#改httpd" class="headerlink" title="改httpd"></a>改httpd</h2><p>修改 <code>/etc/httpd/conf/httpd.conf</code>。<br>比如汝欲將wordpress放佇<code>/wordpress</code>路徑：</p>
+<h2>改httpd</h2>
+<p>修改 <code>/etc/httpd/conf/httpd.conf</code>。<br>
+比如汝欲將wordpress放佇<code>/wordpress</code>路徑：</p>
 <pre><code class="hljs Shell">AcceptFilter http none
 AcceptFilter https none
 
@@ -261,11 +262,9 @@ Alias /wordpress /usr/share/wordpress
     Options FollowSymLinks
     Require all granted
 &lt;/Directory&gt;</code></pre>
-
 <p>佇Apache 2.4版本，單</p>
 <pre><code class="hljs Shell">Order allow, deny
 Allow from all</code></pre>
-
 <p>兩句袂行（報權限錯誤403），只好加</p>
 <pre><code class="hljs Shell">Require all granted</code></pre>
 

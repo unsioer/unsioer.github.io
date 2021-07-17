@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 453 字
+      凡 456 字
     </span>
   
 
@@ -224,9 +224,12 @@
 <p>彙整自教材及課件。</p>
 </blockquote>
 <a id="more"></a>
-<p>硬指令 僞指令  </p>
-<h1 id="彙編語言程序的開發"><a href="#彙編語言程序的開發" class="headerlink" title="彙編語言程序的開發"></a>彙編語言程序的開發</h1><p>編譯 彙編 連接 調試  </p>
-<h2 id="語句格式"><a href="#語句格式" class="headerlink" title="語句格式"></a>語句格式</h2><p>標號 名字 標識符（大小寫不敏感）<br>保留字：</p>
+<p>硬指令 僞指令</p>
+<h1>彙編語言程序的開發</h1>
+<p>編譯 彙編 連接 調試</p>
+<h2>語句格式</h2>
+<p>標號 名字 標識符（大小寫不敏感）<br>
+保留字：</p>
 <ul>
 <li>硬指令助記符</li>
 <li>僞指令助記符</li>
@@ -234,8 +237,14 @@
 <li>寄存器名</li>
 <li>預定義符號：如<code>@data</code></li>
 </ul>
-<p>助記符<br>操作數：立即數、寄存器、存儲單元<br>參數：常數、變量名、表達式等<br>註釋<br>分隔符  </p>
-<h2 id="程序格式"><a href="#程序格式" class="headerlink" title="程序格式"></a>程序格式</h2><h3 id="簡化段定義格式（MASM-6-x支持）"><a href="#簡化段定義格式（MASM-6-x支持）" class="headerlink" title="簡化段定義格式（MASM 6.x支持）"></a>簡化段定義格式（MASM 6.x支持）</h3><pre><code class="hljs Assembly">.model small
+<p>助記符<br>
+操作數：立即數、寄存器、存儲單元<br>
+參數：常數、變量名、表達式等<br>
+註釋<br>
+分隔符</p>
+<h2>程序格式</h2>
+<h3>簡化段定義格式（MASM 6.x支持）</h3>
+<pre><code class="hljs Assembly">.model small
 .stack
 ...
 .data
@@ -246,8 +255,8 @@
 .exit 0
 ...
 end</code></pre>
-
-<h3 id="簡化段定義格式（MASM-5-x支持）"><a href="#簡化段定義格式（MASM-5-x支持）" class="headerlink" title="簡化段定義格式（MASM 5.x支持）"></a>簡化段定義格式（MASM 5.x支持）</h3><pre><code class="hljs Assembly">.model small
+<h3>簡化段定義格式（MASM 5.x支持）</h3>
+<pre><code class="hljs Assembly">.model small
 .stack
 ...
 .data
@@ -260,8 +269,8 @@ start:  mov     ax, @data
         int     21h
 ...
 end</code></pre>
-
-<h3 id="完整段定義格式"><a href="#完整段定義格式" class="headerlink" title="完整段定義格式"></a>完整段定義格式</h3><pre><code class="hljs Assembly">stack   segment stack
+<h3>完整段定義格式</h3>
+<pre><code class="hljs Assembly">stack   segment stack
         dw      512 dup(?)
 stack   ends
 data    segment
@@ -277,29 +286,41 @@ start:  mov     ax, data
 ...
 code    ends
         end     start</code></pre>
-
-<h2 id="開發過程"><a href="#開發過程" class="headerlink" title="開發過程"></a>開發過程</h2><ul>
-<li>編譯：<code>edit.com</code><br><code>edit hello.asm</code></li>
-<li>彙編：<code>ml.exe</code><br><code>ml /c hello.asm</code>或<code>masm hello.asm</code>生成<code>hello.obj</code></li>
-<li>連接：<code>link.exe</code><br><code>link hello.obj</code>生成<code>hello.exe</code><br><code>ml hello.asm</code>自動完成以上兩步。<br><code>ml /fl /sg hello.asm</code>還生成列表文件<code>hello.lst</code>，含源程序和目標代碼。</li>
-<li>調試：<code>debug.exe</code><br><code>debug hello.exe</code></li>
-</ul>
-<h1 id="參數-變量-標號"><a href="#參數-變量-標號" class="headerlink" title="參數 變量 標號"></a>參數 變量 標號</h1><p>數值型參數：</p>
+<h2>開發過程</h2>
 <ul>
-<li>常數<ul>
+<li>編譯：<code>edit.com</code><br>
+<code>edit hello.asm</code></li>
+<li>彙編：<code>ml.exe</code><br>
+<code>ml /c hello.asm</code>或<code>masm hello.asm</code>生成<code>hello.obj</code></li>
+<li>連接：<code>link.exe</code><br>
+<code>link hello.obj</code>生成<code>hello.exe</code><br>
+<code>ml hello.asm</code>自動完成以上兩步。<br>
+<code>ml /fl /sg hello.asm</code>還生成列表文件<code>hello.lst</code>，含源程序和目標代碼。</li>
+<li>調試：<code>debug.exe</code><br>
+<code>debug hello.exe</code></li>
+</ul>
+<h1>參數 變量 標號</h1>
+<p>數值型參數：</p>
+<ul>
+<li>常數
+<ul>
 <li>十進制常數：d結尾（可省略）</li>
 <li>十六進制常數：q結尾</li>
 <li>二進制常數：b結尾</li>
 <li>八進制常數：q結尾</li>
-<li>字符串常數：<code>&#39;balabala&#39;</code></li>
-<li>符號常數<ul>
-<li><code>EQU</code>僞指令<br><code>符號名 equ 數值表達式/字符串</code></li>
-<li><code>=</code>僞指令<br><code>符號名 = 數值表達式</code></li>
+<li>字符串常數：<code>'balabala'</code></li>
+<li>符號常數
+<ul>
+<li><code>EQU</code>僞指令<br>
+<code>符號名 equ 數值表達式/字符串</code></li>
+<li><code>=</code>僞指令<br>
+<code>符號名 = 數值表達式</code></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>數值表達式<ul>
+<li>數值表達式
+<ul>
 <li>算術運算符</li>
 <li>邏輯運算符</li>
 <li>移位運算符</li>
@@ -308,13 +329,16 @@ code    ends
 </ul>
 </li>
 </ul>
-<p>變量定義僞指令：<br>變量名 僞指令助記符 初值表</p>
+<p>變量定義僞指令：<br>
+變量名 僞指令助記符 初值表</p>
 <ul>
-<li>初值表：數值常數、表達式、<code>?</code>、<code>DUP</code><ul>
+<li>初值表：數值常數、表達式、<code>?</code>、<code>DUP</code>
+<ul>
 <li><code>DUP</code>格式：<code>重複次數 DUP(重複參數)</code></li>
 </ul>
 </li>
-<li>僞指令助記符：<ul>
+<li>僞指令助記符：
+<ul>
 <li><code>DB</code></li>
 <li><code>DW</code></li>
 <li><code>DD</code></li>

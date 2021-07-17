@@ -220,12 +220,14 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>前幾日學習OpenCV，愛用遘SIFT/SURF。但是OpenCV3以後兮官方版本默認無<code>nonfree.hpp</code>。  </p>
+              <p>前幾日學習OpenCV，愛用遘SIFT/SURF。但是OpenCV3以後兮官方版本默認無<code>nonfree.hpp</code>。</p>
 <a id="more"></a>
-
-<p>不過，佇<a target="_blank" rel="noopener" href="https://github.com/opencv">OpenCV官方GitHub倉庫</a>兮<code>opencv_contrib</code>內底，猶有<code>opencv2/xfeatures2d/nonfree.hpp</code>。只是需要配合<code>opencv</code>自行<ruby>編譯<rt>phian-e̍k</rt></ruby>。於是參考了網頂兮博文：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Gordon_Wei/article/details/85775328">【OpenCV】opencv4.0.1+opencv_contrib4.0.1+VS2015的编译</a>，如法炮製，用CMake編譯OpenCV4.1.2(+opencv_contrib)。期間狀況頻頻，一言難盡。  </p>
-<p>編譯成功了後，刪除之前下載兮OpenCV4.0.1版本，換做家己編譯兮。<br>用Visual Studio 2019新建解決方案，<ruby>調試<rt>tiâu-tshì</rt></ruby>時竟然報錯：<code>无法打开文件“opencv_world401d.lib”</code>。<br>檢查<ruby>項目屬性<rt>hāng-bo̍k sio̍k-sèng</rt></ruby> - <ruby>鏈接器<rt>liān-tsiap-khì</rt></ruby>-<ruby>輸入<rt>si-ji̍p</rt></ruby>，發現已經刪除兮<code>opencv_world401d.lib</code>竟然猶囥佇<ruby>附加依賴項<rt>hū-kee i-nāi-hāng</rt></ruby>繼承兮項目默認設置：<code>%(AdditionalDependencies)</code>內底，而且無法直接通過<ruby>窗口<rt>thang-kháu</rt></ruby> <ruby>編輯<rt>phian-tship</rt></ruby> <ruby>移除<rt>î-tî</rt></ruby>。  </p>
-<p>佇中文網站<ruby>搜尋<rt>sou-sîm</rt></ruby>如何修改<code>%(AdditionalDependencies)</code>未果，好佳哉佇<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6714269/vs-2010-unable-to-remove-inherited-additional-dependencies">Stack Overflow</a> 揣着辦法：<br>只要修改<code>C:\Users\%USERPROFILE%\AppData\Local\Microsoft\MSBuild\v4.0</code>內底兮項目屬性文件<code>Microsoft.Cpp.Win32.user.props</code>（按：OpenCV64位版本愛對應修改<code>Microsoft.Cpp.x64.user.props</code>），着解使刪除鏈接器繼承兮附加依賴項。  </p>
+<p>不過，佇<a target="_blank" rel="noopener" href="https://github.com/opencv">OpenCV官方GitHub倉庫</a>兮<code>opencv_contrib</code>內底，猶有<code>opencv2/xfeatures2d/nonfree.hpp</code>。只是需要配合<code>opencv</code>自行<ruby>編譯<rt>phian-e̍k</rt></ruby>。於是參考了網頂兮博文：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Gordon_Wei/article/details/85775328">【OpenCV】opencv4.0.1+opencv_contrib4.0.1+VS2015的编译</a>，如法炮製，用CMake編譯OpenCV4.1.2(+opencv_contrib)。期間狀況頻頻，一言難盡。</p>
+<p>編譯成功了後，刪除之前下載兮OpenCV4.0.1版本，換做家己編譯兮。<br>
+用Visual Studio 2019新建解決方案，<ruby>調試<rt>tiâu-tshì</rt></ruby>時竟然報錯：<code>无法打开文件“opencv_world401d.lib”</code>。<br>
+檢查<ruby>項目屬性<rt>hāng-bo̍k sio̍k-sèng</rt></ruby> - <ruby>鏈接器<rt>liān-tsiap-khì</rt></ruby>-<ruby>輸入<rt>si-ji̍p</rt></ruby>，發現已經刪除兮<code>opencv_world401d.lib</code>竟然猶囥佇<ruby>附加依賴項<rt>hū-kee i-nāi-hāng</rt></ruby>繼承兮項目默認設置：<code>%(AdditionalDependencies)</code>內底，而且無法直接通過<ruby>窗口<rt>thang-kháu</rt></ruby> <ruby>編輯<rt>phian-tship</rt></ruby> <ruby>移除<rt>î-tî</rt></ruby>。</p>
+<p>佇中文網站<ruby>搜尋<rt>sou-sîm</rt></ruby>如何修改<code>%(AdditionalDependencies)</code>未果，好佳哉佇<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6714269/vs-2010-unable-to-remove-inherited-additional-dependencies">Stack Overflow</a> 揣着辦法：<br>
+只要修改<code>C:\Users\%USERPROFILE%\AppData\Local\Microsoft\MSBuild\v4.0</code>內底兮項目屬性文件<code>Microsoft.Cpp.Win32.user.props</code>（按：OpenCV64位版本愛對應修改<code>Microsoft.Cpp.x64.user.props</code>），着解使刪除鏈接器繼承兮附加依賴項。</p>
 <p>最後，呵咾Stack Overflow社區，成熟兼專業。</p>
 
             </article>

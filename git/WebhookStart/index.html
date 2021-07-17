@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 770 字
+      凡 771 字
     </span>
   
 
@@ -222,13 +222,14 @@
             <article class="markdown-body">
               <p>也来试试GitHub的自动部署？</p>
 <a id="more"></a>
-
-<h2 id="GitHub项目仓库配置"><a href="#GitHub项目仓库配置" class="headerlink" title="GitHub项目仓库配置"></a>GitHub项目仓库配置</h2><p>在GitHub项目仓库的<code>Settings</code>-<code>Webhooks</code>里，选择<code>Add webhook</code>。<br>填写Payload URL和Secret，保存。</p>
+<h2>GitHub项目仓库配置</h2>
+<p>在GitHub项目仓库的<code>Settings</code>-<code>Webhooks</code>里，选择<code>Add webhook</code>。<br>
+填写Payload URL和Secret，保存。</p>
 <p><img src="/images/AddWebhook.png" srcset="/img/loading.gif" alt="Add Webhook"></p>
-<h2 id="远程服务器配置"><a href="#远程服务器配置" class="headerlink" title="远程服务器配置"></a>远程服务器配置</h2><p>在远程服务器某一位置（如<code>/home/deploy</code>）创建Node.js项目。</p>
+<h2>远程服务器配置</h2>
+<p>在远程服务器某一位置（如<code>/home/deploy</code>）创建Node.js项目。</p>
 <p>首先安装<code>github-webhook-handler</code>包：</p>
 <pre><code class="hljs bash">npm i --save github-webhook-handler</code></pre>
-
 <p>在同一目录下新建一个<code>deploy.js</code>，内容如：</p>
 <pre><code class="hljs js"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>)
 <span class="hljs-keyword">var</span> createHandler = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;github-webhook-handler&#x27;</span>)
@@ -264,21 +265,18 @@ handler.on(<span class="hljs-string">&#x27;push&#x27;</span>, <span class="hljs-
     event.payload.ref);
   run_cmd(<span class="hljs-string">&#x27;sh&#x27;</span>, [<span class="hljs-string">&#x27;./deploy.sh&#x27;</span>], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">text</span>)</span>&#123; <span class="hljs-built_in">console</span>.log(text) &#125;); <span class="hljs-comment">//要部署的脚本</span>
 &#125;)</code></pre>
-
 <p>编写部署脚本（如<code>deploy.sh</code>）。尝试执行</p>
 <pre><code class="hljs bash">sh ./deploy.sh</code></pre>
-
 <p>确认脚本无误。</p>
 <p>全局安装<code>forever</code>，启动进程，检查进程列表：</p>
 <pre><code class="hljs bash">npm i -g forever
 forever start /home/deploy/deploy.js
 forever list</code></pre>
-
 <p>如果一切正常，输出格式形如：</p>
 <pre><code class="hljs bash">data:        uid  <span class="hljs-built_in">command</span>       script       forever pid   id logfile                 uptime                    
 data:    [0] MHwN /usr/bin/node deploy.js 46226   46293    /root/.forever/MHwN.log 0:0:2:2.253999999999905</code></pre>
-
-<h3 id="附注：常用的forever指令"><a href="#附注：常用的forever指令" class="headerlink" title="附注：常用的forever指令"></a>附注：常用的<code>forever</code>指令</h3><pre><code class="hljs bash">// 简单的启动进程
+<h3>附注：常用的<code>forever</code>指令</h3>
+<pre><code class="hljs bash">// 简单的启动进程
 forever start app.js
 
 // 关闭进程
@@ -308,13 +306,13 @@ forever start -w app.js
 
 //查看forever进程列表
 forever list</code></pre>
-
-<h3 id="附注：SSH对远程服务器localhost端口的映射代理"><a href="#附注：SSH对远程服务器localhost端口的映射代理" class="headerlink" title="附注：SSH对远程服务器localhost端口的映射代理"></a>附注：SSH对远程服务器localhost端口的映射代理</h3><p>本地执行：</p>
+<h3>附注：SSH对远程服务器localhost端口的映射代理</h3>
+<p>本地执行：</p>
 <pre><code class="hljs powershell"><span class="hljs-comment"># ssh -L &#123;本地映射端口&#125;:&#123;远程端口绑定的ip&#125;:$&#123;需要代理的远程端口&#125; &#123;远程ip&#125;</span>
 ssh <span class="hljs-literal">-L</span> <span class="hljs-number">1234</span>:localhost:<span class="hljs-number">3000</span> xxx.xxx.xxx.xxx</code></pre>
-
 <p>输入<code>root</code>密码后，本地的<code>1234</code>端口即可监听远程<code>3000</code>端口的内容。</p>
-<h2 id="Nginx-公网映射"><a href="#Nginx-公网映射" class="headerlink" title="Nginx 公网映射"></a>Nginx 公网映射</h2><pre><code class="hljs txt">server &#123;
+<h2>Nginx 公网映射</h2>
+<pre><code class="hljs txt">server &#123;
     server_name example.com;
     ...
 
@@ -325,14 +323,11 @@ ssh <span class="hljs-literal">-L</span> <span class="hljs-number">1234</span>:l
             proxy_pass http://127.0.0.1:3000;
     &#125;
 &#125;</code></pre>
-
 <p>重启Nginx：</p>
 <pre><code class="hljs bash">pkill -9 nginx
 nginx</code></pre>
-
 <p>如无误，即可访问<code>https://example.com/pushCode</code>，得到<code>deploy.js</code>返回的内容：</p>
 <pre><code class="hljs txt">no such location</code></pre>
-
 <p>最后，尝试<code>git push</code>你的项目仓库，如一切正常，则能在对应的webhook页能找到部署成功的记录，大功告成。</p>
 <p><img src="/images/WebhookSuccess.png" srcset="/img/loading.gif" alt="Success"></p>
 

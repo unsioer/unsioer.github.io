@@ -224,28 +224,37 @@
 <p><em>原 型 开 发</em></p>
 </blockquote>
 <a id="more"></a>
-
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>实验目的：用你熟悉的语言，开发一个基于网络（比如Socket）的简单的互操作程序：实现A机器的程序，可以管理（增加、删除、改等）B机器上的某个文件夹或者目录。</p>
-<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>由于题目并未限制编程语言和技术，在此直接选用了HTTP协议，利用Python的Flask框架开发Web应用。</p>
+<h2>引言</h2>
+<p>实验目的：用你熟悉的语言，开发一个基于网络（比如Socket）的简单的互操作程序：实现A机器的程序，可以管理（增加、删除、改等）B机器上的某个文件夹或者目录。</p>
+<h2>问题分析</h2>
+<p>由于题目并未限制编程语言和技术，在此直接选用了HTTP协议，利用Python的Flask框架开发Web应用。</p>
 <p>在服务器端，设计必要的RESTful API，用于前端jQuery发送Ajax请求与远程服务器连接。</p>
 <p>用户可以直接访问服务器端的Web地址，对服务器端的文件夹进行文件管理。</p>
 <p>也可在本机启动客户端Web服务，通过指定服务器端的URL，客户端访问服务器端API，实现远程的文件管理。</p>
 <p>项目仓库地址：<a target="_blank" rel="noopener" href="https://github.com/unsioer/file-manager-flask">https://github.com/unsioer/file-manager-flask</a></p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>开发环境：</p>
+<h2>环境</h2>
+<p>开发环境：</p>
 <ul>
-<li><p>Visual Studio Code</p>
+<li>
+<p>Visual Studio Code</p>
 </li>
-<li><p>Python 3.8.5</p>
+<li>
+<p>Python 3.8.5</p>
 </li>
-<li><p>Flask 1.1.2</p>
+<li>
+<p>Flask 1.1.2</p>
 </li>
 </ul>
-<h2 id="具体设计"><a href="#具体设计" class="headerlink" title="具体设计"></a>具体设计</h2><h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>本实验的服务器端和客户端均采用了Python的Flask这一Web框架。</p>
+<h2>具体设计</h2>
+<h3>概要</h3>
+<p>本实验的服务器端和客户端均采用了Python的Flask这一Web框架。</p>
 <p>为了演示方便，服务器端和客户端均在本机测试。服务器端绑定<code>0.0.0.0:5000</code>，操作的目录设置为<code>test</code>；客户端代码置于<code>client</code>文件夹下，绑定<code>0.0.0.0:10000</code>，直接请求<code>http://127.0.0.1:5000</code>的内容。这显然容易推广到“A机器管理B机器的指定文件夹”。</p>
 <ul>
-<li><p>服务器端的路由设计中，<code>/api</code> 用于RESTful API，<code>/app</code> 用于返回HTML界面。 </p>
+<li>
+<p>服务器端的路由设计中，<code>/api</code> 用于RESTful API，<code>/app</code> 用于返回HTML界面。</p>
 </li>
-<li><p>客户端的路由设计中，<code>/app</code> 用于返回HTML界面（实际与服务器端的内容一致）。</p>
+<li>
+<p>客户端的路由设计中，<code>/app</code> 用于返回HTML界面（实际与服务器端的内容一致）。</p>
 </li>
 </ul>
 <p>下面具体说明使用到的技术。</p>
@@ -254,24 +263,21 @@
 <p>HTML界面的各项交互功能主要靠jQuery和衍生插件<code>jquery-confirm</code>（jQuery版的确认消息提示框）完成；</p>
 <p>还用到了<code>bootstrap</code>以及<code>font-awesome</code>美化界面。</p>
 <p>我们知道，客户端与服务器端应该使用的是不同的套接字，所以jQuery的Ajax请求的URL应该是不同的。所以，在共用的HTML代码中，设计了<code>&#123;&#123; host_link &#125;&#125;</code>这一字段。</p>
-<p>客户端有一个字典<code>remote_config = &#123;&#39;host_link&#39;:&#39;http://127.0.0.1:5000&#39;&#125;</code>，直接填写服务器端的URL。</p>
+<p>客户端有一个字典<code>remote_config = &#123;'host_link':'http://127.0.0.1:5000'&#125;</code>，直接填写服务器端的URL。</p>
 <p>代码差异如下：</p>
 <pre><code class="hljs Python"><span class="hljs-comment"># client/app.py 客户端</span>
 <span class="hljs-meta">@app.route(&quot;/app/&lt;path:folderPath&gt;&quot;, methods=[&#x27;GET&#x27;])</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>(<span class="hljs-params">folderPath</span>):</span>
     <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&#x27;app.html&#x27;</span>, **remote_config)</code></pre>
-
 <pre><code class="hljs Python"><span class="hljs-comment"># app.py 服务器端</span>
 <span class="hljs-meta">@app.route(&quot;/app/&lt;path:folderPath&gt;&quot;, methods=[&#x27;GET&#x27;])</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>(<span class="hljs-params">folderPath</span>):</span>
     <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&#x27;app.html&#x27;</span>)</code></pre>
-
 <pre><code class="hljs js"><span class="hljs-comment">// templates/app.html 共用的HTML模板</span>
 $.ajax(&#123;
     url: <span class="hljs-built_in">window</span>.location.href&#123;% <span class="hljs-keyword">if</span> host_link %&#125;.replace(<span class="hljs-regexp">/(https?:\/\/)?[^\/]+(\/.+)/i</span>,<span class="hljs-string">&#x27;&#123;&#123; host_link &#125;&#125;$2&#x27;</span>,<span class="hljs-number">1</span>)&#123;% endif %&#125;.replace(<span class="hljs-string">&#x27;/app&#x27;</span>, <span class="hljs-string">&#x27;/api/folder/basic&#x27;</span>, <span class="hljs-number">1</span>)，
     ...
 &#125;);</code></pre>
-
 <p>服务器端对应的Python代码未提供<code>host_link</code>，则不会被解析；客户端提供了<code>host_link</code>，在对应位置会被替换为指定的服务器端URL，由JavaScript的字符串替换功能改为正确的服务器端API的URL。</p>
 <p><strong>服务器端</strong>：</p>
 <p>服务器端除了上文提及的HTML界面外，主要内容为一系列操作的API。</p>
@@ -280,10 +286,10 @@ $.ajax(&#123;
 <span class="hljs-meta">@cross_origin()</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span>(<span class="hljs-params">folderPath</span>):</span>
     ...</code></pre>
-
 <p><code>@app.route()</code>指定了路径和请求方法；</p>
 <p><code>@cross_origin()</code>则是为了实现API的跨域访问，使得客户端Web界面得以操作服务器端的API。</p>
-<h3 id="服务器端路由"><a href="#服务器端路由" class="headerlink" title="服务器端路由"></a>服务器端路由</h3><p>服务器端的路由设计中，<code>/api</code> 用于RESTful API，<code>/app</code> 用于返回HTML界面。</p>
+<h3>服务器端路由</h3>
+<p>服务器端的路由设计中，<code>/api</code> 用于RESTful API，<code>/app</code> 用于返回HTML界面。</p>
 <p>需要注意的几点：</p>
 <ol>
 <li>以下的API设计中，格式均对齐为<code>/api/(file|folder)/[a-z]+/&lt;path&gt;?</code>，这是为了防止路径名称与API产生冲突。作为简易实现的功能，严格来说不是严谨的设计。</li>
@@ -291,7 +297,8 @@ $.ajax(&#123;
 <li>目前设计的API中，除发生未知的系统错误外，均返回JSON字串，HTTP状态码均为200（虽然大部分JSON字串有一个<code>state</code>属性，写法仿照HTTP返回状态码）。这只是简易实现功能，不是严谨的设计。在Flask中，返回错误状态码可以使用<code>abort</code>方法，可以通过<code>from flask import abort</code>引入。</li>
 <li>如果是URL路径不存在，Flask默认返回404状态码。</li>
 </ol>
-<h4 id="GET-api-folder-basic-lt-path-folderPath-gt"><a href="#GET-api-folder-basic-lt-path-folderPath-gt" class="headerlink" title="GET /api/folder/basic/&lt;path:folderPath&gt;"></a>GET <code>/api/folder/basic/&lt;path:folderPath&gt;</code></h4><p>获取指定目录下的文件（包含文件夹）信息。</p>
+<h4>GET <code>/api/folder/basic/&lt;path:folderPath&gt;</code></h4>
+<p>获取指定目录下的文件（包含文件夹）信息。</p>
 <p><strong>返回JSON格式</strong>：</p>
 <pre><code class="hljs json">&#123;
     <span class="hljs-attr">&quot;files&quot;</span>:[
@@ -305,25 +312,31 @@ $.ajax(&#123;
         ...
     ]
 &#125;</code></pre>
-
-<h4 id="GET-api-folder-basic"><a href="#GET-api-folder-basic" class="headerlink" title="GET /api/folder/basic/"></a>GET <code>/api/folder/basic/</code></h4><p>获取根目录下的文件信息。</p>
+<h4>GET <code>/api/folder/basic/</code></h4>
+<p>获取根目录下的文件信息。</p>
 <p><strong>返回JSON格式</strong>：同上。</p>
-<h4 id="GET-api-file-check-lt-path-filePath-gt"><a href="#GET-api-file-check-lt-path-filePath-gt" class="headerlink" title="GET /api/file/check/&lt;path:filePath&gt;"></a>GET <code>/api/file/check/&lt;path:filePath&gt;</code></h4><p>检查给出完整路径的文件（夹）是否存在。</p>
+<h4>GET <code>/api/file/check/&lt;path:filePath&gt;</code></h4>
+<p>检查给出完整路径的文件（夹）是否存在。</p>
 <p><em>注：由于下文一些API针对文件（夹）名冲突做了不同处理，HTML界面实际并未利用到此API。</em></p>
 <p><strong>返回JSON格式</strong>：</p>
 <ul>
-<li><p>存在：<code>&#123;&quot;status&quot;: 200&#125;</code></p>
+<li>
+<p>存在：<code>&#123;&quot;status&quot;: 200&#125;</code></p>
 </li>
-<li><p>不存在：<code>&#123;&quot;status&quot;: 404&#125;</code></p>
+<li>
+<p>不存在：<code>&#123;&quot;status&quot;: 404&#125;</code></p>
 </li>
 </ul>
-<h4 id="POST-api-folder-basic-lt-path-folderPath-gt"><a href="#POST-api-folder-basic-lt-path-folderPath-gt" class="headerlink" title="POST /api/folder/basic/&lt;path:folderPath&gt;"></a>POST <code>/api/folder/basic/&lt;path:folderPath&gt;</code></h4><p>在指定目录<strong>上传文件</strong>。</p>
+<h4>POST <code>/api/folder/basic/&lt;path:folderPath&gt;</code></h4>
+<p>在指定目录<strong>上传文件</strong>。</p>
 <p><strong>HTTP请求体</strong>：提交内容为表单数据，<code>file</code>项为二进制（即上传的文件）内容。</p>
 <p><strong>冲突检测</strong>：如果该目录下已经有同名文件，则将上传的文件命名为<code>[非后缀名] - 副本[.后缀名] </code>保存。如果仍然存在命名冲突，则尝试命名为<code>[非后缀名] - 副本 (2)[.后缀名] </code>, <code>[非后缀名] - 副本 (3)[.后缀名] </code>……直至避开冲突。</p>
 <p><strong>返回JSON格式</strong>：<code>&#123;&quot;status&quot;: 200&#125;</code></p>
-<h4 id="POST-api-folder-basic"><a href="#POST-api-folder-basic" class="headerlink" title="POST /api/folder/basic"></a>POST <code>/api/folder/basic</code></h4><p>在根目录<strong>上传文件</strong>。</p>
+<h4>POST <code>/api/folder/basic</code></h4>
+<p>在根目录<strong>上传文件</strong>。</p>
 <p><strong>HTTP请求体、冲突检测、返回JSON格式</strong>：同上。</p>
-<h4 id="PUT-api-folder-basic-lt-path-folderPath-gt"><a href="#PUT-api-folder-basic-lt-path-folderPath-gt" class="headerlink" title="PUT /api/folder/basic/&lt;path:folderPath&gt;"></a>PUT <code>/api/folder/basic/&lt;path:folderPath&gt;</code></h4><p>为指定目录下的指定文件（夹）<strong>重命名</strong>。</p>
+<h4>PUT <code>/api/folder/basic/&lt;path:folderPath&gt;</code></h4>
+<p>为指定目录下的指定文件（夹）<strong>重命名</strong>。</p>
 <p><strong>HTTP请求体</strong>：<code>&#123;&quot;src&quot;:&quot;原名称&quot;,&quot;dst&quot;:&quot;新名称&quot;&#125;</code>。</p>
 <p><strong>文件（夹）名称合法性检测</strong>：拒绝文件（夹）名出现<code>\</code> <code>/</code> <code>:</code> <code>?</code> <code>&lt;</code> <code>&gt;</code>  <code>*</code> 等特殊字符。</p>
 <p><strong>冲突检测</strong>：在这里，不允许新名称与当前目录下其他文件的名称有冲突。</p>
@@ -335,9 +348,11 @@ $.ajax(&#123;
 <li>源文件不存在：<code>&#123;&quot;status&quot;: 404, &quot;msg&quot;: &quot;Source file does not exist&quot;&#125;</code></li>
 <li>新名称与当前目录下其他文件的名称冲突：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;Destination file exists&quot;&#125;</code></li>
 </ul>
-<h4 id="PUT-api-folder-basic"><a href="#PUT-api-folder-basic" class="headerlink" title="PUT /api/folder/basic/"></a>PUT <code>/api/folder/basic/</code></h4><p>为根目录下的指定文件（夹）<strong>重命名</strong>。</p>
+<h4>PUT <code>/api/folder/basic/</code></h4>
+<p>为根目录下的指定文件（夹）<strong>重命名</strong>。</p>
 <p><strong>HTTP请求体、文件（夹）名称合法性检测、冲突检测、返回JSON格式</strong>：同上。</p>
-<h4 id="DELETE-api-folder-basic-lt-path-folderPath-gt"><a href="#DELETE-api-folder-basic-lt-path-folderPath-gt" class="headerlink" title="DELETE /api/folder/basic/&lt;path:folderPath&gt;"></a>DELETE <code>/api/folder/basic/&lt;path:folderPath&gt;</code></h4><p><strong>删除</strong>指定目录下的指定文件（夹）。</p>
+<h4>DELETE <code>/api/folder/basic/&lt;path:folderPath&gt;</code></h4>
+<p><strong>删除</strong>指定目录下的指定文件（夹）。</p>
 <p><strong>HTTP请求体</strong>：<code>&#123;&quot;src&quot;:&quot;要删除的文件（夹）名称&quot;&#125;</code>。</p>
 <p><strong>返回JSON格式</strong>：</p>
 <ul>
@@ -346,26 +361,34 @@ $.ajax(&#123;
 <li>源文件不存在：<code>&#123;&quot;status&quot;: 404, &quot;msg&quot;: &quot;Source file does not exist&quot;&#125;</code></li>
 <li>没有删除权限：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;Permission refused&quot;&#125;</code></li>
 </ul>
-<h4 id="DELETE-api-folder-basic"><a href="#DELETE-api-folder-basic" class="headerlink" title="DELETE /api/folder/basic/"></a>DELETE <code>/api/folder/basic/</code></h4><p><strong>删除</strong>根目录下的指定文件（夹）。</p>
+<h4>DELETE <code>/api/folder/basic/</code></h4>
+<p><strong>删除</strong>根目录下的指定文件（夹）。</p>
 <p><strong>HTTP请求体、返回JSON格式</strong>：同上。</p>
-<h4 id="POST-api-folder-new-lt-path-folderPath-gt"><a href="#POST-api-folder-new-lt-path-folderPath-gt" class="headerlink" title="POST /api/folder/new/&lt;path:folderPath&gt;"></a>POST <code>/api/folder/new/&lt;path:folderPath&gt;</code></h4><p>在指定目录下<strong>新建文件夹</strong>。</p>
+<h4>POST <code>/api/folder/new/&lt;path:folderPath&gt;</code></h4>
+<p>在指定目录下<strong>新建文件夹</strong>。</p>
 <p><strong>HTTP请求体</strong>：<code>&#123;&quot;src&quot;:&quot;文件夹名称&quot;&#125;</code>。</p>
 <p><strong>文件夹名称合法性检测</strong>：拒绝文件夹名出现<code>\</code> <code>/</code> <code>:</code> <code>?</code> <code>&lt;</code> <code>&gt;</code> <code>*</code> 等特殊字符。</p>
 <p><strong>冲突检测</strong>：在这里，不允许文件夹名称与当前目录下其他文件夹的名称有冲突。</p>
 <p><strong>返回JSON格式</strong>：</p>
 <ul>
-<li><p>删除成功，或原名称与新名称相同：<code>&#123;&quot;status&quot;: 200&#125;</code></p>
+<li>
+<p>删除成功，或原名称与新名称相同：<code>&#123;&quot;status&quot;: 200&#125;</code></p>
 </li>
-<li><p>请求体不合法：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;No data given&quot;&#125;</code>或<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;No folder name given&quot;&#125;</code></p>
+<li>
+<p>请求体不合法：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;No data given&quot;&#125;</code>或<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;No folder name given&quot;&#125;</code></p>
 </li>
-<li><p>文件夹名称有特殊字符：<code>&#123;&quot;status&quot;: 403, &quot;msg&quot;: &quot;Illegal folder name&quot;&#125;</code></p>
+<li>
+<p>文件夹名称有特殊字符：<code>&#123;&quot;status&quot;: 403, &quot;msg&quot;: &quot;Illegal folder name&quot;&#125;</code></p>
 </li>
-<li><p>文件夹名称与当前目录下其他文件夹的名称冲突：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;Destination folder exists&quot;&#125;</code></p>
+<li>
+<p>文件夹名称与当前目录下其他文件夹的名称冲突：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;Destination folder exists&quot;&#125;</code></p>
 </li>
 </ul>
-<h4 id="POST-api-folder-new"><a href="#POST-api-folder-new" class="headerlink" title="POST /api/folder/new/"></a>POST <code>/api/folder/new/</code></h4><p>在根目录下<strong>新建文件夹</strong>。</p>
+<h4>POST <code>/api/folder/new/</code></h4>
+<p>在根目录下<strong>新建文件夹</strong>。</p>
 <p><strong>HTTP请求体</strong>、<strong>文件夹名称合法性检测</strong>、<strong>冲突检测</strong>、<strong>返回JSON格式</strong>：同上。</p>
-<h4 id="PUT-api-file-copy-lt-path-filePath-gt"><a href="#PUT-api-file-copy-lt-path-filePath-gt" class="headerlink" title="PUT /api/file/copy/&lt;path:filePath&gt;"></a>PUT <code>/api/file/copy/&lt;path:filePath&gt;</code></h4><p><strong>复制</strong>指定路径下的文件（夹）到指定位置文件夹下。</p>
+<h4>PUT <code>/api/file/copy/&lt;path:filePath&gt;</code></h4>
+<p><strong>复制</strong>指定路径下的文件（夹）到指定位置文件夹下。</p>
 <p>指定位置文件夹如不存在则新建。</p>
 <p><strong>HTTP请求体</strong>：<code>&#123;&quot;dst&quot;:&quot;目标文件夹名称&quot;&#125;</code>。</p>
 <p><strong>路径名称合法性检测</strong>：目标文件夹路径不得出现 <code>:</code> <code>?</code> <code>&lt;</code> <code>&gt;</code> <code>*</code> 等特殊字符。</p>
@@ -381,7 +404,8 @@ $.ajax(&#123;
 <li>目标文件夹路径名称不合法：<code>&#123;&quot;status&quot;: 403, &quot;msg&quot;: &quot;Illegal path&quot;&#125;</code></li>
 <li>复制失败：<code>&#123;&quot;status&quot;: 400, &quot;msg&quot;: &quot;错误信息&quot;&#125;</code></li>
 </ul>
-<h4 id="PUT-api-file-move-lt-path-filePath-gt"><a href="#PUT-api-file-move-lt-path-filePath-gt" class="headerlink" title="PUT /api/file/move/&lt;path:filePath&gt;"></a>PUT <code>/api/file/move/&lt;path:filePath&gt;</code></h4><p><strong>移动</strong>指定路径下的文件（夹）到指定位置文件夹下。</p>
+<h4>PUT <code>/api/file/move/&lt;path:filePath&gt;</code></h4>
+<p><strong>移动</strong>指定路径下的文件（夹）到指定位置文件夹下。</p>
 <p>指定位置文件夹如不存在则新建。</p>
 <p><strong>HTTP请求体</strong>：<code>&#123;&quot;dst&quot;:&quot;目标文件夹名称&quot;&#125;</code>。</p>
 <p><strong>路径名称合法性检测</strong>：目标文件夹路径不得出现 <code>:</code> <code>?</code> <code>&lt;</code> <code>&gt;</code>  <code>*</code> 等特殊字符。</p>
@@ -399,28 +423,38 @@ $.ajax(&#123;
 </ul>
 <hr>
 <p>以下为HTML界面路由，服务器端与客户端基本一致。</p>
-<h3 id="客户端路由"><a href="#客户端路由" class="headerlink" title="客户端路由"></a>客户端路由</h3><h4 id="GET-app-lt-path-folderPath-gt-及GET-app"><a href="#GET-app-lt-path-folderPath-gt-及GET-app" class="headerlink" title="GET /app/&lt;path:folderPath&gt;及GET /app/"></a>GET <code>/app/&lt;path:folderPath&gt;</code>及GET <code>/app/</code></h4><p>返回HTML界面，显示指定目录及根目录下的情况。界面效果详见下节。</p>
-<h2 id="Web界面展示"><a href="#Web界面展示" class="headerlink" title="Web界面展示"></a>Web界面展示</h2><p>这里做了简要截图，也可详见演示视频。</p>
-<h3 id="基本界面"><a href="#基本界面" class="headerlink" title="基本界面"></a>基本界面</h3><p>界面左上方为网页标题，下有四个按钮，分别为：根目录、刷新、新建文件夹、上传（文件）。</p>
+<h3>客户端路由</h3>
+<h4>GET <code>/app/&lt;path:folderPath&gt;</code>及GET <code>/app/</code></h4>
+<p>返回HTML界面，显示指定目录及根目录下的情况。界面效果详见下节。</p>
+<h2>Web界面展示</h2>
+<p>这里做了简要截图，也可详见演示视频。</p>
+<h3>基本界面</h3>
+<p>界面左上方为网页标题，下有四个按钮，分别为：根目录、刷新、新建文件夹、上传（文件）。</p>
 <p>接着是文件列表。对于非根目录，还有一行<code>..</code>的链接返回上一级目录。</p>
 <p>每个文件（夹）根据文件类型配套不同图标。文件夹有链接可以访问；文件则显示具体大小。文件和文件夹均显示最近修改时间。</p>
 <p>对于每个文件（夹），均提供四种操作，分别为：复制、移动、重命名、删除。</p>
 <p>最下方显示作者和创作年份。</p>
 <p><img src="/images/MW1-%E5%9F%BA%E6%9C%AC%E7%95%8C%E9%9D%A2.png" srcset="/img/loading.gif" alt="基本界面"></p>
-<h3 id="提示框"><a href="#提示框" class="headerlink" title="提示框"></a>提示框</h3><p>新建、重命名、复制、移动提示框（以重命名提示框为例）：</p>
+<h3>提示框</h3>
+<p>新建、重命名、复制、移动提示框（以重命名提示框为例）：</p>
 <p><img src="/images/MW1-%E9%87%8D%E5%91%BD%E5%90%8D%E6%8F%90%E7%A4%BA%E6%A1%86.png" srcset="/img/loading.gif" alt="重命名提示框"></p>
 <p>删除提示框：</p>
 <p><img src="/images/MW1-%E5%88%A0%E9%99%A4%E6%8F%90%E7%A4%BA%E6%A1%86.png" srcset="/img/loading.gif" alt="删除提示框"></p>
-<h2 id="技术总结"><a href="#技术总结" class="headerlink" title="技术总结"></a>技术总结</h2><p>本次实验实现了一个最简单的基于网络的远程文件管理应用，完成了实验所有要求并做了一些合法性检测，设计了相对简洁美观的界面。</p>
+<h2>技术总结</h2>
+<p>本次实验实现了一个最简单的基于网络的远程文件管理应用，完成了实验所有要求并做了一些合法性检测，设计了相对简洁美观的界面。</p>
 <p>由于只是简易实现功能，尚有以下不足之处：</p>
 <ul>
-<li><p>API命名规范</p>
+<li>
+<p>API命名规范</p>
 </li>
-<li><p>请求和返回内容设计较为随意</p>
+<li>
+<p>请求和返回内容设计较为随意</p>
 </li>
-<li><p>未进行充分测试，难免bug（如文件操作权限不足在API中没有全部体现）</p>
+<li>
+<p>未进行充分测试，难免bug（如文件操作权限不足在API中没有全部体现）</p>
 </li>
-<li><p>未运用Vue.js等前端框架，纯手写jQuery，代码较为繁琐</p>
+<li>
+<p>未运用Vue.js等前端框架，纯手写jQuery，代码较为繁琐</p>
 </li>
 </ul>
 
