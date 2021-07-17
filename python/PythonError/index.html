@@ -49,7 +49,6 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-
   <script  src="/js/utils.js" ></script>
 <meta name="generator" content="Hexo 5.0.2"></head>
 
@@ -221,7 +220,7 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p></p>
+              <p>　</p>
 <a id="more"></a>
 <p>（本文所述Python版本：3.7）</p>
 <p>Python的所有異常均繼承自<code>BaseExpection</code>類。</p>
@@ -230,213 +229,210 @@
 <pre><code class="hljs Python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Networkerror</span>(<span class="hljs-params">RuntimeError</span>):</span>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, arg</span>):</span>
         self.args = arg</code></pre>
-<h2>常用內置標準異常類</h2>
-<p>參考：<a target="_blank" rel="noopener" href="https://docs.python.org/3.7/library/exceptions.html">官方文檔</a>或<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-exceptions.html">菜鳥教程</a></p>
+
+<h2 id="常用內置標準異常類"><a href="#常用內置標準異常類" class="headerlink" title="常用內置標準異常類"></a>常用內置標準異常類</h2><p>參考：<a target="_blank" rel="noopener" href="https://docs.python.org/3.7/library/exceptions.html">官方文檔</a>或<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-exceptions.html">菜鳥教程</a></p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">異常名稱</th>
-<th style="text-align:left">描述</th>
+<th align="left">異常名稱</th>
+<th align="left">描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">BaseException</td>
-<td style="text-align:left">所有異常的基類</td>
+<tbody><tr>
+<td align="left">BaseException</td>
+<td align="left">所有異常的基類</td>
 </tr>
 <tr>
-<td style="text-align:left">SystemExit</td>
-<td style="text-align:left">解釋器請求退出</td>
+<td align="left">SystemExit</td>
+<td align="left">解釋器請求退出</td>
 </tr>
 <tr>
-<td style="text-align:left">KeyboardInterrupt</td>
-<td style="text-align:left">用戶中斷執行(通常是輸入^C)</td>
+<td align="left">KeyboardInterrupt</td>
+<td align="left">用戶中斷執行(通常是輸入^C)</td>
 </tr>
 <tr>
-<td style="text-align:left">GeneratorExit</td>
-<td style="text-align:left">生成器(generator)發生異常來通知退出</td>
+<td align="left">GeneratorExit</td>
+<td align="left">生成器(generator)發生異常來通知退出</td>
 </tr>
 <tr>
-<td style="text-align:left">Exception</td>
-<td style="text-align:left">常規錯誤的基類（非系統異常）</td>
+<td align="left">Exception</td>
+<td align="left">常規錯誤的基類（非系統異常）</td>
 </tr>
 <tr>
-<td style="text-align:left">ArithmeticError</td>
-<td style="text-align:left">所有數值計算錯誤的基類</td>
+<td align="left">ArithmeticError</td>
+<td align="left">所有數值計算錯誤的基類</td>
 </tr>
 <tr>
-<td style="text-align:left">BufferError</td>
-<td style="text-align:left">緩衝區相關操作無法執行</td>
+<td align="left">BufferError</td>
+<td align="left">緩衝區相關操作無法執行</td>
 </tr>
 <tr>
-<td style="text-align:left">LookupError</td>
-<td style="text-align:left">無效數據查詢的基類</td>
+<td align="left">LookupError</td>
+<td align="left">無效數據查詢的基類</td>
 </tr>
 <tr>
-<td style="text-align:left">StopIteration</td>
-<td style="text-align:left">迭代器沒有更多的值</td>
+<td align="left">StopIteration</td>
+<td align="left">迭代器沒有更多的值</td>
 </tr>
 <tr>
-<td style="text-align:left">StandardError</td>
-<td style="text-align:left">所有的內建標準異常的基類</td>
+<td align="left">StandardError</td>
+<td align="left">所有的內建標準異常的基類</td>
 </tr>
 <tr>
-<td style="text-align:left">FloatingPointError</td>
-<td style="text-align:left">浮點計算錯誤</td>
+<td align="left">FloatingPointError</td>
+<td align="left">浮點計算錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">OverflowError</td>
-<td style="text-align:left">數值運算超出最大限制</td>
+<td align="left">OverflowError</td>
+<td align="left">數值運算超出最大限制</td>
 </tr>
 <tr>
-<td style="text-align:left">ZeroDivisionError</td>
-<td style="text-align:left">除(或取模)零 (所有數據類型)</td>
+<td align="left">ZeroDivisionError</td>
+<td align="left">除(或取模)零 (所有數據類型)</td>
 </tr>
 <tr>
-<td style="text-align:left">AssertionError</td>
-<td style="text-align:left">斷言語句失敗</td>
+<td align="left">AssertionError</td>
+<td align="left">斷言語句失敗</td>
 </tr>
 <tr>
-<td style="text-align:left">AttributeError</td>
-<td style="text-align:left">對象沒有這個屬性</td>
+<td align="left">AttributeError</td>
+<td align="left">對象沒有這個屬性</td>
 </tr>
 <tr>
-<td style="text-align:left">EOFError</td>
-<td style="text-align:left">沒有內建輸入,到達EOF 標記</td>
+<td align="left">EOFError</td>
+<td align="left">沒有內建輸入,到達EOF 標記</td>
 </tr>
 <tr>
-<td style="text-align:left">EnvironmentError</td>
-<td style="text-align:left">操作系統錯誤的基類</td>
+<td align="left">EnvironmentError</td>
+<td align="left">操作系統錯誤的基類</td>
 </tr>
 <tr>
-<td style="text-align:left">IOError</td>
-<td style="text-align:left">輸入/輸出操作失敗</td>
+<td align="left">IOError</td>
+<td align="left">輸入/輸出操作失敗</td>
 </tr>
 <tr>
-<td style="text-align:left">OSError</td>
-<td style="text-align:left">操作系統錯誤</td>
+<td align="left">OSError</td>
+<td align="left">操作系統錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">WindowsError</td>
-<td style="text-align:left">系統調用失敗</td>
+<td align="left">WindowsError</td>
+<td align="left">系統調用失敗</td>
 </tr>
 <tr>
-<td style="text-align:left">ImportError</td>
-<td style="text-align:left">導入模塊/對象失敗</td>
+<td align="left">ImportError</td>
+<td align="left">導入模塊/對象失敗</td>
 </tr>
 <tr>
-<td style="text-align:left">IndexError</td>
-<td style="text-align:left">序列中沒有此索引(index)</td>
+<td align="left">IndexError</td>
+<td align="left">序列中沒有此索引(index)</td>
 </tr>
 <tr>
-<td style="text-align:left">KeyError</td>
-<td style="text-align:left">映射中沒有這個鍵</td>
+<td align="left">KeyError</td>
+<td align="left">映射中沒有這個鍵</td>
 </tr>
 <tr>
-<td style="text-align:left">MemoryError</td>
-<td style="text-align:left">內存溢出錯誤(對於Python 解釋器不是致命的)</td>
+<td align="left">MemoryError</td>
+<td align="left">內存溢出錯誤(對於Python 解釋器不是致命的)</td>
 </tr>
 <tr>
-<td style="text-align:left">NameError</td>
-<td style="text-align:left">未聲明/初始化對象 (沒有屬性)</td>
+<td align="left">NameError</td>
+<td align="left">未聲明/初始化對象 (沒有屬性)</td>
 </tr>
 <tr>
-<td style="text-align:left">UnboundLocalError</td>
-<td style="text-align:left">訪問未初始化的本地變量</td>
+<td align="left">UnboundLocalError</td>
+<td align="left">訪問未初始化的本地變量</td>
 </tr>
 <tr>
-<td style="text-align:left">ReferenceError</td>
-<td style="text-align:left">弱引用(Weak reference)試圖訪問已經垃圾回收了的對象</td>
+<td align="left">ReferenceError</td>
+<td align="left">弱引用(Weak reference)試圖訪問已經垃圾回收了的對象</td>
 </tr>
 <tr>
-<td style="text-align:left">RuntimeError</td>
-<td style="text-align:left">一般的運行時錯誤</td>
+<td align="left">RuntimeError</td>
+<td align="left">一般的運行時錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">NotImplementedError</td>
-<td style="text-align:left">尚未實現的方法</td>
+<td align="left">NotImplementedError</td>
+<td align="left">尚未實現的方法</td>
 </tr>
 <tr>
-<td style="text-align:left">SyntaxError</td>
-<td style="text-align:left">Python 語法錯誤</td>
+<td align="left">SyntaxError</td>
+<td align="left">Python 語法錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">IndentationError</td>
-<td style="text-align:left">縮進錯誤</td>
+<td align="left">IndentationError</td>
+<td align="left">縮進錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">TabError</td>
-<td style="text-align:left">Tab 和空格混用</td>
+<td align="left">TabError</td>
+<td align="left">Tab 和空格混用</td>
 </tr>
 <tr>
-<td style="text-align:left">SystemError</td>
-<td style="text-align:left">一般的解釋器系統錯誤</td>
+<td align="left">SystemError</td>
+<td align="left">一般的解釋器系統錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">TypeError</td>
-<td style="text-align:left">對類型無效的操作</td>
+<td align="left">TypeError</td>
+<td align="left">對類型無效的操作</td>
 </tr>
 <tr>
-<td style="text-align:left">ValueError</td>
-<td style="text-align:left">傳入無效的參數</td>
+<td align="left">ValueError</td>
+<td align="left">傳入無效的參數</td>
 </tr>
 <tr>
-<td style="text-align:left">UnicodeError</td>
-<td style="text-align:left">Unicode 相關的錯誤</td>
+<td align="left">UnicodeError</td>
+<td align="left">Unicode 相關的錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">UnicodeDecodeError</td>
-<td style="text-align:left">Unicode 解碼時的錯誤</td>
+<td align="left">UnicodeDecodeError</td>
+<td align="left">Unicode 解碼時的錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">UnicodeEncodeError</td>
-<td style="text-align:left">Unicode 編碼時錯誤</td>
+<td align="left">UnicodeEncodeError</td>
+<td align="left">Unicode 編碼時錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">UnicodeTranslateError</td>
-<td style="text-align:left">Unicode 轉換時錯誤</td>
+<td align="left">UnicodeTranslateError</td>
+<td align="left">Unicode 轉換時錯誤</td>
 </tr>
 <tr>
-<td style="text-align:left">Warning</td>
-<td style="text-align:left">警告的基類</td>
+<td align="left">Warning</td>
+<td align="left">警告的基類</td>
 </tr>
 <tr>
-<td style="text-align:left">DeprecationWarning</td>
-<td style="text-align:left">關於被棄用的特徵的警告</td>
+<td align="left">DeprecationWarning</td>
+<td align="left">關於被棄用的特徵的警告</td>
 </tr>
 <tr>
-<td style="text-align:left">FutureWarning</td>
-<td style="text-align:left">關於構造將來語義會有改變的警告</td>
+<td align="left">FutureWarning</td>
+<td align="left">關於構造將來語義會有改變的警告</td>
 </tr>
 <tr>
-<td style="text-align:left">OverflowWarning</td>
-<td style="text-align:left">舊的關於自動提升爲長整型(long)的警告</td>
+<td align="left">OverflowWarning</td>
+<td align="left">舊的關於自動提升爲長整型(long)的警告</td>
 </tr>
 <tr>
-<td style="text-align:left">PendingDeprecationWarning</td>
-<td style="text-align:left">關於特性將會被廢棄的警告</td>
+<td align="left">PendingDeprecationWarning</td>
+<td align="left">關於特性將會被廢棄的警告</td>
 </tr>
 <tr>
-<td style="text-align:left">RuntimeWarning</td>
-<td style="text-align:left">可疑的運行時行爲(runtime behavior)的警告</td>
+<td align="left">RuntimeWarning</td>
+<td align="left">可疑的運行時行爲(runtime behavior)的警告</td>
 </tr>
 <tr>
-<td style="text-align:left">SyntaxWarning</td>
-<td style="text-align:left">可疑的語法的警告</td>
+<td align="left">SyntaxWarning</td>
+<td align="left">可疑的語法的警告</td>
 </tr>
 <tr>
-<td style="text-align:left">UserWarning</td>
-<td style="text-align:left">用戶代碼生成的警告</td>
+<td align="left">UserWarning</td>
+<td align="left">用戶代碼生成的警告</td>
 </tr>
-</tbody>
-</table>
-<h2>Errno（派生自OSError）</h2>
-<p>源自C語言的<code>errno</code>。</p>
+</tbody></table>
+<h2 id="Errno（派生自OSError）"><a href="#Errno（派生自OSError）" class="headerlink" title="Errno（派生自OSError）"></a>Errno（派生自OSError）</h2><p>源自C語言的<code>errno</code>。</p>
 <p>另，Python的<code>error</code>模塊復刻了Linux C的<code>errno.h</code>。</p>
 <p>比如socket套接的IP地址權限不足，則會提示：</p>
 <pre><code class="hljs Bash">[Errno 99] Cannot assign requested address.</code></pre>
-<h2>WinError（派生自OSError）</h2>
-<p>Windows系統下，提供Windows錯誤碼。</p>
+
+<h2 id="WinError（派生自OSError）"><a href="#WinError（派生自OSError）" class="headerlink" title="WinError（派生自OSError）"></a>WinError（派生自OSError）</h2><p>Windows系統下，提供Windows錯誤碼。</p>
 <p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes">所有的Win32錯誤信息（英文）</a></p>
 <p>比如在Windows系統socket套接8080端口，則會提示：</p>
 <pre><code class="hljs Bash">[WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。</code></pre>
@@ -459,9 +455,9 @@
                     
                       <a class="hover-with-bg" href="/tags/Python/">Python</a>
                     
-                      <a class="hover-with-bg" href="/tags/exception/">異常處理</a>
-                    
                       <a class="hover-with-bg" href="/tags/socket/">socket</a>
+                    
+                      <a class="hover-with-bg" href="/tags/exception/">異常處理</a>
                     
                   </div>
                 
@@ -566,6 +562,30 @@
         <span>Fluid</span></a>
     </div>
     
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            <i class="iconfont icon-eye"></i> 
+            <span id="busuanzi_value_site_pv"></span>
+            
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            <i class="iconfont icon-users"></i> 
+            <span id="busuanzi_value_site_uv"></span>
+            
+          </span>
+      
+    
+  </div>
+
 
     
 
@@ -577,6 +597,12 @@
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
+
+<!-- OpenCC -->
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.t2cn.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/bundle-browser.min.js" ></script>
+
 <script  src="/js/main.js" ></script>
 
 <!-- Plugins -->
@@ -593,11 +619,12 @@
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
   
 <script src="/js/jquery.cookie.js"></script>
-<script src="/js/jquery.t2s.js"></script>
 
 
 

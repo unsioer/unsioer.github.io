@@ -49,7 +49,6 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-
   <script  src="/js/utils.js" ></script>
 <meta name="generator" content="Hexo 5.0.2"></head>
 
@@ -180,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 90 字
+      凡 88 字
     </span>
   
 
@@ -221,11 +220,9 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p></p>
+              <p>　</p>
 <a id="more"></a>
-<p>項目需要用到C/C++文件流，原本讀寫UTF-8和GBK格式一切正常，但遇到jpg文件老是提前終止，甚至讀取UTF-16LE格式的文本文件也是。<br>
-調試排錯，發現問題出在了<code>0x1A</code>這個字符。<br>
-上網查閱資料，發現該字符可表示EOF，要fopen應使用&quot;b&quot;。</p>
+<p>項目需要用到C/C++文件流，原本讀寫UTF-8和GBK格式一切正常，但遇到jpg文件老是提前終止，甚至讀取UTF-16LE格式的文本文件也是。<br>調試排錯，發現問題出在了<code>0x1A</code>這個字符。<br>上網查閱資料，發現該字符可表示EOF，要fopen應使用”b”。</p>
 
             </article>
             <hr>
@@ -352,6 +349,30 @@
         <span>Fluid</span></a>
     </div>
     
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            <i class="iconfont icon-eye"></i> 
+            <span id="busuanzi_value_site_pv"></span>
+            
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            <i class="iconfont icon-users"></i> 
+            <span id="busuanzi_value_site_uv"></span>
+            
+          </span>
+      
+    
+  </div>
+
 
     
 
@@ -363,6 +384,12 @@
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
+
+<!-- OpenCC -->
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.t2cn.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/bundle-browser.min.js" ></script>
+
 <script  src="/js/main.js" ></script>
 
 <!-- Plugins -->
@@ -379,11 +406,12 @@
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
   
 <script src="/js/jquery.cookie.js"></script>
-<script src="/js/jquery.t2s.js"></script>
 
 
 

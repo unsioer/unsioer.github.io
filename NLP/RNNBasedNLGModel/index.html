@@ -49,7 +49,6 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-
   <script  src="/js/utils.js" ></script>
 <meta name="generator" content="Hexo 5.0.2"></head>
 
@@ -180,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 2.9k 字
+      凡 3.3k 字
     </span>
   
 
@@ -190,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      37
+      43
        分鐘
     </span>
   
@@ -259,15 +258,31 @@
 <p>LSTM在每个时间步上对当前输入和记忆的历史信息进行重新组合，有效减轻梯度爆炸/消失等问题。关键在于：</p>
 <ul>
 <li>更复杂的循环函数：使得梯度在回传过程中经历更多导数较小的激活函数，降低梯度爆炸发生的可能性。</li>
-<li>遗忘门的使用（待补充）。</li>
+<li>遗忘门的使用：遗忘门中的偏置项${\pmb b}_f$通常在初始化时会设置得很大，使得${\pmb f}_t$接近1，即单元状态${\pmb c}_t$将尽量保留${\pmb c}_{t-1}$中的信息。<ul>
+<li>训练时${\pmb c}_t$上的梯度通过${\pmb c}_{t-1}$一直回传，不易消失。</li>
+<li>但${\pmb f}_t$中的元素可能会逐渐减小，故遗忘门无法完全避免梯度消失。</li>
+<li>去掉遗忘门（相当于${\pmb f}_t$为1）可完全避免梯度消失，但有遗忘门的LSTM神经网络实际效果往往会更好。</li>
 </ul>
+</li>
+</ul>
+<p>LSTM效果优于标准RNN，但循环函数复杂，学习和推理能力较低，在大规模神经网络结构中时间性能较差。</p>
 <h2 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h2><p>门控循环单元（Gated Recurrent Units, GRU）：简化LSTM神经网络的循环函数，达到相似的效果和时空效率。</p>
 <p>$$<br>\begin{array}{c}<br>{\pmb h}_t = ( 1 - {\pmb z}_t ) \otimes {\pmb h}_{t-1} + {\pmb z}_t \otimes {\hat {\pmb c}}_t \\ {\hat {\pmb h}}_t = {\rm tanh}({\pmb W}_c{\pmb e}(w_t)+{\pmb U}_c( {\pmb r}_t \otimes {\pmb h}_{t-1} ) )<br>\end{array}<br>$$</p>
 <ul>
 <li>${\pmb r}_t$, ${\pmb z}_t$：分别称为重置门（Reset Gate）、更新门（Update Gate）。</li>
 </ul>
 <p>$$<br>\begin{array}{c}<br>{\pmb r}_t = \sigma({\pmb W}_r {\pmb e} (w_t) + {\pmb U}_r {\pmb h}_{t-1} ) \\ {\pmb z}_t = \sigma({\pmb W}_z {\pmb e} (w_t) + {\pmb U}_z {\pmb h}_{t-1} )<br>\end{array}<br>$$</p>
-<h1 id="RNN的架构设计"><a href="#RNN的架构设计" class="headerlink" title="RNN的架构设计"></a>RNN的架构设计</h1><h2 id="多层RNN"><a href="#多层RNN" class="headerlink" title="多层RNN"></a>多层RNN</h2><h2 id="双向RNN"><a href="#双向RNN" class="headerlink" title="双向RNN"></a>双向RNN</h2><h1 id="基于RNN的语言模型"><a href="#基于RNN的语言模型" class="headerlink" title="基于RNN的语言模型"></a>基于RNN的语言模型</h1><h1 id="Seq2Seq（待扩充）"><a href="#Seq2Seq（待扩充）" class="headerlink" title="Seq2Seq（待扩充）"></a>Seq2Seq（待扩充）</h1><p>序列到序列（Sequence to Sequence, Seq2seq）模型</p>
+<h1 id="RNN的架构设计"><a href="#RNN的架构设计" class="headerlink" title="RNN的架构设计"></a>RNN的架构设计</h1><h2 id="多层RNN"><a href="#多层RNN" class="headerlink" title="多层RNN"></a>多层RNN</h2><p>RNN隐藏层的循环函数$f_r$可以用多层全连接神经网络表示，从而得到更深的多层RNN。</p>
+<ul>
+<li>第一个隐藏层的输入：上一时刻的隐状态和当前的词向量</li>
+<li>其他隐藏层的输入：上一时刻的隐状态和上一隐藏层当前时刻的隐状态</li>
+<li>最后一个隐藏层的隐状态：预测输出</li>
+</ul>
+<p>多层RNN有更多的网络参数和更深的结构，能有效提高对更长时间序列的记忆能力。</p>
+<h2 id="双向RNN"><a href="#双向RNN" class="headerlink" title="双向RNN"></a>双向RNN</h2><p>同时考虑当前位置的上下文信息，有助于更有效的序列特征表示。双向RNN的隐状态${\pmb h}_t$由两个方向编码得到的隐状态组成：</p>
+<p>$${\pmb h}_t = {\overleftarrow {\pmb h} }_t \oplus {\overrightarrow {\pmb h} }_t $$<br>$${\overleftarrow {\pmb h} }_t =<br>\begin{cases}<br>    \begin{array}{ll}<br>        0, &amp; t=0 \\ f_r(\overleftarrow{ {\pmb h} }_{t-1},{\pmb e}(w_t)), &amp; 1\le t\le n<br>    \end{array}<br>\end{cases}<br>$$</p>
+<p>$${\overrightarrow {\pmb h} }_t =<br>\begin{cases}<br>    \begin{array}{ll}<br>        0, &amp; t=n+1 \\ f_r(\overrightarrow{ {\pmb h} }_{t+1},{\pmb e}(w_t)), &amp; 1\le t\le n<br>    \end{array}<br>\end{cases}<br>$$</p>
+<h1 id="基于RNN的语言模型"><a href="#基于RNN的语言模型" class="headerlink" title="基于RNN的语言模型"></a>基于RNN的语言模型</h1><h1 id="Seq2Seq（待扩充）"><a href="#Seq2Seq（待扩充）" class="headerlink" title="Seq2Seq（待扩充）"></a>Seq2Seq（待扩充）</h1><p>序列到序列（Sequence to Sequence, Seq2seq）模型</p>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>组成：编码器和解码器</p>
 <ul>
 <li>训练：教师强制（teacher-forcing）</li>
@@ -467,6 +482,30 @@
         <span>Fluid</span></a>
     </div>
     
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            <i class="iconfont icon-eye"></i> 
+            <span id="busuanzi_value_site_pv"></span>
+            
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            <i class="iconfont icon-users"></i> 
+            <span id="busuanzi_value_site_uv"></span>
+            
+          </span>
+      
+    
+  </div>
+
 
     
 
@@ -478,6 +517,12 @@
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
+
+<!-- OpenCC -->
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.t2cn.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/bundle-browser.min.js" ></script>
+
 <script  src="/js/main.js" ></script>
 
 <!-- Plugins -->
@@ -494,11 +539,12 @@
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
   
 <script src="/js/jquery.cookie.js"></script>
-<script src="/js/jquery.t2s.js"></script>
 
 
 

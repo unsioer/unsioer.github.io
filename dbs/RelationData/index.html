@@ -49,7 +49,6 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-
   <script  src="/js/utils.js" ></script>
 <meta name="generator" content="Hexo 5.0.2"></head>
 
@@ -221,18 +220,15 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p></p>
+              <p>　</p>
 <a id="more"></a>
-<h2>問題的提出</h2>
-<ul>
-<li>關係數據庫邏輯設計
-<ul>
+<h2 id="問題的提出"><a href="#問題的提出" class="headerlink" title="問題的提出"></a>問題的提出</h2><ul>
+<li>關係數據庫邏輯設計<ul>
 <li>針對具體問題構造適合的數據模式</li>
 <li>關係數據庫的規範化理論</li>
 </ul>
 </li>
-<li>關係模式用五元組描述$R(U,D,DOM,F)$
-<ul>
+<li>關係模式用五元組描述$R(U,D,DOM,F)$<ul>
 <li><strong>R</strong> 關係名</li>
 <li><strong>U</strong> 全體屬性組</li>
 <li><strong>D</strong> 屬性組U中的屬性所來自的域</li>
@@ -242,12 +238,10 @@
 </li>
 </ul>
 <p>視爲三元組$R&lt;U,F&gt;$</p>
-<h3>第一範式（1NF, Normal Form）</h3>
-<ul>
+<h3 id="第一範式（1NF-Normal-Form）"><a href="#第一範式（1NF-Normal-Form）" class="headerlink" title="第一範式（1NF, Normal Form）"></a>第一範式（1NF, Normal Form）</h3><ul>
 <li>對一個二維表$R$，如果它所有關係的分量都是不可分的，即稱<strong>關係模式R屬於第一範式</strong>，簡寫爲$R\in\rm{1NF}$</li>
 </ul>
-<h3>數據依賴</h3>
-<ul>
+<h3 id="數據依賴"><a href="#數據依賴" class="headerlink" title="數據依賴"></a>數據依賴</h3><ul>
 <li>一個關係內部屬性與屬性之間的一種約束關係：通過<strong>屬性間值的相等與否</strong>體現數據間的相互聯繫</li>
 <li>現實世界屬性間相互聯繫的抽象</li>
 <li>數據內在的性質</li>
@@ -264,8 +258,7 @@
 </ul>
 <p>記爲$Sno\rightarrow Sname, Sno\rightarrow Sdept$</p>
 <p>對 $R&lt;U,F&gt;$ 而言，部分實例使得U上屬性具有某種“依賴”關係，無法推斷$R$的所有關係均滿足該“依賴”關係。</p>
-<h3>例 學校教務數據庫</h3>
-<p>包含：</p>
+<h3 id="例-學校教務數據庫"><a href="#例-學校教務數據庫" class="headerlink" title="例 學校教務數據庫"></a>例 學校教務數據庫</h3><p>包含：</p>
 <ul>
 <li>Sno（學生學號）</li>
 <li>Sdept（所在系）</li>
@@ -273,9 +266,7 @@
 <li>Cno（課程號）</li>
 <li>Grade（成績）</li>
 </ul>
-<p>即：<br>
-$U={Sno, Sdept, Mname, Cno, Grade}$<br>
-$F={Sno\rightarrow Sdept, Sdept \rightarrow Mname,(Sno,Cno)\rightarrow Grade}$</p>
+<p>即：<br>$U={Sno, Sdept, Mname, Cno, Grade}$<br>$F={Sno\rightarrow Sdept, Sdept \rightarrow Mname,(Sno,Cno)\rightarrow Grade}$</p>
 <p>$Student&lt;U,F&gt;$ 存在的問題：系主任Mname</p>
 <ol>
 <li>數據冗餘</li>
@@ -283,71 +274,49 @@ $F={Sno\rightarrow Sdept, Sdept \rightarrow Mname,(Sno,Cno)\rightarrow Grade}$</
 <li>插入異常</li>
 <li>刪除異常</li>
 </ol>
-<h2>規範化</h2>
-<h3>函數依賴</h3>
-<p>設$R(U)$是屬性集$U$上的關係模式，$X$,$Y$是$U$的子集，若對於$R(U)$的任意一個可能的關係$r$,$r$中不可能存在兩個元組在$X$上的屬性值相等，而在$Y$上的屬性值不等，則稱$X$函數確定$Y$或$Y$函數依賴於$X$，記作$X\rightarrow Y$。</p>
+<h2 id="規範化"><a href="#規範化" class="headerlink" title="規範化"></a>規範化</h2><h3 id="函數依賴"><a href="#函數依賴" class="headerlink" title="函數依賴"></a>函數依賴</h3><p>設$R(U)$是屬性集$U$上的關係模式，$X$,$Y$是$U$的子集，若對於$R(U)$的任意一個可能的關係$r$,$r$中不可能存在兩個元組在$X$上的屬性值相等，而在$Y$上的屬性值不等，則稱$X$函數確定$Y$或$Y$函數依賴於$X$，記作$X\rightarrow Y$。</p>
 <p>屬於語義範疇，只能根據語義來確定一個函數依賴。</p>
-<h4>非平凡的函數依賴</h4>
-<p>$$X\rightarrow Y,但Y\not\subseteq X$$</p>
-<h4>平凡的函數依賴</h4>
-<p>$$X\rightarrow Y,但Y\subseteq X$$</p>
-<h4>完全函數依賴</h4>
-<p>$X\rightarrow Y$，並且對於$X$的任何一個真子集$X’$,都有$X’\not\rightarrow Y$，則稱$Y$對$X$完全函數依賴，記作$X\stackrel{F}{\rightarrow}Y$<br>
-（胡扯：一一映射）</p>
-<h4>部分函數依賴</h4>
-<p>若$X\rightarrow Y$, 但$Y$不完全函數依賴於$X$，記作$X\stackrel{P}{\rightarrow}Y$</p>
-<h4>傳遞函數依賴</h4>
-<p>$X\rightarrow Y(Y\not\subseteq X)$, $Y\not\rightarrow X$, $Y\rightarrow Z$, $Z\not\subseteq Y$</p>
+<h4 id="非平凡的函數依賴"><a href="#非平凡的函數依賴" class="headerlink" title="非平凡的函數依賴"></a>非平凡的函數依賴</h4><p>$$X\rightarrow Y,但Y\not\subseteq X$$</p>
+<h4 id="平凡的函數依賴"><a href="#平凡的函數依賴" class="headerlink" title="平凡的函數依賴"></a>平凡的函數依賴</h4><p>$$X\rightarrow Y,但Y\subseteq X$$</p>
+<h4 id="完全函數依賴"><a href="#完全函數依賴" class="headerlink" title="完全函數依賴"></a>完全函數依賴</h4><p>$X\rightarrow Y$，並且對於$X$的任何一個真子集$X’$,都有$X’\not\rightarrow Y$，則稱$Y$對$X$完全函數依賴，記作$X\stackrel{F}{\rightarrow}Y$<br>（胡扯：一一映射）</p>
+<h4 id="部分函數依賴"><a href="#部分函數依賴" class="headerlink" title="部分函數依賴"></a>部分函數依賴</h4><p>若$X\rightarrow Y$, 但$Y$不完全函數依賴於$X$，記作$X\stackrel{P}{\rightarrow}Y$</p>
+<h4 id="傳遞函數依賴"><a href="#傳遞函數依賴" class="headerlink" title="傳遞函數依賴"></a>傳遞函數依賴</h4><p>$X\rightarrow Y(Y\not\subseteq X)$, $Y\not\rightarrow X$, $Y\rightarrow Z$, $Z\not\subseteq Y$</p>
 <ul>
 <li>無損連接</li>
 </ul>
-<h3>碼</h3>
-<p>設$K$爲$R&lt;U,F&gt;$中的屬性或屬性組合。若$K\stackrel{F}{\rightarrow}U$,則$K$稱爲$R$的一個候選碼。</p>
+<h3 id="碼"><a href="#碼" class="headerlink" title="碼"></a>碼</h3><p>設$K$爲$R&lt;U,F&gt;$中的屬性或屬性組合。若$K\stackrel{F}{\rightarrow}U$,則$K$稱爲$R$的一個候選碼。</p>
 <ul>
 <li>若$U$部分函數依賴，則$K$稱爲超碼(Superkey)</li>
 <li>候選碼是最小的超碼，則$K$的任意一個真子集</li>
 </ul>
-<h4>主屬性與非主屬性</h4>
-<h4>全碼(all-key)</h4>
-<p>整個屬性組是碼</p>
-<h4>外碼</h4>
-<p>X非R的碼，但是另一個關係的碼</p>
-<h3>範式</h3>
-<p>滿足最低要求的叫第一範式，簡稱$\rm{1NF}$。<br>
-$$\rm{1NF\supset 2NF\supset 3NF\supset BCNF\supset 4NF\supset 5NF}$$</p>
+<h4 id="主屬性與非主屬性"><a href="#主屬性與非主屬性" class="headerlink" title="主屬性與非主屬性"></a>主屬性與非主屬性</h4><h4 id="全碼-all-key"><a href="#全碼-all-key" class="headerlink" title="全碼(all-key)"></a>全碼(all-key)</h4><p>整個屬性組是碼</p>
+<h4 id="外碼"><a href="#外碼" class="headerlink" title="外碼"></a>外碼</h4><p>X非R的碼，但是另一個關係的碼</p>
+<h3 id="範式"><a href="#範式" class="headerlink" title="範式"></a>範式</h3><p>滿足最低要求的叫第一範式，簡稱$\rm{1NF}$。<br>$$\rm{1NF\supset 2NF\supset 3NF\supset BCNF\supset 4NF\supset 5NF}$$</p>
 <ul>
 <li>規範化</li>
 </ul>
-<h3>2NF</h3>
-<p>$R\in\rm{1NF}$且每個非主屬性都完全函數依賴於任何一個候選碼，則$R\in\rm{2NF}$</p>
+<h3 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h3><p>$R\in\rm{1NF}$且每個非主屬性都完全函數依賴於任何一個候選碼，則$R\in\rm{2NF}$</p>
 <p>一個關係不屬於$\rm{2NF}$，則：</p>
 <ul>
 <li>插入異常</li>
 <li>刪除異常</li>
 <li>修改複雜</li>
 </ul>
-<h3>3NF</h3>
-<p>$R&lt;U,F&gt;\in\rm{1NF}$，若R中不存在這樣的碼X，屬性組Y及非主屬性Z（$Z\not\subseteq Y$）使得$X\rightarrow Y， Y\rightarrow Z$成立，$Y\not\rightarrow X$，則$R&lt;U,F&gt;\in\rm{3NF}$</p>
-<h3>BCNF</h3>
-<p>$R&lt;U,F&gt;\in\rm{1NF}$，若$X\rightarrow Y$且 $Y\not\subseteq X$時X必含有碼，則$R&lt;U,F&gt;\in\rm{BCNF}$</p>
-<p>換言之，在關係模式$R&lt;U,F&gt;$中，如果每一個決定屬性集都包含候選碼，則$R&lt;U,F&gt;\in\rm{BCNF}$<br>
-性質：</p>
+<h3 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h3><p>$R&lt;U,F&gt;\in\rm{1NF}$，若R中不存在這樣的碼X，屬性組Y及非主屬性Z（$Z\not\subseteq Y$）使得$X\rightarrow Y， Y\rightarrow Z$成立，$Y\not\rightarrow X$，則$R&lt;U,F&gt;\in\rm{3NF}$</p>
+<h3 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h3><p>$R&lt;U,F&gt;\in\rm{1NF}$，若$X\rightarrow Y$且 $Y\not\subseteq X$時X必含有碼，則$R&lt;U,F&gt;\in\rm{BCNF}$</p>
+<p>換言之，在關係模式$R&lt;U,F&gt;$中，如果每一個決定屬性集都包含候選碼，則$R&lt;U,F&gt;\in\rm{BCNF}$<br>性質：</p>
 <ul>
 <li>所有非主屬性都完全函數依賴於每個候選碼</li>
 <li>所有主屬性都完全函數依賴於每個不包含它的候選碼</li>
 <li>沒有任何屬性完全函數依賴於非碼的任何一種屬性</li>
 </ul>
 <p>$R&lt;U,F&gt;\in\rm{BCNF}\Rightarrow R&lt;U,F&gt;\in\rm{3NF}$</p>
-<h3>多值依賴</h3>
-<h3>4NF</h3>
-<p>關係模式$R&lt;U,F&gt;\in\rm{1NF}$，如果對於R的每個非平凡多值依賴$X\rightarrow \rightarrow Y(Y \not\subseteq X)$，X都含有碼。</p>
+<h3 id="多值依賴"><a href="#多值依賴" class="headerlink" title="多值依賴"></a>多值依賴</h3><h3 id="4NF"><a href="#4NF" class="headerlink" title="4NF"></a>4NF</h3><p>關係模式$R&lt;U,F&gt;\in\rm{1NF}$，如果對於R的每個非平凡多值依賴$X\rightarrow \rightarrow Y(Y \not\subseteq X)$，X都含有碼。</p>
 <p>限制屬性，不允許有非平凡且非函數依賴的多值依賴。</p>
-<h3>將BCNF的R分解成4NF的方法</h3>
-<ul>
+<h3 id="將BCNF的R分解成4NF的方法"><a href="#將BCNF的R分解成4NF的方法" class="headerlink" title="將BCNF的R分解成4NF的方法"></a>將BCNF的R分解成4NF的方法</h3><ul>
 <li>假設$R(A,B,C)∈\rm{BCNF}$滿足$A→→B$，$A→→C$，則分解$R$可分解爲$R_1(A,B)$和$R_2(A,C)$</li>
 </ul>
-<h2>數據依賴的公理系統</h2>
-<p><strong>Armstrong公理系統</strong>：</p>
+<h2 id="數據依賴的公理系統"><a href="#數據依賴的公理系統" class="headerlink" title="數據依賴的公理系統"></a>數據依賴的公理系統</h2><p><strong>Armstrong公理系統</strong>：</p>
 <ul>
 <li>A1 自反律 若$Y\subseteq X\subseteq U$，則$X\rightarrow Y$爲$F$所蘊涵</li>
 <li>A2 增廣律 若$X\rightarrow Y$爲$F$所蘊涵，且$Z\subset U$，則$XZ\rightarrow YZ$爲$F$所蘊涵</li>
@@ -480,6 +449,30 @@ $$\rm{1NF\supset 2NF\supset 3NF\supset BCNF\supset 4NF\supset 5NF}$$</p>
         <span>Fluid</span></a>
     </div>
     
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            <i class="iconfont icon-eye"></i> 
+            <span id="busuanzi_value_site_pv"></span>
+            
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            <i class="iconfont icon-users"></i> 
+            <span id="busuanzi_value_site_uv"></span>
+            
+          </span>
+      
+    
+  </div>
+
 
     
 
@@ -491,6 +484,12 @@ $$\rm{1NF\supset 2NF\supset 3NF\supset BCNF\supset 4NF\supset 5NF}$$</p>
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
+
+<!-- OpenCC -->
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.t2cn.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/bundle-browser.min.js" ></script>
+
 <script  src="/js/main.js" ></script>
 
 <!-- Plugins -->
@@ -507,11 +506,12 @@ $$\rm{1NF\supset 2NF\supset 3NF\supset BCNF\supset 4NF\supset 5NF}$$</p>
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
   
 <script src="/js/jquery.cookie.js"></script>
-<script src="/js/jquery.t2s.js"></script>
 
 
 

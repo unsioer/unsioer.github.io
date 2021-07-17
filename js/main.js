@@ -119,12 +119,16 @@ function scrollTopArrowEvent() {
   });
 }
 
+const converter = OpenCC.Converter({ from: 'tw', to: 'cn' });
+const rootNode = document.documentElement;
+const HTMLConvertHandler = OpenCC.HTMLConverter(converter, rootNode, 'zh-TW', 'zh-Hans');
+
 function simplifyTextInPage(simplified) {
   if (simplified) {
-    $(document.body).t2s();
+    HTMLConvertHandler.convert();
     $('#btn-simplify').addClass('simplified');
   } else {
-    $(document.body).s2t();
+    HTMLConvertHandler.restore();
     $('#btn-simplify').removeClass('simplified');
   }
 }

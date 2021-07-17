@@ -49,7 +49,6 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-
   <script  src="/js/utils.js" ></script>
 <meta name="generator" content="Hexo 5.0.2"></head>
 
@@ -221,32 +220,30 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>2020/11/27附註：<br>
-本文闡述的條件是：</p>
+              <p>2020/11/27附註：<br>本文闡述的條件是：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://pypi.org/project/mysqlclient">mysqlclient 2.0.1</a></li>
 </ul>
-<p>而非<a target="_blank" rel="noopener" href="https://pypi.org/project/MySQL-python/">MySQL-python</a>。對於MySQL-python，本身僅支持Python 2而在Python 3下安裝和運行不便（需修改配置），且已事實（de facto）停止維護。<br>
-事實上，建議使用新的<br>
-<a target="_blank" rel="noopener" href="https://pypi.org/project/PyMySQL/">PyMySQL</a>，並在Django項目的<code>settings.py</code>添加：</p>
+<p>而非<a target="_blank" rel="noopener" href="https://pypi.org/project/MySQL-python/">MySQL-python</a>。對於MySQL-python，本身僅支持Python 2而在Python 3下安裝和運行不便（需修改配置），且已事實（de facto）停止維護。<br>事實上，建議使用新的<br><a target="_blank" rel="noopener" href="https://pypi.org/project/PyMySQL/">PyMySQL</a>，並在Django項目的<code>settings.py</code>添加：</p>
 <pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymysql
 <span class="hljs-comment"># Avoid mysqlclient low version error</span>
 <span class="hljs-comment"># pymysql.version_info = (1, 4, 0, &quot;final&quot;, 0)</span>
 pymysql.install_as_MySQLdb()</code></pre>
-<p>其中第3行只是在未安裝mysqlclient包的前提下的權宜之計。<br>
-如果在Linux終端執行<code>pip3 install mysqlclient</code>時出現以下錯誤：</p>
+
+<p>其中第3行只是在未安裝mysqlclient包的前提下的權宜之計。<br>如果在Linux終端執行<code>pip3 install mysqlclient</code>時出現以下錯誤：</p>
 <pre><code class="hljs Shell">/bin/sh: 1: mysql_config: not found
 /bin/sh: 1: mariadb_config: not found
 /bin/sh: 1: mysql_config: not found</code></pre>
+
 <p>則應該先安裝libmysqlclient-dev：</p>
 <pre><code class="hljs Bash">sudo apt install libmysqlclient-dev
 pip3 install mysqlclient</code></pre>
-<p>------</p>
-<p>服務器掛載一個利用uwsgi+Django+MySQL的項目。<br>
-其中MySQL連接一直未關閉。<br>
-想要查表，網頁卻報錯了：</p>
+
+<p>-—–</p>
+<p>服務器掛載一個利用uwsgi+Django+MySQL的項目。<br>其中MySQL連接一直未關閉。<br>想要查表，網頁卻報錯了：</p>
 <pre><code class="hljs Shell">OperationalError at /
 (2006, &#x27;MySQL server has gone away&#x27;)</code></pre>
+
 <p>查閱了相關資料，發現是MySQL設置了非活動連接超時：</p>
 <pre><code class="hljs Shell"><span class="hljs-meta">mysql&gt;</span><span class="bash"> show variables like <span class="hljs-string">&#x27;%timeout%&#x27;</span>;</span>
 +-----------------------------+----------+
@@ -268,6 +265,7 @@ pip3 install mysqlclient</code></pre>
 +-----------------------------+----------+
 13 rows in set (0.00 sec)
 </code></pre>
+
 <p>於是爲了一探究竟，直接執行<code>set global interactive_timeout=1;</code>，再用Jupyter Notebook運行了下列代碼，通過<code>conn.ping()</code>檢查連接狀態，設置<code>time.sleep(4)</code>（4s&gt;2s），復現問題：</p>
 <pre><code class="hljs Python"><span class="hljs-keyword">import</span> MySQLdb
 <span class="hljs-keyword">import</span> time
@@ -347,6 +345,7 @@ res=curs.fetchall()
             print(<span class="hljs-string">&quot;Fail to reconnect&quot;</span>)
             time.sleep(<span class="hljs-number">2</span>)
             <span class="hljs-keyword">continue</span></code></pre>
+
 <p>結果如下：</p>
 <pre><code class="hljs Shell">MySQL connection error 1
 (2006, &#x27;MySQL server has gone away&#x27;)
@@ -355,11 +354,12 @@ MySQL connection error 2
 MySQL connection error 3
 (2006, &#x27;&#x27;)
 OK 4</code></pre>
+
 <p>我們可以如此分析：</p>
 <ul>
 <li>前兩次<code>ping</code>，是在超過了<code>interactive_timeout</code>之後連接，勢必報錯。</li>
 <li>第三次<code>ping</code>，由於之前關閉了<code>conn</code>，也勢必報錯。</li>
-<li>第四次<code>ping</code>，由於緊承上面的代碼且未超過<code>interactive_timeout</code>，故而不報錯。</li>
+<li>第四次<code>ping</code>，由於緊承上面的代碼且未超過<code>interactive_timeout</code>，故而不報錯。  </li>
 </ul>
 <p><strong>當然，實際部署時，調試用的控制檯輸出應刪去，防止uwsgi後臺掛載時無處輸出而報錯。</strong></p>
 <p><strong>如果不是頻繁查詢，我們更推薦一次查詢一開一關。</strong></p>
@@ -382,9 +382,9 @@ OK 4</code></pre>
                     
                       <a class="hover-with-bg" href="/tags/Python/">Python</a>
                     
-                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
-                    
                       <a class="hover-with-bg" href="/tags/exception/">異常處理</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
                     
                       <a class="hover-with-bg" href="/tags/Django/">Django</a>
                     
@@ -491,6 +491,30 @@ OK 4</code></pre>
         <span>Fluid</span></a>
     </div>
     
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            <i class="iconfont icon-eye"></i> 
+            <span id="busuanzi_value_site_pv"></span>
+            
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            <i class="iconfont icon-users"></i> 
+            <span id="busuanzi_value_site_uv"></span>
+            
+          </span>
+      
+    
+  </div>
+
 
     
 
@@ -502,6 +526,12 @@ OK 4</code></pre>
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
+
+<!-- OpenCC -->
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.t2cn.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/bundle-browser.min.js" ></script>
+
 <script  src="/js/main.js" ></script>
 
 <!-- Plugins -->
@@ -518,11 +548,12 @@ OK 4</code></pre>
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
   
 <script src="/js/jquery.cookie.js"></script>
-<script src="/js/jquery.t2s.js"></script>
 
 
 
