@@ -224,134 +224,100 @@
 <p>彙整自個人OneNote筆記。</p>
 </blockquote>
 <a id="more"></a>
-<h1>指令格式</h1>
-<pre><code class="hljs Assembly">標號:   指令助記符 目的操作數, 源操作數 ; 註釋</code></pre>
-<h1>數據傳送類指令</h1>
-<p><strong>重點掌握：<code>MOV</code> <code>XCHG</code> <code>XLAT</code> <code>PUSH</code> <code>POP</code> <code>LEA</code></strong></p>
-<h2>通用數據傳送指令</h2>
-<h3>傳送指令 <code>MOV</code></h3>
-<pre><code class="hljs Assembly">
+
+<h1 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h1><pre><code class="hljs Assembly">標號:   指令助記符 目的操作數, 源操作數 ; 註釋</code></pre>
+
+<h1 id="數據傳送類指令"><a href="#數據傳送類指令" class="headerlink" title="數據傳送類指令"></a>數據傳送類指令</h1><p><strong>重點掌握：<code>MOV</code> <code>XCHG</code> <code>XLAT</code> <code>PUSH</code> <code>POP</code> <code>LEA</code></strong></p>
+<h2 id="通用數據傳送指令"><a href="#通用數據傳送指令" class="headerlink" title="通用數據傳送指令"></a>通用數據傳送指令</h2><h3 id="傳送指令-MOV"><a href="#傳送指令-MOV" class="headerlink" title="傳送指令 MOV"></a>傳送指令 <code>MOV</code></h3><pre><code class="hljs Assembly">
 mov     byte ptr [si], 0ah  ; ds:[si]←0ah，字節操作
 mov     word ptr [si+2], 0bh; ds:[si+2]←0bh，字操作</code></pre>
-<h3>交換指令 <code>XCHG</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="交換指令-XCHG"><a href="#交換指令-XCHG" class="headerlink" title="交換指令 XCHG"></a>交換指令 <code>XCHG</code></h3><pre><code class="hljs Assembly">
 xchg    reg, reg&#x2F;mem        ; reg←→reg&#x2F;mem，也可寫做xchg reg&#x2F;mem, reg</code></pre>
-<h3>換碼指令 <code>XLAT</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="換碼指令-XLAT"><a href="#換碼指令-XLAT" class="headerlink" title="換碼指令 XLAT"></a>換碼指令 <code>XLAT</code></h3><pre><code class="hljs Assembly">
 xlat                        ; al←ds:[bx+al]</code></pre>
-<h2>堆棧操作指令</h2>
-<pre><code class="hljs Assembly">
+
+<h2 id="堆棧操作指令"><a href="#堆棧操作指令" class="headerlink" title="堆棧操作指令"></a>堆棧操作指令</h2><pre><code class="hljs Assembly">
 push&#x2F;pop r16</code></pre>
-<h3>進棧指令 <code>PUSH</code></h3>
-<p>使<code>SP</code>減2，把一個字操作數存入棧頂。</p>
-<h3>出棧指令 <code>POP</code></h3>
-<p>把一個字操作數傳送至目的操作數，使<code>SP</code>加2。</p>
-<h2>標誌傳送指令</h2>
-<p>標誌寄存器傳送指令傳送<code>FLAGS</code>的內容；標誌位操作指令對<code>CF</code> <code>DF</code> <code>IF</code>標誌復位或置位。</p>
-<h3>標誌寄存器傳送 <code>LAHF</code> <code>SAHF</code> <code>PUSHF</code> <code>POPF</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="進棧指令-PUSH"><a href="#進棧指令-PUSH" class="headerlink" title="進棧指令 PUSH"></a>進棧指令 <code>PUSH</code></h3><p>使<code>SP</code>減2，把一個字操作數存入棧頂。</p>
+<h3 id="出棧指令-POP"><a href="#出棧指令-POP" class="headerlink" title="出棧指令 POP"></a>出棧指令 <code>POP</code></h3><p>把一個字操作數傳送至目的操作數，使<code>SP</code>加2。</p>
+<h2 id="標誌傳送指令"><a href="#標誌傳送指令" class="headerlink" title="標誌傳送指令"></a>標誌傳送指令</h2><p>標誌寄存器傳送指令傳送<code>FLAGS</code>的內容；標誌位操作指令對<code>CF</code> <code>DF</code> <code>IF</code>標誌復位或置位。</p>
+<h3 id="標誌寄存器傳送-LAHF-SAHF-PUSHF-POPF"><a href="#標誌寄存器傳送-LAHF-SAHF-PUSHF-POPF" class="headerlink" title="標誌寄存器傳送 LAHF SAHF PUSHF POPF"></a>標誌寄存器傳送 <code>LAHF</code> <code>SAHF</code> <code>PUSHF</code> <code>POPF</code></h3><pre><code class="hljs Assembly">
 lahf                        ; AH←FLAGS的低字節
 sahf                        ; FLAGS的低字節←AH
 ;（上兩條指令，除AH的第7&#x2F;6&#x2F;2&#x2F;4&#x2F;0位外任意）
 pushf                       ; SP←SP-2，SS:[SP]←FLAGS
 popf                        ; FLAGS←SS:[SP]，SP←SP+2
 </code></pre>
-<h3>標誌位操作 <code>CLC</code> <code>STC</code> <code>CMC</code> <code>CLD</code> <code>STD</code> <code>CLI</code> <code>STI</code></h3>
-<p>對<code>CF</code>/<code>DF</code>/<code>IF</code>標誌復位或置位。<br>
-CL：復位爲0<br>
-ST：置位爲1<br>
-CM：求反</p>
+
+<h3 id="標誌位操作-CLC-STC-CMC-CLD-STD-CLI-STI"><a href="#標誌位操作-CLC-STC-CMC-CLD-STD-CLI-STI" class="headerlink" title="標誌位操作 CLC STC CMC CLD STD CLI STI"></a>標誌位操作 <code>CLC</code> <code>STC</code> <code>CMC</code> <code>CLD</code> <code>STD</code> <code>CLI</code> <code>STI</code></h3><p>對<code>CF</code>/<code>DF</code>/<code>IF</code>標誌復位或置位。<br>CL：復位爲0<br>ST：置位爲1<br>CM：求反</p>
 <ul>
-<li>
-<p>任意設置進位標誌：<code>CLC</code> <code>STC</code> <code>CMC</code></p>
+<li><p>任意設置進位標誌：<code>CLC</code> <code>STC</code> <code>CMC</code></p>
 </li>
-<li>
-<p>串操作指令：<code>CLD</code> <code>STD</code></p>
+<li><p>串操作指令：<code>CLD</code> <code>STD</code></p>
 </li>
-<li>
-<p>編寫中斷服務程序時，禁止/允許可屏蔽中斷：<code>CLI</code> <code>STI</code></p>
+<li><p>編寫中斷服務程序時，禁止/允許可屏蔽中斷：<code>CLI</code> <code>STI</code></p>
 </li>
 </ul>
-<h2>地址傳送指令</h2>
-<h3>有效地址傳送指令 <code>LEA</code></h3>
-<pre><code class="hljs Assembly">
+<h2 id="地址傳送指令"><a href="#地址傳送指令" class="headerlink" title="地址傳送指令"></a>地址傳送指令</h2><h3 id="有效地址傳送指令-LEA"><a href="#有效地址傳送指令-LEA" class="headerlink" title="有效地址傳送指令 LEA"></a>有效地址傳送指令 <code>LEA</code></h3><pre><code class="hljs Assembly">
 lea     r16, mem            ; r16←mem的有效地址</code></pre>
-<h3>指針傳送指令 <code>LDS</code> <code>LES</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="指針傳送指令-LDS-LES"><a href="#指針傳送指令-LDS-LES" class="headerlink" title="指針傳送指令 LDS LES"></a>指針傳送指令 <code>LDS</code> <code>LES</code></h3><pre><code class="hljs Assembly">
 lds     r16, mem            ; r16←mem，ds←mem+2
 les     r16, mem            ; r16←mem，es←mem+2</code></pre>
-<h2>輸入輸出指令</h2>
-<p>與外設進行數據交換。<br>
-外設：端口(Port)即I/O地址</p>
-<h3>輸入指令 <code>IN</code></h3>
-<h3>輸出指令 <code>OUT</code></h3>
-<h1>算術運算類指令</h1>
-<p><strong>重點：<code>ADD</code>/<code>ADC</code>/<code>INC</code> <code>SUB</code>/<code>SBB</code>/<code>DEC</code> <code>CBW</code>/<code>CWD</code></strong></p>
-<h2>加法指令</h2>
-<h3>加法指令 <code>ADD</code></h3>
-<h3>帶進位加法指令 <code>ADC</code></h3>
-<p>主要與<code>ADD</code>配合，實現多精度加法。</p>
+
+<h2 id="輸入輸出指令"><a href="#輸入輸出指令" class="headerlink" title="輸入輸出指令"></a>輸入輸出指令</h2><p>與外設進行數據交換。<br>外設：端口(Port)即I/O地址</p>
+<h3 id="輸入指令-IN"><a href="#輸入指令-IN" class="headerlink" title="輸入指令 IN"></a>輸入指令 <code>IN</code></h3><h3 id="輸出指令-OUT"><a href="#輸出指令-OUT" class="headerlink" title="輸出指令 OUT"></a>輸出指令 <code>OUT</code></h3><h1 id="算術運算類指令"><a href="#算術運算類指令" class="headerlink" title="算術運算類指令"></a>算術運算類指令</h1><p><strong>重點：<code>ADD</code>/<code>ADC</code>/<code>INC</code> <code>SUB</code>/<code>SBB</code>/<code>DEC</code> <code>CBW</code>/<code>CWD</code></strong></p>
+<h2 id="加法指令"><a href="#加法指令" class="headerlink" title="加法指令"></a>加法指令</h2><h3 id="加法指令-ADD"><a href="#加法指令-ADD" class="headerlink" title="加法指令 ADD"></a>加法指令 <code>ADD</code></h3><h3 id="帶進位加法指令-ADC"><a href="#帶進位加法指令-ADC" class="headerlink" title="帶進位加法指令 ADC"></a>帶進位加法指令 <code>ADC</code></h3><p>主要與<code>ADD</code>配合，實現多精度加法。</p>
 <pre><code class="hljs Assembly">
 adc     dest, src               ; dest←dest+src+cf</code></pre>
-<h3>增量指令 <code>INC</code></h3>
-<h2>減法指令</h2>
-<p>參考對應的加法指令。</p>
-<h3>減法指令 <code>SUB</code></h3>
-<h3>帶借位減法指令 <code>SBB</code></h3>
-<h3>減量指令 <code>DEC</code></h3>
-<h2>其他</h2>
-<h3>求補指令 <code>NEG</code></h3>
-<p>用0減去操作數，結果返回給操作數。<br>
-對標誌的影響與用0作減法的<code>SUB</code>指令一樣。</p>
+
+<h3 id="增量指令-INC"><a href="#增量指令-INC" class="headerlink" title="增量指令 INC"></a>增量指令 <code>INC</code></h3><h2 id="減法指令"><a href="#減法指令" class="headerlink" title="減法指令"></a>減法指令</h2><p>參考對應的加法指令。</p>
+<h3 id="減法指令-SUB"><a href="#減法指令-SUB" class="headerlink" title="減法指令 SUB"></a>減法指令 <code>SUB</code></h3><h3 id="帶借位減法指令-SBB"><a href="#帶借位減法指令-SBB" class="headerlink" title="帶借位減法指令 SBB"></a>帶借位減法指令 <code>SBB</code></h3><h3 id="減量指令-DEC"><a href="#減量指令-DEC" class="headerlink" title="減量指令 DEC"></a>減量指令 <code>DEC</code></h3><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="求補指令-NEG"><a href="#求補指令-NEG" class="headerlink" title="求補指令 NEG"></a>求補指令 <code>NEG</code></h3><p>用0減去操作數，結果返回給操作數。<br>對標誌的影響與用0作減法的<code>SUB</code>指令一樣。</p>
 <pre><code class="hljs Assembly">
 neg     reg&#x2F;mem                 ; reg&#x2F;mem←0-reg&#x2F;mem</code></pre>
-<h3>比較指令 <code>CMP</code></h3>
-<p>執行的功能與<code>SUB</code>相似，但結果不回送至目的操作數。<br>
-配合<code>Jcc</code>。</p>
-<h2>乘法指令</h2>
-<p>利用<code>OF</code>和<code>CF</code>判斷乘積的高一半是否具有有效數值。</p>
-<p><code>MUL</code>：高一半爲0，則<code>OF</code>=<code>CF</code>=0；否則均爲1。</p>
-<p><code>IMUL</code>：高一半爲低一半的符號擴展，則<code>OF</code>=<code>CF</code>=0；否則均爲1。</p>
-<h3>無符號乘法 <code>MUL</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="比較指令-CMP"><a href="#比較指令-CMP" class="headerlink" title="比較指令 CMP"></a>比較指令 <code>CMP</code></h3><p>執行的功能與<code>SUB</code>相似，但結果不回送至目的操作數。<br>配合<code>Jcc</code>。</p>
+<h2 id="乘法指令"><a href="#乘法指令" class="headerlink" title="乘法指令"></a>乘法指令</h2><p>利用<code>OF</code>和<code>CF</code>判斷乘積的高一半是否具有有效數值。  </p>
+<p><code>MUL</code>：高一半爲0，則<code>OF</code>=<code>CF</code>=0；否則均爲1。  </p>
+<p><code>IMUL</code>：高一半爲低一半的符號擴展，則<code>OF</code>=<code>CF</code>=0；否則均爲1。  </p>
+<h3 id="無符號乘法-MUL"><a href="#無符號乘法-MUL" class="headerlink" title="無符號乘法 MUL"></a>無符號乘法 <code>MUL</code></h3><pre><code class="hljs Assembly">
 mul     r8&#x2F;m8                   ; 無符號字節乘法，ax←al×r8&#x2F;m8
 mul     r16&#x2F;m16                 ; 無符號字乘法，dx.ax←ax×r16&#x2F;m16</code></pre>
-<h3>有符號乘法 <code>IMUL</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="有符號乘法-IMUL"><a href="#有符號乘法-IMUL" class="headerlink" title="有符號乘法 IMUL"></a>有符號乘法 <code>IMUL</code></h3><pre><code class="hljs Assembly">
 imul     r8&#x2F;m8                  ; 有符號字節乘法，ax←al×r8&#x2F;m8
 imul     r16&#x2F;m16                ; 有符號字乘法，dx.ax←ax×r16&#x2F;m16</code></pre>
-<h2>除法指令</h2>
-<p>對標誌沒有定義。<br>
-會產生結果溢出（除法錯中斷，8086CPU編號爲0的內部中斷）：</p>
+
+<h2 id="除法指令"><a href="#除法指令" class="headerlink" title="除法指令"></a>除法指令</h2><p>對標誌沒有定義。<br>會產生結果溢出（除法錯中斷，8086CPU編號爲0的內部中斷）：</p>
 <ul>
 <li>除數爲0</li>
-<li>商超出範圍</li>
+<li>商超出範圍  </li>
 </ul>
-<h3>無符號除法 <code>DIV</code></h3>
-<pre><code class="hljs Assembly">
+<h3 id="無符號除法-DIV"><a href="#無符號除法-DIV" class="headerlink" title="無符號除法 DIV"></a>無符號除法 <code>DIV</code></h3><pre><code class="hljs Assembly">
 div     r8&#x2F;m8                   ; 無符號字節乘法，al←ax÷r8&#x2F;m8的商，ah←ax÷r8&#x2F;m8的餘數
 div     r16&#x2F;m16                 ; 無符號字乘法，ax←dx.ax÷r16&#x2F;m16的商，dx←dx.ax÷r16&#x2F;m16的餘數</code></pre>
-<h3>有符號除法 <code>IDIV</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="有符號除法-IDIV"><a href="#有符號除法-IDIV" class="headerlink" title="有符號除法 IDIV"></a>有符號除法 <code>IDIV</code></h3><pre><code class="hljs Assembly">
 idiv     r8&#x2F;m8                  ; 有符號字節乘法，al←ax÷r8&#x2F;m8的商，ah←ax÷r8&#x2F;m8的餘數
 idiv     r16&#x2F;m16                ; 有符號字乘法，ax←dx.ax÷r16&#x2F;m16的商，dx←dx.ax÷r16&#x2F;m16的餘數</code></pre>
-<h2>符號擴展指令 <code>CBW</code> <code>CWD</code></h2>
-<p>不影響標誌位，常用於獲得倍長的數據。<br>
-如<code>64H</code>（表示十進制100）最高位$D_7$爲0，符號擴展後爲<code>0064H</code>（仍表示十進制100）；<code>FF00H</code>（表示十進制-256）最高位$D_{15}$爲1，符號擴展後爲<code>FFFFFF00H</code>（仍表示十進制256）。<br>
-利用符號擴展指令可得到除法指令所需的倍長於除數的被除數。</p>
+
+<h2 id="符號擴展指令-CBW-CWD"><a href="#符號擴展指令-CBW-CWD" class="headerlink" title="符號擴展指令 CBW CWD"></a>符號擴展指令 <code>CBW</code> <code>CWD</code></h2><p>不影響標誌位，常用於獲得倍長的數據。<br>如<code>64H</code>（表示十進制100）最高位$D_7$爲0，符號擴展後爲<code>0064H</code>（仍表示十進制100）；<code>FF00H</code>（表示十進制-256）最高位$D_{15}$爲1，符號擴展後爲<code>FFFFFF00H</code>（仍表示十進制256）。<br>利用符號擴展指令可得到除法指令所需的倍長於除數的被除數。  </p>
 <pre><code class="hljs Assembly">
 cwd
 idiv bx</code></pre>
+
 <p>對無符號除法：直接清零即可。</p>
-<h2>壓縮BCD碼加減調整指令<code>DAA</code> <code>DAS</code></h2>
-<p>對<code>OF</code>無定義，但影響其他標誌，比如<code>CF</code>。</p>
+<h2 id="壓縮BCD碼加減調整指令DAA-DAS"><a href="#壓縮BCD碼加減調整指令DAA-DAS" class="headerlink" title="壓縮BCD碼加減調整指令DAA DAS"></a>壓縮BCD碼加減調整指令<code>DAA</code> <code>DAS</code></h2><p>對<code>OF</code>無定義，但影響其他標誌，比如<code>CF</code>。</p>
 <pre><code class="hljs Assembly">
 add&#x2F;adc al, i8&#x2F;r8&#x2F;m8
 daa                             ; 將al的加和調整爲壓縮BCD碼
 sub&#x2F;sub al, i8&#x2F;r8&#x2F;m8
 das                             ; 將al的減差調整爲壓縮BCD碼</code></pre>
-<h2>非壓縮BCD碼加減乘除調整指令<code>AAA</code> <code>AAS</code> <code>AAM</code> <code>AAD</code></h2>
-<pre><code class="hljs Assembly">
+
+<h2 id="非壓縮BCD碼加減乘除調整指令AAA-AAS-AAM-AAD"><a href="#非壓縮BCD碼加減乘除調整指令AAA-AAS-AAM-AAD" class="headerlink" title="非壓縮BCD碼加減乘除調整指令AAA AAS AAM AAD"></a>非壓縮BCD碼加減乘除調整指令<code>AAA</code> <code>AAS</code> <code>AAM</code> <code>AAD</code></h2><pre><code class="hljs Assembly">
 add&#x2F;adc al, i8&#x2F;r8&#x2F;m8
 aaa                             ; 將al的加和調整爲壓縮BCD碼
                                 ; ah←ah+調整的進位
@@ -362,221 +328,177 @@ mul     r8&#x2F;m8
 aam                             ; 將ax的乘積調整爲非壓縮BCD碼
 aad                             ; 將ax中非壓縮BCD碼調整爲二進制數
 div     r8&#x2F;m8</code></pre>
-<h1>位操作類指令</h1>
-<h2>邏輯運算指令</h2>
-<h3>邏輯與 <code>AND</code></h3>
-<p>皆1方爲1。</p>
+
+<h1 id="位操作類指令"><a href="#位操作類指令" class="headerlink" title="位操作類指令"></a>位操作類指令</h1><h2 id="邏輯運算指令"><a href="#邏輯運算指令" class="headerlink" title="邏輯運算指令"></a>邏輯運算指令</h2><h3 id="邏輯與-AND"><a href="#邏輯與-AND" class="headerlink" title="邏輯與 AND"></a>邏輯與 <code>AND</code></h3><p>皆1方爲1。  </p>
 <pre><code class="hljs Assembly">
 add     reg, imm&#x2F;reg&#x2F;mem
 add     mem, imm&#x2F;reg</code></pre>
-<p><code>CF</code>=<code>OF</code>=0；<code>SF</code> <code>ZF</code> <code>PF</code>根據結果；<code>AF</code>未定義。<br>
-可用於復位（0相與，1變0）。</p>
-<h3>邏輯或 <code>OR</code></h3>
-<p>皆0方爲0。<br>
-標誌位變化同<code>AND</code>。<br>
-可用於置位（1相或，0變1）。</p>
-<h3>邏輯異或 <code>XOR</code></h3>
-<p>不同方爲1。<br>
-標誌位變化同<code>AND</code>。<br>
-可用於求反（1相異或，1變0，0變1）；自身<code>XOR</code>則清零。</p>
-<h3>邏輯非 <code>NOT</code></h3>
-<p>按位取反，不影響標誌位。</p>
+
+<p><code>CF</code>=<code>OF</code>=0；<code>SF</code> <code>ZF</code> <code>PF</code>根據結果；<code>AF</code>未定義。<br>可用於復位（0相與，1變0）。</p>
+<h3 id="邏輯或-OR"><a href="#邏輯或-OR" class="headerlink" title="邏輯或 OR"></a>邏輯或 <code>OR</code></h3><p>皆0方爲0。<br>標誌位變化同<code>AND</code>。<br>可用於置位（1相或，0變1）。</p>
+<h3 id="邏輯異或-XOR"><a href="#邏輯異或-XOR" class="headerlink" title="邏輯異或 XOR"></a>邏輯異或 <code>XOR</code></h3><p>不同方爲1。<br>標誌位變化同<code>AND</code>。<br>可用於求反（1相異或，1變0，0變1）；自身<code>XOR</code>則清零。</p>
+<h3 id="邏輯非-NOT"><a href="#邏輯非-NOT" class="headerlink" title="邏輯非 NOT"></a>邏輯非 <code>NOT</code></h3><p>按位取反，不影響標誌位。</p>
 <pre><code class="hljs Assembly">not     reg&#x2F;mem</code></pre>
-<h3>測試指令 <code>TEST</code></h3>
-<p>類似<code>AND</code>，結果不返回至操作數。</p>
+
+<h3 id="測試指令-TEST"><a href="#測試指令-TEST" class="headerlink" title="測試指令 TEST"></a>測試指令 <code>TEST</code></h3><p>類似<code>AND</code>，結果不返回至操作數。</p>
 <pre><code class="hljs Assembly">
 test    al, 01h             ; 測試最後一位是否爲0（是則ZF&#x3D;1）</code></pre>
-<h2>移位指令</h2>
-<h3>邏輯左移 <code>SHL</code></h3>
-<pre><code class="hljs Assembly">
+
+<h2 id="移位指令"><a href="#移位指令" class="headerlink" title="移位指令"></a>移位指令</h2><h3 id="邏輯左移-SHL"><a href="#邏輯左移-SHL" class="headerlink" title="邏輯左移 SHL"></a>邏輯左移 <code>SHL</code></h3><pre><code class="hljs Assembly">
 shl     reg&#x2F;mem, 1&#x2F;cl       ; 邏輯左移1&#x2F;cl位（最低位補0，最高位進入CF）</code></pre>
-<h3>邏輯右移 <code>SHR</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="邏輯右移-SHR"><a href="#邏輯右移-SHR" class="headerlink" title="邏輯右移 SHR"></a>邏輯右移 <code>SHR</code></h3><pre><code class="hljs Assembly">
 shr     reg&#x2F;mem, 1&#x2F;cl       ; 邏輯右移1&#x2F;cl位（最高位補0，最低位進入CF）</code></pre>
-<h3>算術左移 <code>SAL</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="算術左移-SAL"><a href="#算術左移-SAL" class="headerlink" title="算術左移 SAL"></a>算術左移 <code>SAL</code></h3><pre><code class="hljs Assembly">
 sal     reg&#x2F;mem, 1&#x2F;cl       ; 算術左移1&#x2F;cl位（同SHL）</code></pre>
-<h3>算術右移 <code>SAR</code></h3>
-<pre><code class="hljs Assembly">
+
+<h3 id="算術右移-SAR"><a href="#算術右移-SAR" class="headerlink" title="算術右移 SAR"></a>算術右移 <code>SAR</code></h3><pre><code class="hljs Assembly">
 sar     reg&#x2F;mem, 1&#x2F;cl       ; 算術右移1&#x2F;cl位（最高位不變，最低位進入CF）</code></pre>
-<h3>小結</h3>
-<p>若最高位改變：<code>OF</code>=1</p>
+
+<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>若最高位改變：<code>OF</code>=1  </p>
 <ul>
-<li>
-<p><code>shl</code>/<code>sal</code> 1位相當於無符號數乘2</p>
+<li><p><code>shl</code>/<code>sal</code> 1位相當於無符號數乘2  </p>
 </li>
-<li>
-<p><code>shr</code> 1位相當於無符號數除以2</p>
+<li><p><code>shr</code> 1位相當於無符號數除以2  </p>
 </li>
-<li>
-<p><code>sar</code> 1位相當於有符號數除以2（與<code>idiv</code>有別）</p>
+<li><p><code>sar</code> 1位相當於有符號數除以2（與<code>idiv</code>有別）  </p>
 <ul>
 <li>如-5(FBH)經<code>SAR</code>右移1位等於-3(FDH)，但<code>IDIV</code>指令執行-5÷2結果爲-2</li>
 </ul>
 </li>
 </ul>
-<h2>循環移位指令 <code>ROL</code> <code>ROR</code> <code>RCL</code> <code>RCR</code></h2>
-<pre><code class="hljs Assembly">
+<h2 id="循環移位指令-ROL-ROR-RCL-RCR"><a href="#循環移位指令-ROL-ROR-RCL-RCR" class="headerlink" title="循環移位指令 ROL ROR RCL RCR"></a>循環移位指令 <code>ROL</code> <code>ROR</code> <code>RCL</code> <code>RCR</code></h2><pre><code class="hljs Assembly">
 rol     reg&#x2F;mem, 1&#x2F;cl       ; 不帶進位循環左移  
 ror     reg&#x2F;mem, 1&#x2F;cl       ; 不帶進位循環右移  
 rcl     reg&#x2F;mem, 1&#x2F;cl       ; 帶進位循環左移  
 rcr     reg&#x2F;mem, 1&#x2F;cl       ; 帶進位循環右移</code></pre>
-<h1>控制轉移類指令</h1>
-<p><strong>重點</strong>：<code>JMP</code> <code>JCC</code> <code>LOOP</code> <code>CALL</code> <code>RET</code> <code>INT n</code> <code>IRET</code> 常用系統功能調用</p>
-<p><code>CS</code>：當前指令所在代碼段的段地址</p>
+
+<h1 id="控制轉移類指令"><a href="#控制轉移類指令" class="headerlink" title="控制轉移類指令"></a>控制轉移類指令</h1><p><strong>重點</strong>：<code>JMP</code> <code>JCC</code> <code>LOOP</code> <code>CALL</code> <code>RET</code> <code>INT n</code> <code>IRET</code> 常用系統功能調用  </p>
+<p><code>CS</code>：當前指令所在代碼段的段地址  </p>
 <p><code>IP</code>：要執行的下一條指令的偏移地址</p>
-<h2>無條件轉移指令 <code>JMP</code></h2>
-<p>段內轉移：</p>
+<h2 id="無條件轉移指令-JMP"><a href="#無條件轉移指令-JMP" class="headerlink" title="無條件轉移指令 JMP"></a>無條件轉移指令 <code>JMP</code></h2><p>段內轉移：</p>
 <ul>
-<li><strong>近轉移</strong>（near）：在當前代碼段64KB（±32KB）範圍內轉移。</li>
-<li><strong>短轉移</strong>（short）：在段內-128~127的範圍的轉移。</li>
+<li><strong>近轉移</strong>（near）：在當前代碼段64KB（±32KB）範圍內轉移。  </li>
+<li><strong>短轉移</strong>（short）：在段內-128~127的範圍的轉移。  </li>
 </ul>
 <p>段間轉移：</p>
 <ul>
-<li><strong>遠轉移</strong>（far）：更改<code>CS</code>段地址和<code>IP</code>偏移地址。可在1MB範圍內轉移。目標地址用32位遠指針表示，即邏輯地址。</li>
+<li><strong>遠轉移</strong>（far）：更改<code>CS</code>段地址和<code>IP</code>偏移地址。可在1MB範圍內轉移。目標地址用32位遠指針表示，即邏輯地址。  </li>
 </ul>
 <p>通常彙編程序根據位移量大小自動形成短轉移/近轉移/遠轉移指令。同時彙編程序也提供<code>short</code>或<code>near ptr</code>或<code>far ptr</code>強制。</p>
 <ul>
-<li>
-<p>段內轉移 相對尋址：<code>jmp label</code> ; <code>ip</code>←<code>ip</code>+位移量</p>
+<li><p>段內轉移 相對尋址：<code>jmp label</code> ; <code>ip</code>←<code>ip</code>+位移量</p>
 </li>
-<li>
-<p>段內轉移 間接尋址：<code>jmp r16/m16</code> ; <code>ip</code>←<code>r16/m16</code></p>
+<li><p>段內轉移 間接尋址：<code>jmp r16/m16</code> ; <code>ip</code>←<code>r16/m16</code>  </p>
 </li>
 </ul>
 <pre><code class="hljs Assembly">
 jmp     ax
 jmp     word ptr[2000h]</code></pre>
+
 <ul>
-<li>
-<p>段間轉移 直接尋址：<code>jmp far ptr label</code> ; <code>ip</code>←<code>label</code>的偏移地址，<code>cs</code>←<code>label</code>的段地址</p>
+<li><p>段間轉移 直接尋址：<code>jmp far ptr label</code> ; <code>ip</code>←<code>label</code>的偏移地址，<code>cs</code>←<code>label</code>的段地址</p>
 </li>
-<li>
-<p>段間轉移 間接尋址：<code>jmp far ptr mem</code> ; <code>ip</code>←<code>[mem]</code>，<code>cs</code>←<code>[mem+2]</code></p>
+<li><p>段間轉移 間接尋址：<code>jmp far ptr mem</code> ; <code>ip</code>←<code>[mem]</code>，<code>cs</code>←<code>[mem+2]</code></p>
 </li>
 </ul>
-<h2>條件轉移指令 <code>Jcc</code></h2>
-<pre><code class="hljs Assembly">
+<h2 id="條件轉移指令-Jcc"><a href="#條件轉移指令-Jcc" class="headerlink" title="條件轉移指令 Jcc"></a>條件轉移指令 <code>Jcc</code></h2><pre><code class="hljs Assembly">
 jcc     label</code></pre>
-<h3>判斷單個標誌位狀態</h3>
-<ul>
-<li>
-<p><code>JZ</code>/<code>JE</code>和<code>JNZ</code>/<code>JNE</code>利用<code>ZF</code>，判斷結果是否爲0（或相等）</p>
+
+<h3 id="判斷單個標誌位狀態"><a href="#判斷單個標誌位狀態" class="headerlink" title="判斷單個標誌位狀態"></a>判斷單個標誌位狀態</h3><ul>
+<li><p><code>JZ</code>/<code>JE</code>和<code>JNZ</code>/<code>JNE</code>利用<code>ZF</code>，判斷結果是否爲0（或相等）</p>
 </li>
-<li>
-<p><code>JS</code>和<code>JNS</code>利用<code>SF</code>，判斷結果正負</p>
+<li><p><code>JS</code>和<code>JNS</code>利用<code>SF</code>，判斷結果正負</p>
 </li>
-<li>
-<p><code>JO</code>和<code>JNO</code>利用<code>OF</code>，判斷結果是否溢出</p>
+<li><p><code>JO</code>和<code>JNO</code>利用<code>OF</code>，判斷結果是否溢出</p>
 </li>
-<li>
-<p><code>JP</code>/<code>JPE</code>和<code>JNP</code>/<code>JPO</code>利用<code>PF</code>，判斷結果中1的個數奇偶</p>
+<li><p><code>JP</code>/<code>JPE</code>和<code>JNP</code>/<code>JPO</code>利用<code>PF</code>，判斷結果中1的個數奇偶</p>
 </li>
-<li>
-<p><code>JC</code>/<code>JB</code>/<code>JNAE</code>和<code>JNC</code>/<code>JNB</code>/<code>JAE</code>利用<code>CF</code>，判斷結果是否進位/借位</p>
+<li><p><code>JC</code>/<code>JB</code>/<code>JNAE</code>和<code>JNC</code>/<code>JNB</code>/<code>JAE</code>利用<code>CF</code>，判斷結果是否進位/借位</p>
 </li>
 </ul>
-<h3>比較無符號數高低</h3>
-<p>高（Above）、低（Below）。<br>
-利用<code>CF</code>確定高低，利用<code>ZF</code>確定相等。</p>
+<h3 id="比較無符號數高低"><a href="#比較無符號數高低" class="headerlink" title="比較無符號數高低"></a>比較無符號數高低</h3><p>高（Above）、低（Below）。<br>利用<code>CF</code>確定高低，利用<code>ZF</code>確定相等。</p>
 <ul>
-<li>
-<p><code>JB</code>/<code>JNAE</code></p>
+<li><p><code>JB</code>/<code>JNAE</code></p>
 </li>
-<li>
-<p><code>JNB</code>/<code>JAE</code></p>
+<li><p><code>JNB</code>/<code>JAE</code></p>
 </li>
-<li>
-<p><code>JBE</code>/<code>JNA</code></p>
+<li><p><code>JBE</code>/<code>JNA</code></p>
 </li>
-<li>
-<p><code>JNBE</code>/<code>JA</code></p>
+<li><p><code>JNBE</code>/<code>JA</code></p>
 </li>
 </ul>
-<h3>比較有符號數大小</h3>
-<p>大（Greater）、小（Less）。<br>
-利用<code>SF</code>和<code>OF</code>確定大小，利用<code>ZF</code>確定相等。</p>
+<h3 id="比較有符號數大小"><a href="#比較有符號數大小" class="headerlink" title="比較有符號數大小"></a>比較有符號數大小</h3><p>大（Greater）、小（Less）。<br>利用<code>SF</code>和<code>OF</code>確定大小，利用<code>ZF</code>確定相等。</p>
 <ul>
-<li>
-<p><code>JL</code>/<code>JNGE</code></p>
+<li><p><code>JL</code>/<code>JNGE</code></p>
 </li>
-<li>
-<p><code>JNL</code>/<code>JGE</code></p>
+<li><p><code>JNL</code>/<code>JGE</code></p>
 </li>
-<li>
-<p><code>JLE</code>/<code>JNG</code></p>
+<li><p><code>JLE</code>/<code>JNG</code></p>
 </li>
-<li>
-<p><code>JNLE</code>/<code>JG</code></p>
+<li><p><code>JNLE</code>/<code>JG</code></p>
 </li>
 </ul>
-<h2>循環指令 <code>LOOP</code></h2>
-<pre><code class="hljs Assembly">
+<h2 id="循環指令-LOOP"><a href="#循環指令-LOOP" class="headerlink" title="循環指令 LOOP"></a>循環指令 <code>LOOP</code></h2><pre><code class="hljs Assembly">
 jcxz    label   ; cx&#x3D;0則轉移到標號label
 loop    label   ; cx←cx-1；cx≠0則轉移到label
 loopz   label   ; cx←cx-1；cx≠0且zf&#x3D;1則轉移到label
 loopnz  label   ; cx←cx-1；cx≠0且zf&#x3D;0則轉移到label</code></pre>
-<h2>子程序指令 <code>CALL</code> <code>RET</code></h2>
-<h3>子程序調用指令 <code>CALL</code></h3>
-<pre><code class="hljs Assembly">
+
+<h2 id="子程序指令-CALL-RET"><a href="#子程序指令-CALL-RET" class="headerlink" title="子程序指令 CALL RET"></a>子程序指令 <code>CALL</code> <code>RET</code></h2><h3 id="子程序調用指令-CALL"><a href="#子程序調用指令-CALL" class="headerlink" title="子程序調用指令 CALL"></a>子程序調用指令 <code>CALL</code></h3><pre><code class="hljs Assembly">
 CALL    label           ; 段內調用 直接尋址
 CALL    r16&#x2F;m16         ; 段內調用 間接尋址
 CALL    far ptr label   ; 段間調用 直接尋址
 CALL    far ptr mem     ; 段間調用 間接尋址</code></pre>
-<p><code>CALL</code>指令需要保存返回地址：</p>
+
+<p><code>CALL</code>指令需要保存返回地址：  </p>
 <ul>
-<li>
-<p>段內調用：入棧偏移地址<code>IP</code></p>
+<li><p>段內調用：入棧偏移地址<code>IP</code>  </p>
 <ul>
-<li><code>SP</code>←<code>SP</code>-2，<code>SS:[SP]</code>←<code>IP</code></li>
+<li><code>SP</code>←<code>SP</code>-2，<code>SS:[SP]</code>←<code>IP</code>  </li>
 </ul>
 </li>
-<li>
-<p>段間調用：入棧偏移地址IP和段地址CS</p>
+<li><p>段間調用：入棧偏移地址IP和段地址CS  </p>
 <ul>
-<li><code>SP</code>←<code>SP</code>-2，<code>SS:[SP]</code>←<code>IP</code></li>
-<li><code>SP</code>←<code>SP</code>-2，<code>SS:[SP]</code>←<code>CS</code></li>
+<li><code>SP</code>←<code>SP</code>-2，<code>SS:[SP]</code>←<code>IP</code>  </li>
+<li><code>SP</code>←<code>SP</code>-2，<code>SS:[SP]</code>←<code>CS</code>  </li>
 </ul>
 </li>
 </ul>
-<h3>子程序返回指令 <code>RET</code></h3>
-<pre><code class="hljs Assembly">
+<h3 id="子程序返回指令-RET"><a href="#子程序返回指令-RET" class="headerlink" title="子程序返回指令 RET"></a>子程序返回指令 <code>RET</code></h3><pre><code class="hljs Assembly">
 ret             ; 無參數段內返回
 ret     i16     ; 有參數段內返回
 ret             ; 無參數段間返回
 ret     i16     ; 有參數段間返回</code></pre>
+
 <p>需要彈出<code>CALL</code>指令壓入堆棧的返回地址。</p>
 <ul>
-<li>
-<p>段內返回：出棧偏移地址<code>IP</code></p>
+<li><p>段內返回：出棧偏移地址<code>IP</code></p>
 <ul>
 <li><code>IP</code>←<code>SS:[SP]</code>，<code>SP</code>←<code>SP</code>+2</li>
 </ul>
 </li>
-<li>
-<p>段间返回：出棧偏移地址<code>IP</code>和段地址<code>CS</code></p>
+<li><p>段间返回：出棧偏移地址<code>IP</code>和段地址<code>CS</code></p>
 <ul>
 <li><code>IP</code>←<code>SS:[SP]</code>，<code>SP</code>←<code>SP</code>+2</li>
 <li><code>CS</code>←<code>SS:[SP]</code>，<code>SP</code>←<code>SP</code>+2</li>
 </ul>
 </li>
 </ul>
-<h4>返回指令<code>RET</code>的參數</h4>
-<pre><code class="hljs Assembly">
+<h4 id="返回指令RET的參數"><a href="#返回指令RET的參數" class="headerlink" title="返回指令RET的參數"></a>返回指令<code>RET</code>的參數</h4><pre><code class="hljs Assembly">
 ret i16         ; SP←SP+i16</code></pre>
+
 <p>可以方便廢除執行<code>CALL</code>指令之前入棧的參數。</p>
-<h2>中斷指令 <code>INT i8</code> <code>IRET</code> <code>INTO</code></h2>
-<p>8086可管理256个中斷。</p>
+<h2 id="中斷指令-INT-i8-IRET-INTO"><a href="#中斷指令-INT-i8-IRET-INTO" class="headerlink" title="中斷指令 INT i8 IRET INTO"></a>中斷指令 <code>INT i8</code> <code>IRET</code> <code>INTO</code></h2><p>8086可管理256个中斷。  </p>
 <ul>
-<li>
-<p>外部中斷</p>
+<li><p>外部中斷</p>
 <ul>
 <li>可屏蔽中斷：可由CPU中斷允许標誌<code>IF</code>控制</li>
 <li>非屏蔽中斷：不受CPU中斷允许標誌<code>IF</code>控制</li>
 </ul>
 </li>
-<li>
-<p>內部中斷</p>
+<li><p>內部中斷</p>
 <ul>
 <li>除法錯中斷：溢出，0號中斷</li>
 <li>指令中斷：中斷調用指令 <code>INT i8</code></li>
@@ -590,95 +512,66 @@ ret i16         ; SP←SP+i16</code></pre>
 int     i8      ; 中斷調用（產生i8號中斷）
 iret            ; 中斷返回
 into            ; 溢出中斷指令：若OF&#x3D;1，產生4號中斷，否則順序執行</code></pre>
-<h2>系統功能調用</h2>
-<h3>INT 21H，<code>AH</code>=02H 輸出字符</h3>
-<p><code>DL</code>=字符的ASCII碼</p>
-<h3>INT 10H，<code>AH</code>=0EH 輸出字符</h3>
-<p><code>AL</code>=字符的ASCII碼</p>
-<p><code>BL</code>=字符顏色值（圖形方式）</p>
-<p><code>BH</code>=頁號（字符方式）</p>
+
+<h2 id="系統功能調用"><a href="#系統功能調用" class="headerlink" title="系統功能調用"></a>系統功能調用</h2><h3 id="INT-21H，AH-02H-輸出字符"><a href="#INT-21H，AH-02H-輸出字符" class="headerlink" title="INT 21H，AH=02H 輸出字符"></a>INT 21H，<code>AH</code>=02H 輸出字符</h3><p><code>DL</code>=字符的ASCII碼</p>
+<h3 id="INT-10H，AH-0EH-輸出字符"><a href="#INT-10H，AH-0EH-輸出字符" class="headerlink" title="INT 10H，AH=0EH 輸出字符"></a>INT 10H，<code>AH</code>=0EH 輸出字符</h3><p><code>AL</code>=字符的ASCII碼  </p>
+<p><code>BL</code>=字符顏色值（圖形方式）  </p>
+<p><code>BH</code>=頁號（字符方式）  </p>
 <p>（通常使BX=0）</p>
-<h3>INT 21H，<code>AH</code>=09H 輸出字符串</h3>
-<p><code>DS</code>:<code>DX</code>=欲顯示字符串在主存中的首地址，以$(24H)結束</p>
-<h3>INT 21H，<code>AH</code>=01H 輸入字符</h3>
-<p><code>AL</code>=字符的ASCII碼</p>
-<h3>INT 16H，<code>AH</code>=0 輸入字符</h3>
-<p><code>AX</code>=鍵值代碼</p>
-<p>標準ASCII碼按鍵：<code>AL</code>=ASCII碼，<code>AH</code>=掃描碼<br>
-…</p>
-<h3>INT 21H，<code>AH</code>=0AH 輸入字符串</h3>
-<p><code>DS</code>:<code>DX</code>=緩衝區首地址</p>
-<h4>緩衝區的定義</h4>
-<ul>
+<h3 id="INT-21H，AH-09H-輸出字符串"><a href="#INT-21H，AH-09H-輸出字符串" class="headerlink" title="INT 21H，AH=09H 輸出字符串"></a>INT 21H，<code>AH</code>=09H 輸出字符串</h3><p><code>DS</code>:<code>DX</code>=欲顯示字符串在主存中的首地址，以$(24H)結束  </p>
+<h3 id="INT-21H，AH-01H-輸入字符"><a href="#INT-21H，AH-01H-輸入字符" class="headerlink" title="INT 21H，AH=01H 輸入字符"></a>INT 21H，<code>AH</code>=01H 輸入字符</h3><p><code>AL</code>=字符的ASCII碼</p>
+<h3 id="INT-16H，AH-0-輸入字符"><a href="#INT-16H，AH-0-輸入字符" class="headerlink" title="INT 16H，AH=0 輸入字符"></a>INT 16H，<code>AH</code>=0 輸入字符</h3><p><code>AX</code>=鍵值代碼</p>
+<p>標準ASCII碼按鍵：<code>AL</code>=ASCII碼，<code>AH</code>=掃描碼<br>…</p>
+<h3 id="INT-21H，AH-0AH-輸入字符串"><a href="#INT-21H，AH-0AH-輸入字符串" class="headerlink" title="INT 21H，AH=0AH 輸入字符串"></a>INT 21H，<code>AH</code>=0AH 輸入字符串</h3><p><code>DS</code>:<code>DX</code>=緩衝區首地址</p>
+<h4 id="緩衝區的定義"><a href="#緩衝區的定義" class="headerlink" title="緩衝區的定義"></a>緩衝區的定義</h4><ul>
 <li>第1字節：最多欲接收的字符個數（1-255，含回車）</li>
 <li>第2字節：實際輸入的字符個數</li>
 <li>第3字節開始：輸入的字符串</li>
 </ul>
-<h3>INT 21H，<code>AH</code>=0BH 按鍵判斷</h3>
-<p><code>AL</code>=0，當前沒有按鍵；</p>
-<p><code>AL</code>=FFH，當前已經按鍵。<br>
-僅判斷當前是否有按下的鍵，設置<code>AL</code>後退出。</p>
-<h3>INT 16H，<code>AH</code>=1 按鍵判斷</h3>
-<p><code>ZF</code>=1，無按鍵；</p>
-<p><code>ZF</code>=0，有按鍵，且<code>AX</code>=鍵值代碼。<br>
-僅判斷當前是否有按下的鍵，設置<code>ZF</code>後退出。</p>
-<h1>串操作類指令</h1>
-<p>重點：<code>MOVS</code> <code>STOS</code> <code>LODS</code> <code>CMPS</code> <code>SCAS</code> <code>REP</code></p>
-<h2>串尋址方式</h2>
-<ul>
-<li>
-<p>源操作數：<code>SI</code>尋址，默認<code>DS</code>段，允許段超越</p>
+<h3 id="INT-21H，AH-0BH-按鍵判斷"><a href="#INT-21H，AH-0BH-按鍵判斷" class="headerlink" title="INT 21H，AH=0BH 按鍵判斷"></a>INT 21H，<code>AH</code>=0BH 按鍵判斷</h3><p><code>AL</code>=0，當前沒有按鍵；  </p>
+<p><code>AL</code>=FFH，當前已經按鍵。<br>僅判斷當前是否有按下的鍵，設置<code>AL</code>後退出。</p>
+<h3 id="INT-16H，AH-1-按鍵判斷"><a href="#INT-16H，AH-1-按鍵判斷" class="headerlink" title="INT 16H，AH=1 按鍵判斷"></a>INT 16H，<code>AH</code>=1 按鍵判斷</h3><p><code>ZF</code>=1，無按鍵；  </p>
+<p><code>ZF</code>=0，有按鍵，且<code>AX</code>=鍵值代碼。<br>僅判斷當前是否有按下的鍵，設置<code>ZF</code>後退出。</p>
+<h1 id="串操作類指令"><a href="#串操作類指令" class="headerlink" title="串操作類指令"></a>串操作類指令</h1><p>重點：<code>MOVS</code> <code>STOS</code> <code>LODS</code> <code>CMPS</code> <code>SCAS</code> <code>REP</code></p>
+<h2 id="串尋址方式"><a href="#串尋址方式" class="headerlink" title="串尋址方式"></a>串尋址方式</h2><ul>
+<li><p>源操作數：<code>SI</code>尋址，默認<code>DS</code>段，允許段超越  </p>
 </li>
-<li>
-<p>目的操作數：<code>DI</code>尋址，默認<code>ES</code>段，不允許段超越</p>
+<li><p>目的操作數：<code>DI</code>尋址，默認<code>ES</code>段，不允許段超越  </p>
 </li>
 </ul>
-<p><code>SI</code> <code>DI</code>自動修改（增減1或2）</p>
-<p><code>CLD</code>，<code>DF</code>=0，地址指針增1或2</p>
-<p><code>STD</code>，<code>DF</code>=1，地址指針減1或2</p>
-<h2>串傳送 <code>MOVSB</code> <code>MOVSW</code></h2>
-<p><code>ES:[DI]</code>←<code>DS:[SI]</code></p>
-<p><code>SI</code> <code>DI</code>加減1或2</p>
-<h2>串存儲 <code>STOSB</code> <code>STOSW</code></h2>
-<p><code>ES:[DI]</code>←<code>AL</code>/<code>AX</code></p>
-<p><code>DI</code>加減1或2</p>
-<h2>串讀取 <code>LODSB</code> <code>LODSW</code></h2>
-<p><code>AL</code>/<code>AX</code>←<code>DS:[SI]</code></p>
-<p><code>SI</code>加減1或2</p>
-<h2>串比較 <code>CMPSB</code> <code>CMPSW</code></h2>
-<p><code>DS:[SI]</code>-<code>ES:[DI]</code></p>
-<p><code>SI</code> <code>DI</code>加減1或2</p>
-<h2>串掃描 <code>SCASB</code> <code>SCASW</code></h2>
-<p><code>AL</code>/<code>AX</code>-<code>ES:[DI]</code></p>
-<p><code>DI</code>加減1或2</p>
-<h2>重複前綴指令 <code>REP</code> <code>REPZ</code> <code>REPNZ</code></h2>
-<h3>配合不影響標誌的<code>MOVS</code> <code>STOS</code> <code>LODS</code>：<code>REP</code>前綴</h3>
-<p>如 <code>rep movsb</code>相當於：</p>
+<p><code>SI</code> <code>DI</code>自動修改（增減1或2）  </p>
+<p><code>CLD</code>，<code>DF</code>=0，地址指針增1或2  </p>
+<p><code>STD</code>，<code>DF</code>=1，地址指針減1或2  </p>
+<h2 id="串傳送-MOVSB-MOVSW"><a href="#串傳送-MOVSB-MOVSW" class="headerlink" title="串傳送 MOVSB MOVSW"></a>串傳送 <code>MOVSB</code> <code>MOVSW</code></h2><p><code>ES:[DI]</code>←<code>DS:[SI]</code>  </p>
+<p><code>SI</code> <code>DI</code>加減1或2  </p>
+<h2 id="串存儲-STOSB-STOSW"><a href="#串存儲-STOSB-STOSW" class="headerlink" title="串存儲 STOSB STOSW"></a>串存儲 <code>STOSB</code> <code>STOSW</code></h2><p><code>ES:[DI]</code>←<code>AL</code>/<code>AX</code>  </p>
+<p><code>DI</code>加減1或2  </p>
+<h2 id="串讀取-LODSB-LODSW"><a href="#串讀取-LODSB-LODSW" class="headerlink" title="串讀取 LODSB LODSW"></a>串讀取 <code>LODSB</code> <code>LODSW</code></h2><p><code>AL</code>/<code>AX</code>←<code>DS:[SI]</code>  </p>
+<p><code>SI</code>加減1或2  </p>
+<h2 id="串比較-CMPSB-CMPSW"><a href="#串比較-CMPSB-CMPSW" class="headerlink" title="串比較 CMPSB CMPSW"></a>串比較 <code>CMPSB</code> <code>CMPSW</code></h2><p><code>DS:[SI]</code>-<code>ES:[DI]</code>  </p>
+<p><code>SI</code> <code>DI</code>加減1或2  </p>
+<h2 id="串掃描-SCASB-SCASW"><a href="#串掃描-SCASB-SCASW" class="headerlink" title="串掃描 SCASB SCASW"></a>串掃描 <code>SCASB</code> <code>SCASW</code></h2><p><code>AL</code>/<code>AX</code>-<code>ES:[DI]</code>  </p>
+<p><code>DI</code>加減1或2  </p>
+<h2 id="重複前綴指令-REP-REPZ-REPNZ"><a href="#重複前綴指令-REP-REPZ-REPNZ" class="headerlink" title="重複前綴指令 REP REPZ REPNZ"></a>重複前綴指令 <code>REP</code> <code>REPZ</code> <code>REPNZ</code></h2><h3 id="配合不影響標誌的MOVS-STOS-LODS：REP前綴"><a href="#配合不影響標誌的MOVS-STOS-LODS：REP前綴" class="headerlink" title="配合不影響標誌的MOVS STOS LODS：REP前綴"></a>配合不影響標誌的<code>MOVS</code> <code>STOS</code> <code>LODS</code>：<code>REP</code>前綴</h3><p>如 <code>rep movsb</code>相當於：</p>
 <pre><code class="hljs Assembly">
 again:  movsb
         dec cx
         jnz again</code></pre>
+
 <p><code>rep stosw</code>相當於：</p>
 <pre><code class="hljs Assembly">
 again:  stosw
         dec cx
         jnz again</code></pre>
-<h3>配合影響標誌的<code>CMPS</code> <code>SCAS</code>：<code>REPZ</code> <code>REPNZ</code>前綴</h3>
-<p><code>REPZ</code>/<code>REPE</code>相當於：<code>CX</code>≠0且<code>ZF</code>=1則繼續比較。</p>
+
+<h3 id="配合影響標誌的CMPS-SCAS：REPZ-REPNZ前綴"><a href="#配合影響標誌的CMPS-SCAS：REPZ-REPNZ前綴" class="headerlink" title="配合影響標誌的CMPS SCAS：REPZ REPNZ前綴"></a>配合影響標誌的<code>CMPS</code> <code>SCAS</code>：<code>REPZ</code> <code>REPNZ</code>前綴</h3><p><code>REPZ</code>/<code>REPE</code>相當於：<code>CX</code>≠0且<code>ZF</code>=1則繼續比較。</p>
 <p><code>REPNZ</code>/<code>REPNE</code>相當於：<code>CX</code>≠0且<code>ZF</code>=0則繼續比較。</p>
-<h2>處理機控制類指令</h2>
-<h3>空操作指令 <code>NOP</code></h3>
-<p>不執行任何操作，佔用一個字節存儲單元，空耗一個指令執行週期。<br>
-常用於程序調試。</p>
-<h3>段超越前綴指令 <code>CS:</code> <code>SS:</code> <code>DS:</code> <code>ES:</code></h3>
-<h3>封鎖前綴指令 <code>LOCK</code></h3>
-<h3>暫停指令 <code>HLT</code></h3>
-<h3>交權指令 <code>ESC</code></h3>
-<pre><code class="hljs Assembly">
+<h2 id="處理機控制類指令"><a href="#處理機控制類指令" class="headerlink" title="處理機控制類指令"></a>處理機控制類指令</h2><h3 id="空操作指令-NOP"><a href="#空操作指令-NOP" class="headerlink" title="空操作指令 NOP"></a>空操作指令 <code>NOP</code></h3><p>不執行任何操作，佔用一個字節存儲單元，空耗一個指令執行週期。<br>常用於程序調試。  </p>
+<h3 id="段超越前綴指令-CS-SS-DS-ES"><a href="#段超越前綴指令-CS-SS-DS-ES" class="headerlink" title="段超越前綴指令 CS: SS: DS: ES:"></a>段超越前綴指令 <code>CS:</code> <code>SS:</code> <code>DS:</code> <code>ES:</code></h3><h3 id="封鎖前綴指令-LOCK"><a href="#封鎖前綴指令-LOCK" class="headerlink" title="封鎖前綴指令 LOCK"></a>封鎖前綴指令 <code>LOCK</code></h3><h3 id="暫停指令-HLT"><a href="#暫停指令-HLT" class="headerlink" title="暫停指令 HLT"></a>暫停指令 <code>HLT</code></h3><h3 id="交權指令-ESC"><a href="#交權指令-ESC" class="headerlink" title="交權指令 ESC"></a>交權指令 <code>ESC</code></h3><pre><code class="hljs Assembly">
 esc     i6, reg&#x2F;mem</code></pre>
+
 <p>8086浮點指令交給8087執行。</p>
-<h3>等待指令 <code>WAIT</code></h3>
-<p>實現8086與8087同步運行。</p>
+<h3 id="等待指令-WAIT"><a href="#等待指令-WAIT" class="headerlink" title="等待指令 WAIT"></a>等待指令 <code>WAIT</code></h3><p>實現8086與8087同步運行。</p>
 
             </article>
             <hr>

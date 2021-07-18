@@ -224,13 +224,12 @@
 <p><em>粗 制 滥 造</em></p>
 </blockquote>
 <a id="more"></a>
-<h2>引言</h2>
-<p>掌握远程过程调用原理，基于java RMI进行远程编程和控制。要求定义远程接口类及实现类：定义相应的处理方法；客户端利用RMI实现远程调用服务。同时，在在两台机器之间验证结果正确。</p>
+
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>掌握远程过程调用原理，基于java RMI进行远程编程和控制。要求定义远程接口类及实现类：定义相应的处理方法；客户端利用RMI实现远程调用服务。同时，在在两台机器之间验证结果正确。</p>
 <p>基于实验一的内容，基于RMI的远程调用，改写你的程序。</p>
 <p>（2.2 实现A机器的程序，可以管理（增加、删除、改等）B机器上的某个文件夹或者目录）</p>
 <p>项目仓库地址：<a target="_blank" rel="noopener" href="https://github.com/unsioer/RmiFileManager">https://github.com/unsioer/RmiFileManager</a></p>
-<h2>环境</h2>
-<p>开发环境：</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>开发环境：</p>
 <ul>
 <li>JDK 11</li>
 <li>IDEA 社区版（本地代码开发）</li>
@@ -240,16 +239,12 @@
 <li><code>commons-io</code>（<code>FileUtils</code>类含扩展的文件操作）</li>
 <li>Git（代码管理）</li>
 </ul>
-<h2>详细设计</h2>
-<h3>概要</h3>
-<p>本实验的服务器端和客户端均采用了Java RMI技术。</p>
+<h2 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h2><h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>本实验的服务器端和客户端均采用了Java RMI技术。</p>
 <p>服务器端绑定注册RMI服务，实现对应的接口方法。客户端访问建立的URL，在指定的远程主机上查找RMI服务对象，找到后转换为本地接口，从而可以实现远程操作。</p>
 <p>提交的实验代码中，服务器端有控制台版本，客户端则有控制台和GUI两种版本。</p>
-<h3>服务器端</h3>
-<h4>跨平台远程连接的服务器端设置（重点）</h4>
-<p>本实验测试双机通信时，远程服务器系统为Ubuntu 20.04 LTS。由于ECS服务器存在内网和公网IP，服务器端应用就必须注意相应的处理，才能实现远程调用。</p>
+<h3 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h3><h4 id="跨平台远程连接的服务器端设置（重点）"><a href="#跨平台远程连接的服务器端设置（重点）" class="headerlink" title="跨平台远程连接的服务器端设置（重点）"></a>跨平台远程连接的服务器端设置（重点）</h4><p>本实验测试双机通信时，远程服务器系统为Ubuntu 20.04 LTS。由于ECS服务器存在内网和公网IP，服务器端应用就必须注意相应的处理，才能实现远程调用。</p>
 <p>否则，就会出现如图所示的情况，出现远程内网IP：</p>
-<p><img src="/images/MW2-%E5%87%BA%E7%8E%B0%E8%BF%9C%E7%A8%8B%E5%86%85%E7%BD%91IP.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="/images/MW2-%E5%87%BA%E7%8E%B0%E8%BF%9C%E7%A8%8B%E5%86%85%E7%BD%91IP.png" srcset="/img/loading.gif"></p>
 <p>解决方案的代码形如：</p>
 <pre><code class="hljs java">...
 System.setProperty(<span class="hljs-string">&quot;java.rmi.server.hostname&quot;</span>, hostname); <span class="hljs-comment">//设置公网IP</span>
@@ -270,8 +265,10 @@ System.setProperty(<span class="hljs-string">&quot;java.rmi.server.hostname&quot
 &#125; <span class="hljs-keyword">catch</span> (IOException | NamingException e) &#123; <span class="hljs-comment">//捕获异常</span>
     e.printStackTrace();
 &#125;</code></pre>
-<h3>接口的实现</h3>
-<p>服务器端需要实现的RMI接口方法如下：</p>
+
+
+
+<h3 id="接口的实现"><a href="#接口的实现" class="headerlink" title="接口的实现"></a>接口的实现</h3><p>服务器端需要实现的RMI接口方法如下：</p>
 <pre><code class="hljs java"><span class="hljs-function">String <span class="hljs-title">hello</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> RemoteException</span>; <span class="hljs-comment">//返回&quot;Hello World!&quot;，检查连接是否正常</span>
 
 <span class="hljs-comment">/*</span>
@@ -333,6 +330,7 @@ System.setProperty(<span class="hljs-string">&quot;java.rmi.server.hostname&quot
 <span class="hljs-comment"> * 参数：info FileInfoImpl文件信息自定义类，包含文件名、要上传的路径、文件字节内容</span>
 <span class="hljs-comment"> */</span>
 <span class="hljs-function">ResponseImpl <span class="hljs-title">uploadFile</span><span class="hljs-params">(FileInfoImpl info)</span> <span class="hljs-keyword">throws</span> RemoteException</span>;</code></pre>
+
 <p>以上的<code>ResponseImpl</code>类为自定义<code>Response</code>接口的实现，主要含有成员：</p>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResponseImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Response</span> </span>&#123;
     Boolean status = <span class="hljs-keyword">false</span>;<span class="hljs-comment">//操作状态</span>
@@ -342,14 +340,12 @@ System.setProperty(<span class="hljs-string">&quot;java.rmi.server.hostname&quot
     File[] files = <span class="hljs-keyword">null</span>;<span class="hljs-comment">//文件对象列表</span>
     ...
 &#125;</code></pre>
+
 <p>以及对应的<code>get</code> <code>set</code>方法。</p>
-<h4>合法性检验</h4>
-<p>对于传入的字符串，如果是文件路径，不允许出现<code>?</code> <code>*</code>  <code>&lt;</code> <code>&gt;</code> <code>:</code> <code>..</code>（最后两个限制是防止操作根目录之外的文件夹）名。</p>
+<h4 id="合法性检验"><a href="#合法性检验" class="headerlink" title="合法性检验"></a>合法性检验</h4><p>对于传入的字符串，如果是文件路径，不允许出现<code>?</code> <code>*</code>  <code>&lt;</code> <code>&gt;</code> <code>:</code> <code>..</code>（最后两个限制是防止操作根目录之外的文件夹）名。</p>
 <p>如果是文件名，还不允许出现<code>/</code> 或 <code>\</code>。</p>
-<h3>客户端</h3>
-<p>客户端分为控制台版本和GUI版本。控制台部分，输入一行操作名称，再输入一至二行相应参数，最后执行操作。</p>
-<h4>控制台版本操作</h4>
-<ul>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p> 客户端分为控制台版本和GUI版本。控制台部分，输入一行操作名称，再输入一至二行相应参数，最后执行操作。</p>
+<h4 id="控制台版本操作"><a href="#控制台版本操作" class="headerlink" title="控制台版本操作"></a>控制台版本操作</h4><ul>
 <li>ls：列目录</li>
 <li>mkdir：新建文件夹</li>
 <li>rm：删除</li>
@@ -359,39 +355,28 @@ System.setProperty(<span class="hljs-string">&quot;java.rmi.server.hostname&quot
 <li>upload：上传文件</li>
 </ul>
 <p>GUI版本见下文。</p>
-<h2>GUI界面展示</h2>
-<p>GUI采用了swing。这里做了简要截图，也可详见演示视频。</p>
-<h3>基本界面</h3>
-<p>首先需要输入RMI服务的URL：</p>
-<p><img src="/images/MW2-%E5%88%9D%E5%A7%8B%E8%BE%93%E5%85%A5%E6%A1%86.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="GUI界面展示"><a href="#GUI界面展示" class="headerlink" title="GUI界面展示"></a>GUI界面展示</h2><p>GUI采用了swing。这里做了简要截图，也可详见演示视频。</p>
+<h3 id="基本界面"><a href="#基本界面" class="headerlink" title="基本界面"></a>基本界面</h3><p>首先需要输入RMI服务的URL：</p>
+<p><img src="/images/MW2-%E5%88%9D%E5%A7%8B%E8%BE%93%E5%85%A5%E6%A1%86.png" srcset="/img/loading.gif"></p>
 <p>成功连接：</p>
-<p><img src="images/MW2-%E6%88%90%E5%8A%9F%E8%BF%9E%E6%8E%A5.png" srcset="/img/loading.gif" alt=""></p>
-<h4>主界面</h4>
-<p><img src="/images/MW2-%E4%B8%BB%E7%95%8C%E9%9D%A2.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="images/MW2-%E6%88%90%E5%8A%9F%E8%BF%9E%E6%8E%A5.png" srcset="/img/loading.gif"></p>
+<h4 id="主界面"><a href="#主界面" class="headerlink" title="主界面"></a>主界面</h4><p><img src="/images/MW2-%E4%B8%BB%E7%95%8C%E9%9D%A2.png" srcset="/img/loading.gif"></p>
 <p>基本界面窗口显示标题和对应的RMI URL。</p>
 <p>上方的工具条分别为：根目录按钮、上传按钮、输入框（输入并回车后直接访问指定目录）</p>
 <p>主体部分是指定目录下的文件目录树。</p>
-<h4>右键菜单</h4>
-<p><img src="/images/MW2-%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95.png" srcset="/img/loading.gif" alt="右键菜单"></p>
-<h4>上传</h4>
-<p><img src="/images/MW2-%E4%B8%8A%E4%BC%A0.png" srcset="/img/loading.gif" alt="上传"></p>
-<h4>新建文件夹</h4>
-<p><img src="/images/MW2-%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9.png" srcset="/img/loading.gif" alt="新建文件夹"></p>
-<h4>重命名</h4>
-<p><img src="/images/MW2-%E9%87%8D%E5%91%BD%E5%90%8D.png" srcset="/img/loading.gif" alt="重命名"></p>
+<h4 id="右键菜单"><a href="#右键菜单" class="headerlink" title="右键菜单"></a>右键菜单</h4><p><img src="/images/MW2-%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95.png" srcset="/img/loading.gif" alt="右键菜单"></p>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p><img src="/images/MW2-%E4%B8%8A%E4%BC%A0.png" srcset="/img/loading.gif" alt="上传"></p>
+<h4 id="新建文件夹"><a href="#新建文件夹" class="headerlink" title="新建文件夹"></a>新建文件夹</h4><p><img src="/images/MW2-%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9.png" srcset="/img/loading.gif" alt="新建文件夹"></p>
+<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><p><img src="/images/MW2-%E9%87%8D%E5%91%BD%E5%90%8D.png" srcset="/img/loading.gif" alt="重命名"></p>
 <p>剪切、复制、粘贴等不便在文档显示，详见视频。</p>
-<h2>技术总结</h2>
-<p>本次实验实现了一个最简单的基于Java RMI的远程文件管理应用，完成了实验所有要求并做了一些合法性检测，设计了相对简洁的GUI界面。</p>
+<h2 id="技术总结"><a href="#技术总结" class="headerlink" title="技术总结"></a>技术总结</h2><p>本次实验实现了一个最简单的基于Java RMI的远程文件管理应用，完成了实验所有要求并做了一些合法性检测，设计了相对简洁的GUI界面。</p>
 <p>由于只是简易实现功能，尚有以下不足之处：</p>
 <ul>
-<li>
-<p>请求和返回内容设计较为随意</p>
+<li><p>请求和返回内容设计较为随意</p>
 </li>
-<li>
-<p>远程操作时，得到的文件对象许多属性丢失，导致对应的目录树均识别为文件，不利于查看（但仍可通过输入框访问指定的目录进行操作）</p>
+<li><p>远程操作时，得到的文件对象许多属性丢失，导致对应的目录树均识别为文件，不利于查看（但仍可通过输入框访问指定的目录进行操作）</p>
 </li>
-<li>
-<p>未进行充分测试</p>
+<li><p>未进行充分测试</p>
 </li>
 </ul>
 

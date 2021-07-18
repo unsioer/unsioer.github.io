@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 516 字
+      凡 515 字
     </span>
   
 
@@ -222,8 +222,8 @@
             <article class="markdown-body">
               <p>介紹兩種：重鍊/變基。</p>
 <a id="more"></a>
-<h1>重鍊（Reinitialize）：完全删除以往所有commit記錄</h1>
-<p>罔摕家己無用兮repository做例：</p>
+
+<h1 id="重鍊（Reinitialize）：完全删除以往所有commit記錄"><a href="#重鍊（Reinitialize）：完全删除以往所有commit記錄" class="headerlink" title="重鍊（Reinitialize）：完全删除以往所有commit記錄"></a>重鍊（Reinitialize）：完全删除以往所有commit記錄</h1><p>罔摕家己無用兮repository做例：</p>
 <pre><code class="hljs Bash"><span class="hljs-comment"># Clone your git repo</span>
 git <span class="hljs-built_in">clone</span> https://github.com/unsioer/uselessgittest.git
 <span class="hljs-comment"># Enter your local repo</span>
@@ -238,18 +238,21 @@ git commit -am <span class="hljs-string">&quot;Reinitialize&quot;</span>
 git branch -D master
 <span class="hljs-comment"># Rename the current branch to master</span>
 git branch -m master</code></pre>
+
 <p>上尾，汝只需要<code>push</code>：</p>
 <pre><code class="hljs Bash"><span class="hljs-comment"># Finally, force update your repository</span>
 git push -f origin master;</code></pre>
-<h1>變基（Rebase）：重整以往一寡commit記錄</h1>
-<p>若汝毋急於執行頂橛上尾彼句（執行矣也毋畏，再添加厘仔commit做試驗），來試看覓如何通過<ruby>變基<rt>piàn-ki</rt></ruby>（<code>rebase</code>）囥汝以前commit兮烏歷史(XD)，又欲保持其他commit記錄：</p>
+
+<h1 id="變基（Rebase）：重整以往一寡commit記錄"><a href="#變基（Rebase）：重整以往一寡commit記錄" class="headerlink" title="變基（Rebase）：重整以往一寡commit記錄"></a>變基（Rebase）：重整以往一寡commit記錄</h1><p>若汝毋急於執行頂橛上尾彼句（執行矣也毋畏，再添加厘仔commit做試驗），來試看覓如何通過<ruby>變基<rt>piàn-ki</rt></ruby>（<code>rebase</code>）囥汝以前commit兮烏歷史(XD)，又欲保持其他commit記錄：</p>
 <pre><code class="hljs Bash"><span class="hljs-comment"># Switch to `master` branch</span>
 git checkout master
 <span class="hljs-comment"># Find commit log. Press q to quit.</span>
 git <span class="hljs-built_in">log</span></code></pre>
+
 <p>選擇汝欲修改兮commit(s)之前的任意一條commit記錄：</p>
 <pre><code class="hljs Bash"><span class="hljs-comment"># Rebase a commit</span>
 git rebase -i c8b2314c0b1768bc1443ae4cdb82ab29878a626e</code></pre>
+
 <p>咱來看跳出來兮<code>git-rebase-todo</code>，着是聽候汝處理這條commit之後所有commit記錄：</p>
 <pre><code class="hljs Bash">pick 75198ef Update readme.md
 pick c119c5b Update readme.md
@@ -280,6 +283,7 @@ pick ef9700f Update readme.md
 <span class="hljs-comment"># However, if you remove everything, the rebase will be aborted.</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># Note that empty commits are commented out</span></code></pre>
+
 <p>所以，若汝欲刪除以往一寡commits，可以改做<code>squash</code>合併，順紲可以<code>reword</code> 、<code>edit</code>等等。</p>
 <p>改好了後，<code>push</code>，收工：</p>
 <pre><code class="hljs Bash"><span class="hljs-comment"># Finally, force update your repository</span>
