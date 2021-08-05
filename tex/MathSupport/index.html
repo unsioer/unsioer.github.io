@@ -202,7 +202,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 521 字
+      凡 537 字
     </span>
   
 
@@ -247,201 +247,191 @@
             <div class="markdown-body">
               <p>（待扩充）本篇主要介绍如何利用MathJax输入数学公式，并额外补充一些LaTeX和Office公式的输入方法。此外还会涉及MathJax解析与Hexo的Markdown解析冲突时的解决办法。</p>
 <span id="more"></span>
+
 <p>在Markdown中：</p>
 <ul>
-<li>行内插入公式：<script type="math/tex">公式</script></li>
-<li>独立公式：$$$ 公式 $$$</li>
+<li>行内插入公式：<code>$ 公式 $</code></li>
+<li>独立公式：<code>$$ 公式 $$</code></li>
 </ul>
 <h1 id="上下标"><a href="#上下标" class="headerlink" title="上下标"></a>上下标</h1><ul>
 <li><code>^</code>上标，<code>_</code>下标</li>
 <li>内容多于一个字符，则需用<code>&#123;&#125;</code>包括</li>
-<li>可嵌套使用（Hexo中需注意多个<code>_</code>带来的<a href="#MathJax解析与Hexo冲突转义">转义</a>问题）</li>
+<li>可嵌套使用（Hexo中需注意多个<code>_</code>带来的<a href="#MathJax%E8%A7%A3%E6%9E%90%E4%B8%8EHexo%E5%86%B2%E7%AA%81%E8%BD%AC%E4%B9%89">转义</a>问题）</li>
 </ul>
-<h1 id="括号和分隔符"><a href="#括号和分隔符" class="headerlink" title="括号和分隔符"></a>括号和分隔符</h1><div class="table-container">
-<table>
+<h1 id="括号和分隔符"><a href="#括号和分隔符" class="headerlink" title="括号和分隔符"></a>括号和分隔符</h1><table>
 <thead>
 <tr>
-<th style="text-align:center">输入</th>
-<th style="text-align:center">显示</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center"><script type="math/tex">\langle a\rangle</script></td>
-<td style="text-align:center">$\langle a\rangle$</td>
+<tbody><tr>
+<td align="center"><code>$\langle a\rangle$</code></td>
+<td align="center">$\langle a\rangle$</td>
 </tr>
 <tr>
-<td style="text-align:center"><script type="math/tex">\lceil a\rceil</script></td>
-<td style="text-align:center">$\lceil a\rceil$</td>
+<td align="center"><code>$\lceil a\rceil$</code></td>
+<td align="center">$\lceil a\rceil$</td>
 </tr>
 <tr>
-<td style="text-align:center"><script type="math/tex">\lfloor a\rfloor</script></td>
-<td style="text-align:center">$\lfloor a\rfloor$</td>
+<td align="center"><code>$\lfloor a\rfloor$</code></td>
+<td align="center">$\lfloor a\rfloor$</td>
 </tr>
 <tr>
-<td style="text-align:center"><script type="math/tex">\lbrace a\rbrace</script></td>
-<td style="text-align:center">$\lbrace a\rbrace$</td>
+<td align="center"><code>$\lbrace a\rbrace$</code></td>
+<td align="center">$\lbrace a\rbrace$</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h1 id="重音符号"><a href="#重音符号" class="headerlink" title="重音符号"></a>重音符号</h1><div class="table-container">
-<table>
+</tbody></table>
+<h1 id="重音符号"><a href="#重音符号" class="headerlink" title="重音符号"></a>重音符号</h1><table>
 <thead>
 <tr>
-<th style="text-align:center">输入</th>
-<th style="text-align:center">显示</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center"><code>\hat&#123;x&#125;</code></td>
-<td style="text-align:center">$\hat{x}$</td>
+<tbody><tr>
+<td align="center"><code>\hat&#123;x&#125;</code></td>
+<td align="center">$\hat{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\check&#123;x&#125;</code></td>
-<td style="text-align:center">$\check{x}$</td>
+<td align="center"><code>\check&#123;x&#125;</code></td>
+<td align="center">$\check{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\breve&#123;x&#125;</code></td>
-<td style="text-align:center">$\breve{x}$</td>
+<td align="center"><code>\breve&#123;x&#125;</code></td>
+<td align="center">$\breve{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\acute&#123;x&#125;</code></td>
-<td style="text-align:center">$\acute{x}$</td>
+<td align="center"><code>\acute&#123;x&#125;</code></td>
+<td align="center">$\acute{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\tilde&#123;x&#125;</code></td>
-<td style="text-align:center">$\tilde{x}$</td>
+<td align="center"><code>\tilde&#123;x&#125;</code></td>
+<td align="center">$\tilde{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\vec&#123;x&#125;</code></td>
-<td style="text-align:center">$\vec{x}$</td>
+<td align="center"><code>\vec&#123;x&#125;</code></td>
+<td align="center">$\vec{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\dot&#123;x&#125;</code></td>
-<td style="text-align:center">$\dot{x}$</td>
+<td align="center"><code>\dot&#123;x&#125;</code></td>
+<td align="center">$\dot{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\ddot&#123;x&#125;</code></td>
-<td style="text-align:center">$\ddot{x}$</td>
+<td align="center"><code>\ddot&#123;x&#125;</code></td>
+<td align="center">$\ddot{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\overline&#123;x&#125;</code></td>
-<td style="text-align:center">$\overline{x}$</td>
+<td align="center"><code>\overline&#123;x&#125;</code></td>
+<td align="center">$\overline{x}$</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\underline&#123;x&#125;</code></td>
-<td style="text-align:center">$\underline{x}$</td>
+<td align="center"><code>\underline&#123;x&#125;</code></td>
+<td align="center">$\underline{x}$</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p><code>&#123;\字体 &#123;字符&#125;&#125;</code>或<code>\math字体&#123;字符&#125;</code></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center">输入</th>
-<th style="text-align:center">显示</th>
-<th style="text-align:center">说明</th>
-<th style="text-align:center">备注</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
+<th align="center">说明</th>
+<th align="center">备注</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center"><code>\rm</code><br><code>\mathrm&#123;&#125;</code></td>
-<td style="text-align:center">${\rm {abcdABCD}}$<br>$\mathrm{abcdABCD}$</td>
-<td style="text-align:center">罗马体</td>
-<td style="text-align:center"></td>
+<tbody><tr>
+<td align="center"><code>\rm</code><br><code>\mathrm&#123;&#125;</code></td>
+<td align="center">${\rm {abcdABCD}}$<br>$\mathrm{abcdABCD}$</td>
+<td align="center">罗马体</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\cal</code><br><code>\mathcal&#123;&#125;</code></td>
-<td style="text-align:center">${\cal {abcdABCD}}$<br>$\mathcal{abcdABCD}$</td>
-<td style="text-align:center">花体</td>
-<td style="text-align:center">Office：<code>\script字母</code></td>
+<td align="center"><code>\cal</code><br><code>\mathcal&#123;&#125;</code></td>
+<td align="center">${\cal {abcdABCD}}$<br>$\mathcal{abcdABCD}$</td>
+<td align="center">花体</td>
+<td align="center">Office：<code>\script字母</code></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\it</code><br><code>\mathit&#123;&#125;</code></td>
-<td style="text-align:center">${\it {abcdABCD}}$<br>$\mathit{abcdABCD}$</td>
-<td style="text-align:center">意大利体</td>
-<td style="text-align:center"></td>
+<td align="center"><code>\it</code><br><code>\mathit&#123;&#125;</code></td>
+<td align="center">${\it {abcdABCD}}$<br>$\mathit{abcdABCD}$</td>
+<td align="center">意大利体</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\Bbb</code><br><code>\mathbb&#123;&#125;</code></td>
-<td style="text-align:center">${\Bbb {abcdABCD}}$<br>$\mathbb{abcdABCD}$</td>
-<td style="text-align:center">黑板粗体</td>
-<td style="text-align:center">Office：<code>\double字母</code></td>
+<td align="center"><code>\Bbb</code><br><code>\mathbb&#123;&#125;</code></td>
+<td align="center">${\Bbb {abcdABCD}}$<br>$\mathbb{abcdABCD}$</td>
+<td align="center">黑板粗体</td>
+<td align="center">Office：<code>\double字母</code></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\bf</code><br><code>\mathbf&#123;&#125;</code></td>
-<td style="text-align:center">${\bf {abcdABCD}}$<br>$\mathbf{abcdABCD}$</td>
-<td style="text-align:center">粗体</td>
-<td style="text-align:center"></td>
+<td align="center"><code>\bf</code><br><code>\mathbf&#123;&#125;</code></td>
+<td align="center">${\bf {abcdABCD}}$<br>$\mathbf{abcdABCD}$</td>
+<td align="center">粗体</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\mit</code></td>
-<td style="text-align:center">${\mit {abcdABCD}}$<br></td>
-<td style="text-align:center">数学斜体</td>
-<td style="text-align:center"></td>
+<td align="center"><code>\mit</code></td>
+<td align="center">${\mit {abcdABCD}}$<br></td>
+<td align="center">数学斜体</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\sf</code></td>
-<td style="text-align:center">${\sf {abcdABCD}}$</td>
-<td style="text-align:center">等线体</td>
-<td style="text-align:center"></td>
+<td align="center"><code>\sf</code></td>
+<td align="center">${\sf {abcdABCD}}$</td>
+<td align="center">等线体</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\scr</code></td>
-<td style="text-align:center">${\scr {abcdABCD}}$</td>
-<td style="text-align:center">手写体</td>
-<td style="text-align:center"></td>
+<td align="center"><code>\scr</code></td>
+<td align="center">${\scr {abcdABCD}}$</td>
+<td align="center">手写体</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\tt</code></td>
-<td style="text-align:center">${\tt {abcdABCD}}$</td>
-<td style="text-align:center">打字机体</td>
-<td style="text-align:center"></td>
+<td align="center"><code>\tt</code></td>
+<td align="center">${\tt {abcdABCD}}$</td>
+<td align="center">打字机体</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\frak</code><br><code>\mathfrak&#123;&#125;</code></td>
-<td style="text-align:center">${\frak {abcdABCD}}$<br>$\mathfrak{abcdABCD}$</td>
-<td style="text-align:center">旧德式字体</td>
-<td style="text-align:center">Office：<code>\fraktur字母</code></td>
+<td align="center"><code>\frak</code><br><code>\mathfrak&#123;&#125;</code></td>
+<td align="center">${\frak {abcdABCD}}$<br>$\mathfrak{abcdABCD}$</td>
+<td align="center">旧德式字体</td>
+<td align="center">Office：<code>\fraktur字母</code></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\boldsymbol</code></td>
-<td style="text-align:center">${\boldsymbol {abcdABCD}}$</td>
-<td style="text-align:center">黑体</td>
-<td style="text-align:center"></td>
+<td align="center"><code>\boldsymbol</code></td>
+<td align="center">${\boldsymbol {abcdABCD}}$</td>
+<td align="center">黑体</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><code>\pmb</code></td>
-<td style="text-align:center">${\pmb {abcdABCD}}$</td>
-<td style="text-align:center">粗体（叠字符）</td>
+<td align="center"><code>\pmb</code></td>
+<td align="center">${\pmb {abcdABCD}}$</td>
+<td align="center">粗体（叠字符）</td>
+<td align="center"></td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h1 id="MathJax解析与Hexo冲突转义"><a href="#MathJax解析与Hexo冲突转义" class="headerlink" title="MathJax解析与Hexo冲突转义"></a>MathJax解析与Hexo冲突转义</h1><blockquote>
 <p>Hexo中如需使用公式，需在Markdown开头需附上<code>mathjax:true</code>（如<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">NexT主题</a>）或<code>math:true</code>（如<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">Fuild主题</a>）。</p>
 </blockquote>
 <ul>
 <li>一行MathJax公式中出现多个<code>_</code><ul>
-<li><script type="math/tex">{\rm a}_b{\rm a}_b</script>: ${\rm a}<em>{b}{\rm a}</em>{b}$</li>
-<li><script type="math/tex">{\rm a}\_b{\rm a}\_b</script>✅: ${\rm a}_{b}{\rm a}_{b}$</li>
+<li><code>$&#123;\rm a&#125;_b&#123;\rm a&#125;_b$</code>: ${\rm a}<em>{b}{\rm a}</em>{b}$</li>
+<li><code>$&#123;\rm a&#125;\_b&#123;\rm a&#125;\_b$</code>✅: ${\rm a}_{b}{\rm a}_{b}$</li>
 </ul>
 </li>
 <li>欲显示<code>_</code><ul>
-<li><script type="math/tex">Pax\_Romana</script>: $Pax_Romana$</li>
-<li><script type="math/tex">Pax\\\_Romana</script>✅: $Pax\_Romana$</li>
+<li><code>$Pax\_Romana$</code>: $Pax_Romana$</li>
+<li><code>$Pax\\\_Romana$</code>✅: $Pax\_Romana$</li>
 </ul>
 </li>
 <li>欲换行：<ul>
-<li><script type="math/tex">a\\b\\c</script>：$a\b\c$</li>
-<li><script type="math/tex">a\\\\b\\\\c</script>：$a\\b\\c$</li>
-<li><script type="math/tex">\begin{array} a\\\\b\\\\c \end{array}</script>：$\begin{array} a\\b\\c \end{array}$</li>
-<li><script type="math/tex">\begin{array} \\\\a\\\\b\\\\c \end{array}</script>✅：$\begin{array} \\a\\b\\c \end{array}$</li>
+<li><code>$a\\b\\c$</code>：$a\b\c$</li>
+<li><code>$a\\\\b\\\\c$</code>：$a\\b\\c$</li>
+<li><code>$\begin&#123;array&#125; a\\\\b\\\\c \end&#123;array&#125;$</code>：$\begin{array} a\\b\\c \end{array}$</li>
+<li><code>$\begin&#123;array&#125; \\\\a\\\\b\\\\c \end&#123;array&#125;$</code>✅：$\begin{array} \\a\\b\\c \end{array}$</li>
 </ul>
 </li>
 </ul>
