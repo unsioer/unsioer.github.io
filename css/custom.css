@@ -1,3 +1,9 @@
+html,
+body,
+.markdown-body {
+  font-size: 16px;
+  font-family: "SF Pro SC", "SF Pro Text", "SF Pro Icons", PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif !important;
+}
 body {
 	line-height: 200%;
 }
@@ -12,6 +18,13 @@ ruby > rt {
 }
 img { 
     transform: scale(0.95);
+}
+
+/*
+ For MathJaX
+*/
+.mjx-container{
+    white-space: normal!important;
 }
 
 .navbar-convert {

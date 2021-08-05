@@ -1,14 +1,14 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-TW">
-
-
+<html lang="zh-TW" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
-  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,19 +17,20 @@
   <meta name="description" content="">
   <meta name="author" content="Enatsu">
   <meta name="keywords" content="">
+  
   <title>Enatsu&#39;s Site</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -40,8 +41,14 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -135,8 +142,14 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -145,13 +158,13 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/20130730041.jpg') no-repeat center center;
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Young and Simple.">
               
             </span>
 
@@ -170,7 +183,7 @@
 
   <main>
     
-      <div class="container nopadding-md">
+      <div class="container nopadding-x-md">
         <div class="py-5" id="board"
           style=margin-top:0>
           
@@ -183,21 +196,37 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/nlp/RNNBasedNLGModels/">基于RNN的语言生成模型</a>
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/nlp/TransformerBasedNLGModels/" target="_self">
+          <img src="/images/Transformer.jpg" srcset="/img/loading.gif" lazyload alt="基于Transformer的自然语言生成模型">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/nlp/TransformerBasedNLGModels/" target="_self">
+          基于Transformer的自然语言生成模型
+        </a>
+      </h1>
 
-      <a href="/nlp/RNNBasedNLGModels/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/nlp/TransformerBasedNLGModels/" target="_self">
           
-        
-        <div>本篇介绍RNN的基本原理及其在NLP的应用。</div>
-      </a>
+          
+            
+          
+          （待扩充）
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2021-07-15
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-04 08:00" pubdate>
+              2021-08-04
+            </time>
           </div>
         
         
@@ -212,9 +241,121 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
+              <a href="/tags/NLP/">NLP</a>
+            
               <a href="/tags/ML/">ML</a>
             
+              <a href="/tags/Transformer/">Transformer</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tex/MathSupport/" target="_self">
+          MathJax数学符号支持
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/tex/MathSupport/" target="_self">
+          
+          
+            
+          
+          （待扩充）本篇主要介绍如何利用MathJax输入数学公式，并额外补充一些LaTeX和Office公式的输入方法。此外还会涉及MathJax解析与Hexo的Markdown解析冲突时的解决办法。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-03 08:36" pubdate>
+              2021-08-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/tex/">TeX</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MathJax/">MathJax</a>
+            
+              <a href="/tags/TeX/">TeX</a>
+            
+              <a href="/tags/LaTeX/">LaTeX</a>
+            
+              <a href="/tags/Office/">Office</a>
+            
+              <a href="/tags/Hexo/">Hexo</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/nlp/RNNBasedNLGModels/" target="_self">
+          基于RNN的语言生成模型
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/nlp/RNNBasedNLGModels/" target="_self">
+          
+          
+            
+          
+          本篇介绍RNN的基本原理及其在NLP的应用。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-15 15:51" pubdate>
+              2021-07-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/nlp/">NLP</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
               <a href="/tags/NLP/">NLP</a>
+            
+              <a href="/tags/ML/">ML</a>
             
               <a href="/tags/NLG/">NLG</a>
             
@@ -231,7 +372,7 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
@@ -239,27 +380,37 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/middleware/MWExp3CrossLangImpl/" target="_self">
-          <img src="/images/Thrift.jfif" srcset="/img/loading.gif" alt="《中间件技术》实验3：跨语言加密解密调用">
+          <img src="/images/Thrift.jfif" srcset="/img/loading.gif" lazyload alt="《中间件技术》实验3：跨语言加密解密调用">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/middleware/MWExp3CrossLangImpl/">《中间件技术》实验3：跨语言加密解密调用</a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/middleware/MWExp3CrossLangImpl/" target="_self">
+          《中间件技术》实验3：跨语言加密解密调用
+        </a>
+      </h1>
 
-      <a href="/middleware/MWExp3CrossLangImpl/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/middleware/MWExp3CrossLangImpl/" target="_self">
           
-        
-        <div>
+          
+            
+          
+          
 简单的AES，雕虫小技的跨语言调用……
-</div>
-      </a>
+
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2021-04-19
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-19 23:40" pubdate>
+              2021-04-19
+            </time>
           </div>
         
         
@@ -276,9 +427,9 @@
             
               <a href="/tags/cpp/">C++</a>
             
-              <a href="/tags/Java/">Java</a>
-            
               <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Java/">Java</a>
             
               <a href="/tags/Thrift/">Thrift</a>
             
@@ -293,7 +444,7 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
@@ -301,25 +452,35 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/git/WebhookStart/" target="_self">
-          <img src="/images/AddWebhook.png" srcset="/img/loading.gif" alt="GitHub Webhook远程服务器自动部署杂记">
+          <img src="/images/AddWebhook.png" srcset="/img/loading.gif" lazyload alt="GitHub Webhook远程服务器自动部署杂记">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/git/WebhookStart/">GitHub Webhook远程服务器自动部署杂记</a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/git/WebhookStart/" target="_self">
+          GitHub Webhook远程服务器自动部署杂记
+        </a>
+      </h1>
 
-      <a href="/git/WebhookStart/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/git/WebhookStart/" target="_self">
           
-        
-        <div>也来试试GitHub的自动部署？</div>
-      </a>
+          
+            
+          
+          也来试试GitHub的自动部署？
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2021-04-17
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-17 00:00" pubdate>
+              2021-04-17
+            </time>
           </div>
         
         
@@ -349,7 +510,7 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
@@ -357,27 +518,37 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/middleware/MWExp2RmiFileManager/" target="_self">
-          <img src="/images/RMI.png" srcset="/img/loading.gif" alt="《中间件技术》实验2：RMI远程文件管理">
+          <img src="/images/RMI.png" srcset="/img/loading.gif" lazyload alt="《中间件技术》实验2：RMI远程文件管理">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/middleware/MWExp2RmiFileManager/">《中间件技术》实验2：RMI远程文件管理</a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/middleware/MWExp2RmiFileManager/" target="_self">
+          《中间件技术》实验2：RMI远程文件管理
+        </a>
+      </h1>
 
-      <a href="/middleware/MWExp2RmiFileManager/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/middleware/MWExp2RmiFileManager/" target="_self">
           
-        
-        <div>
+          
+            
+          
+          
 粗 制 滥 造
-</div>
-      </a>
+
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2021-04-08
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-08 19:40" pubdate>
+              2021-04-08
+            </time>
           </div>
         
         
@@ -401,7 +572,7 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
@@ -409,27 +580,37 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/poem/XMU100/" target="_self">
-          <img src="/images/QunxianBuildings.jpg" srcset="/img/loading.gif" alt="八聲甘州·頌廈大百年華誕">
+          <img src="/images/QunxianBuildings.jpg" srcset="/img/loading.gif" lazyload alt="八聲甘州·頌廈大百年華誕">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/poem/XMU100/">八聲甘州·頌廈大百年華誕</a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/poem/XMU100/" target="_self">
+          八聲甘州·頌廈大百年華誕
+        </a>
+      </h1>
 
-      <a href="/poem/XMU100/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/poem/XMU100/" target="_self">
           
-        
-        <div>
+          
+            
+          
+          
 1921-2021，慶賀母校廈門大學百年華誕。敢竭拙思，也擬詩詞，共勉未來。
-</div>
-      </a>
+
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2021-04-05
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-05 16:00" pubdate>
+              2021-04-05
+            </time>
           </div>
         
         
@@ -455,7 +636,7 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
@@ -463,27 +644,37 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/middleware/MWExp1FileManager/" target="_self">
-          <img src="/images/MW1-%E5%9F%BA%E6%9C%AC%E7%95%8C%E9%9D%A2.png" srcset="/img/loading.gif" alt="《中间件技术》实验1：远程文件管理">
+          <img src="/images/MW1-%E5%9F%BA%E6%9C%AC%E7%95%8C%E9%9D%A2.png" srcset="/img/loading.gif" lazyload alt="《中间件技术》实验1：远程文件管理">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/middleware/MWExp1FileManager/">《中间件技术》实验1：远程文件管理</a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/middleware/MWExp1FileManager/" target="_self">
+          《中间件技术》实验1：远程文件管理
+        </a>
+      </h1>
 
-      <a href="/middleware/MWExp1FileManager/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/middleware/MWExp1FileManager/" target="_self">
           
-        
-        <div>
+          
+            
+          
+          
 原 型 开 发
-</div>
-      </a>
+
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2021-03-25
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 09:40" pubdate>
+              2021-03-25
+            </time>
           </div>
         
         
@@ -509,7 +700,7 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
@@ -517,25 +708,35 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/poem/TsipbiHaktshngTrip/" target="_self">
-          <img src="/images/TsipBiHakTshng.jfif" srcset="/img/loading.gif" alt="念奴嬌·遊集美學村">
+          <img src="/images/TsipBiHakTshng.jfif" srcset="/img/loading.gif" lazyload alt="念奴嬌·遊集美學村">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/poem/TsipbiHaktshngTrip/">念奴嬌·遊集美學村</a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/poem/TsipbiHaktshngTrip/" target="_self">
+          念奴嬌·遊集美學村
+        </a>
+      </h1>
 
-      <a href="/poem/TsipbiHaktshngTrip/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/poem/TsipbiHaktshngTrip/" target="_self">
           
-        
-        <div>遊集美學村，感嘉庚先生愛國精神，爲廈大精神之首。百年校慶臨近，乃賦斯篇，颂先賢而勉吾儕。</div>
-      </a>
+          
+            
+          
+          遊集美學村，感嘉庚先生愛國精神，爲廈大精神之首。百年校慶臨近，乃賦斯篇，颂先賢而勉吾儕。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-11-07
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-07 21:50" pubdate>
+              2020-11-07
+            </time>
           </div>
         
         
@@ -565,7 +766,7 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
@@ -573,25 +774,35 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/poem/CUMCM2020/" target="_self">
-          <img src="/images/CUMCM2020-B.jpg" srcset="/img/loading.gif" alt="庚子數模國賽後感懷">
+          <img src="/images/CUMCM2020-B.jpg" srcset="/img/loading.gif" lazyload alt="庚子數模國賽後感懷">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/poem/CUMCM2020/">庚子數模國賽後感懷</a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/poem/CUMCM2020/" target="_self">
+          庚子數模國賽後感懷
+        </a>
+      </h1>
 
-      <a href="/poem/CUMCM2020/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/poem/CUMCM2020/" target="_self">
           
-        
-        <div>　</div>
-      </a>
+          
+            
+          
+          　
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-09-13
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-09-13 23:55" pubdate>
+              2020-09-13
+            </time>
           </div>
         
         
@@ -615,33 +826,42 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/python/PythonMySQLServerGoneAway/">Python MySQL 失聯及解決辦法</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/python/PythonMySQLServerGoneAway/" target="_self">
+          Python MySQL 失聯及解決辦法
+        </a>
+      </h1>
 
-      <a href="/python/PythonMySQLServerGoneAway/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/python/PythonMySQLServerGoneAway/" target="_self">
           
-        
-        <div>2020/11/27附註：本文闡述的條件是：
+          
+            
+          
+          2020/11/27附註：本文闡述的條件是：
 
 mysqlclient 2.0.1
 
 而非MySQL-python。對於MySQL-python，本身僅支持Python 2而在Python 3下安裝和運行不便（需修改配置），且已事實（de facto）停止維護。事實上，建議使用新的PyMySQL，並在Django項目的settings.py添加：
-import pymysql
-# Avoid my</div>
-      </a>
+1234import pymysql# Avoid
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-08-20
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-20 11:12" pubdate>
+              2020-08-20
+            </time>
           </div>
         
         
@@ -667,7 +887,7 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
@@ -675,26 +895,36 @@ import pymysql
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/hokkien/CameFrom17thCentury/" target="_self">
-          <img src="/images/ArteChioChiuTitle.jpg" srcset="/img/loading.gif" alt="來自17世紀兮漳州音">
+          <img src="/images/ArteChioChiuTitle.jpg" srcset="/img/loading.gif" lazyload alt="來自17世紀兮漳州音">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/hokkien/CameFrom17thCentury/">來自17世紀兮漳州音</a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/hokkien/CameFrom17thCentury/" target="_self">
+          來自17世紀兮漳州音
+        </a>
+      </h1>
 
-      <a href="/hokkien/CameFrom17thCentury/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/hokkien/CameFrom17thCentury/" target="_self">
           
-        
-        <div>Arte de la lengua Chio Chiu，漢名譯做《漳州話語法》，一般認爲是17世紀西班牙天主教道明會（Dominican missionaries）傳教士佮呂宋唐儂（華人）合作佇馬尼拉編寫兮漳州方言語法冊。
-原文用當時兮卡斯蒂利亞語（Castilian，也着是現代所講兮西班牙語）寫成，舉例字詞按照西語羅馬字拼音+漢字+西語解釋（有時陣無）兮順序。原件現在囥佇西班牙巴塞羅那大學圖書館</div>
-      </a>
+          
+            
+          
+          Arte de la lengua Chio Chiu，漢名譯做《漳州話語法》，一般認爲是17世紀西班牙天主教道明會（Dominican missionaries）傳教士佮呂宋唐儂（華人）合作佇馬尼拉編寫兮漳州方言語法冊。
+原文用當時兮卡斯蒂利亞語（Castilian，也着是現代所講兮西班牙語）寫成，舉例字詞按照西語羅馬字拼音+漢字+西語解釋（有時陣無）兮順序。原件現在囥佇西班牙巴塞羅那大學圖書館
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-20
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-20 12:33" pubdate>
+              2020-06-20
+            </time>
           </div>
         
         
@@ -716,27 +946,37 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/dbs/RelationData/">關係數據理論</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/dbs/RelationData/" target="_self">
+          關係數據理論
+        </a>
+      </h1>
 
-      <a href="/dbs/RelationData/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/dbs/RelationData/" target="_self">
           
-        
-        <div>　</div>
-      </a>
+          
+            
+          
+          　
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-19
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-19 19:00" pubdate>
+              2020-06-19
+            </time>
           </div>
         
         
@@ -756,27 +996,37 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/centos/CentOSWordPress/">CentOS安裝WordPress</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/centos/CentOSWordPress/" target="_self">
+          CentOS安裝WordPress
+        </a>
+      </h1>
 
-      <a href="/centos/CentOSWordPress/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/centos/CentOSWordPress/" target="_self">
           
-        
-        <div>　</div>
-      </a>
+          
+            
+          
+          　
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-04-19
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-19 16:04" pubdate>
+              2020-04-19
+            </time>
           </div>
         
         
@@ -800,27 +1050,37 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/python/PythonError/">Python異常類型彙整</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/python/PythonError/" target="_self">
+          Python異常類型彙整
+        </a>
+      </h1>
 
-      <a href="/python/PythonError/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/python/PythonError/" target="_self">
           
-        
-        <div>　</div>
-      </a>
+          
+            
+          
+          　
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-04-18
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-18 20:20" pubdate>
+              2020-04-18
+            </time>
           </div>
         
         
@@ -844,27 +1104,37 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/git/GitNotes-2/">Git雜記2：復刻的repo怎拉取原repo的commit更新</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/git/GitNotes-2/" target="_self">
+          Git雜記2：復刻的repo怎拉取原repo的commit更新
+        </a>
+      </h1>
 
-      <a href="/git/GitNotes-2/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/git/GitNotes-2/" target="_self">
           
-        
-        <div>　</div>
-      </a>
+          
+            
+          
+          　
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-03-24
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-24 16:50" pubdate>
+              2020-03-24
+            </time>
           </div>
         
         
@@ -886,27 +1156,37 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/cpp/MSVCFileStreamEOF/">MSVC文件流的EOF</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/cpp/MSVCFileStreamEOF/" target="_self">
+          MSVC文件流的EOF
+        </a>
+      </h1>
 
-      <a href="/cpp/MSVCFileStreamEOF/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/cpp/MSVCFileStreamEOF/" target="_self">
           
-        
-        <div>　</div>
-      </a>
+          
+            
+          
+          　
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-03-16
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-16 20:38" pubdate>
+              2020-03-16
+            </time>
           </div>
         
         
@@ -930,27 +1210,37 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/git/GitNotes-1/">Git雜記1：按怎刪除以前兮commit記錄？</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/git/GitNotes-1/" target="_self">
+          Git雜記1：按怎刪除以前兮commit記錄？
+        </a>
+      </h1>
 
-      <a href="/git/GitNotes-1/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/git/GitNotes-1/" target="_self">
           
-        
-        <div>介紹兩種：重鍊/變基。</div>
-      </a>
+          
+            
+          
+          介紹兩種：重鍊/變基。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-03-09
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-09 09:00" pubdate>
+              2020-03-09
+            </time>
           </div>
         
         
@@ -972,29 +1262,39 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/asm/AsmNotes-3/">彙編語言複習筆記3：程序格式</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/asm/AsmNotes-3/" target="_self">
+          彙編語言複習筆記3：程序格式
+        </a>
+      </h1>
 
-      <a href="/asm/AsmNotes-3/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/asm/AsmNotes-3/" target="_self">
           
-        
-        <div>
+          
+            
+          
+          
 彙整自教材及課件。
-</div>
-      </a>
+
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-01-07
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-07 17:35" pubdate>
+              2020-01-07
+            </time>
           </div>
         
         
@@ -1014,29 +1314,39 @@ import pymysql
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/asm/AsmNotes-2/">彙編語言複習筆記2：指令系統</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/asm/AsmNotes-2/" target="_self">
+          彙編語言複習筆記2：指令系統
+        </a>
+      </h1>
 
-      <a href="/asm/AsmNotes-2/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/asm/AsmNotes-2/" target="_self">
           
-        
-        <div>
+          
+            
+          
+          
 彙整自個人OneNote筆記。
-</div>
-      </a>
+
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-01-06
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-06 21:44" pubdate>
+              2020-01-06
+            </time>
           </div>
         
         
@@ -1056,110 +1366,16 @@ import pymysql
           </div>
         
       </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/asm/AsmNotes-1/">彙編語言複習筆記1：基礎知識</a>
-
-      <a href="/asm/AsmNotes-1/" class="index-excerpt">
-        
-        
-          
-        
-        <div>
-彙整自個人OneNote筆記。僅記錄重點，不記例題。
-</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-01-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/asm/">Assembly</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/asm/">Assembly</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/poem/Near2020/">己亥臨元旦書懷步賴和韻</a>
-
-      <a href="/poem/Near2020/" class="index-excerpt">
-        
-        
-          
-        
-        <div>
-半暝無眠，賦詩一首。期末其勉之。  
-</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2019-12-26
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/poem/">詩詞</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/si/">詩</a>
-            
-              <a href="/tags/tshitlut/">七言律詩</a>
-            
-              <a href="/tags/2020/">2020</a>
-            
-          </div>
-        
-      </div>
-    </div>
+    </article>
   </div>
 
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
-  
-  <script>
-    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
-      ele.href += '#board';
-    }
-  </script>
 
 
 
@@ -1169,16 +1385,15 @@ import pymysql
         </div>
       </div>
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -1199,26 +1414,16 @@ import pymysql
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a target="_blank" rel="noopener" href="https://blog.enatsu.top">Enatsu's Site</a>
-      <span> © 2019-2021</span>
-    </div>
-    <div>
-      <span>Powered by</span>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div> <a target="_blank" rel="noopener" href='https://blog.enatsu.top'>Enatsu's Site</a> <span> © 2019-2021</span> </div> <div> <span>Powered by</span> <a href='https://hexo.io' target='_blank' rel='nofollow noopener'><span>Hexo</span></a> <i class='iconfont icon-love'></i> <a href='https://github.com/fluid-dev/hexo-theme-fluid' target='_blank' rel='nofollow noopener'> <span>Fluid</span></a> </div> 
+  </div>
+  
   <div class="statistics">
     
     
@@ -1244,35 +1449,60 @@ import pymysql
   </div>
 
 
-    
+  
 
-    
-  </div>
+  
 </footer>
 
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- OpenCC -->
 <script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.t2cn.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/bundle-browser.min.js" ></script>
 
-<script  src="/js/main.js" ></script>
-
 <!-- Plugins -->
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -1280,65 +1510,39 @@ import pymysql
 
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
+<script src="/js/custom.js"></script>
 <script src="/js/jquery.cookie.js"></script>
 
 
 
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "Young and Simple.&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 </body>

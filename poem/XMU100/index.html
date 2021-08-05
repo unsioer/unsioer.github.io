@@ -1,44 +1,54 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-TW">
-
-
+<html lang="zh-TW" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
-  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="
+1921-2021，慶賀母校廈門大學百年華誕。敢竭拙思，也擬詩詞，共勉未來。
+">
   <meta name="author" content="Enatsu">
   <meta name="keywords" content="">
+  
   <title>八聲甘州·頌廈大百年華誕 - Enatsu&#39;s Site</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
   
 
   
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -49,8 +59,14 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -144,8 +160,14 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -154,25 +176,28 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/images/QunxianBuildings.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="八聲甘州·頌廈大百年華誕">
               
             </span>
 
             
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2021-04-05 16:00">
-      2021年4月5日 下午
-    </time>
-  </div>
-
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-05 16:00" pubdate>
+        2021年4月5日 下午
+      </time>
+    </span>
+  
+</div>
 
 <div class="mt-1">
   
@@ -189,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      4
        分鐘
     </span>
   
@@ -211,19 +236,21 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">八聲甘州·頌廈大百年華誕</h1>
             
-            <article class="markdown-body">
+            <div class="markdown-body">
               <blockquote>
 <p>1921-2021，慶賀母校廈門大學百年華誕。<br>敢竭拙思，也擬詩詞，共勉未來。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>憶陵夷演武肇黌基<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="憶陵夷演武肇黌基：民國10年（1921年）4月6日廈門大學借集美學校開辦；5月9日廈門大學在當年鄭成功操練軍隊的演武亭舊址奠基。選定5月9日奠基，是為了銘記1915年5月9日袁世凱接受「二十一條」這一國恥。陵夷：指國勢衰微，這裏借指中日「二十一條」這一國恥。黌：學校。
 ">[1]</span></a></sup>，<br>鷺洲會羣賢<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="鷺洲會羣賢：鷺洲：廈門島早期形似白鷺，雅稱鷺島。群賢：雙關，既指來到廈大的青年才俊，也指最早奠基的群賢樓群。
@@ -243,43 +270,7 @@
 <h2 id="廈音對照"><a href="#廈音對照" class="headerlink" title="廈音對照"></a>廈音對照</h2><p>這裏的羅馬字標識出了當代廈門話缺失的j-聲母。實際朗誦按當代的l-。</p>
 <p>「字」的文讀音可以是jū或tsū，這裏取j-，朗誦應折合爲lū。</p>
 <p>「閩」的讀音採用了傳統的bân，不依反切音bîn。</p>
-<pre><code class="hljs txt">憶陵夷演武肇黌基，
-Ik lîng-î Ián-bú tiāu hông ki,
-鷺洲會羣賢。
-Lōo-tsiu huē kûn-hiân.
-正海濱輻輳，
-Tsìng hái-pin hok-tsòo,
-師生踔厲，
-su-sing thok-lē,
-道義擔肩。
-tō-gī tam-kian.
-同集囊螢映雪，
-Tông Tsi̍p Lông-îng Ìng-suat,
-一字列巍然。
-it-jū lia̍t guî-jiân.
-負笈南強志，
-Hū-khip Lâm-kiông tsì,
-故郡窮年。
-kòo-kūn kiông-liân.
-
-覽昔毀家紓國，
-Lám-sik huí-ka su-kok,
-更典藏迻譯，
-kìng tián-tsông î-i̍k,
-格致周延。
-kik-tì tsiu-iân.
-況巡洋攬月，
-Hóng sûn-iông lám-gua̍t,
-兀兀寄雲天。
-gu̍t-gu̍t kì ûn-thian.
-賞八閩、花繁木秀，
-Sióng pat-Bân, hua huân bo̍k siù,
-望滄瀛、萬舸競風煙。
-bōng tsong-îng, bān-khó kīng hong-ian.
-逢稘歲、棉開四地，
-Hông kî-suè, biân khai sù-tē,
-共話新篇。
-kiōng-huā sin-phian.</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs txt">憶陵夷演武肇黌基，<br>Ik lîng-î Ián-bú tiāu hông ki,<br>鷺洲會羣賢。<br>Lōo-tsiu huē kûn-hiân.<br>正海濱輻輳，<br>Tsìng hái-pin hok-tsòo,<br>師生踔厲，<br>su-sing thok-lē,<br>道義擔肩。<br>tō-gī tam-kian.<br>同集囊螢映雪，<br>Tông Tsi̍p Lông-îng Ìng-suat,<br>一字列巍然。<br>it-jū lia̍t guî-jiân.<br>負笈南強志，<br>Hū-khip Lâm-kiông tsì,<br>故郡窮年。<br>kòo-kūn kiông-liân.<br><br>覽昔毀家紓國，<br>Lám-sik huí-ka su-kok,<br>更典藏迻譯，<br>kìng tián-tsông î-i̍k,<br>格致周延。<br>kik-tì tsiu-iân.<br>況巡洋攬月，<br>Hóng sûn-iông lám-gua̍t,<br>兀兀寄雲天。<br>gu̍t-gu̍t kì ûn-thian.<br>賞八閩、花繁木秀，<br>Sióng pat-Bân, hua huân bo̍k siù,<br>望滄瀛、萬舸競風煙。<br>bōng tsong-îng, bān-khó kīng hong-ian.<br>逢稘歲、棉開四地，<br>Hông kî-suè, biân khai sù-tē,<br>共話新篇。<br>kiōng-huā sin-phian.<br></code></pre></td></tr></table></figure>
 
 <section class="footnotes"><h2>註</h2><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>憶陵夷演武肇黌基：民國10年（1921年）4月6日廈門大學借集美學校開辦；5月9日廈門大學在當年鄭成功操練軍隊的演武亭舊址奠基。選定5月9日奠基，是為了銘記1915年5月9日袁世凱接受「二十一條」這一國恥。陵夷：指國勢衰微，這裏借指中日「二十一條」這一國恥。黌：學校。
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>鷺洲會羣賢：鷺洲：廈門島早期形似白鷺，雅稱鷺島。群賢：雙關，既指來到廈大的青年才俊，也指最早奠基的群賢樓群。
@@ -294,7 +285,7 @@ kiōng-huā sin-phian.</code></pre>
 <a href="#fnref:10" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:11" class="footnote-text"><span>稘歲：一個世紀。稘本指週歲，世紀義用法最早可能來自嚴復。
 <a href="#fnref:11" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:12" class="footnote-text"><span>棉開四地：棉指木棉，指校慶正是木棉花開時節。四地：指廈大的思明、翔安、漳州、馬來西亞四個校區。
 <a href="#fnref:12" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
-            </article>
+            </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
@@ -322,11 +313,15 @@ kiōng-huā sin-phian.</code></pre>
                 
               </div>
               
-                <p class="note note-warning">本站所有文章除特別聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！</p>
+                <p class="note note-warning">
+                  
+                    本站所有文章除特別聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
                     
                     
                       <a href="/middleware/MWExp2RmiFileManager/">
@@ -335,8 +330,8 @@ kiōng-huā sin-phian.</code></pre>
                         <span class="visible-mobile">前篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
                       <a href="/middleware/MWExp1FileManager/">
@@ -345,13 +340,13 @@ kiōng-huā sin-phian.</code></pre>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
@@ -359,7 +354,7 @@ kiōng-huā sin-phian.</code></pre>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目錄</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -371,16 +366,15 @@ kiōng-huā sin-phian.</code></pre>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -401,26 +395,16 @@ kiōng-huā sin-phian.</code></pre>
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a target="_blank" rel="noopener" href="https://blog.enatsu.top">Enatsu's Site</a>
-      <span> © 2019-2021</span>
-    </div>
-    <div>
-      <span>Powered by</span>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <div> <a target="_blank" rel="noopener" href='https://blog.enatsu.top'>Enatsu's Site</a> <span> © 2019-2021</span> </div> <div> <span>Powered by</span> <a href='https://hexo.io' target='_blank' rel='nofollow noopener'><span>Hexo</span></a> <i class='iconfont icon-love'></i> <a href='https://github.com/fluid-dev/hexo-theme-fluid' target='_blank' rel='nofollow noopener'> <span>Fluid</span></a> </div> 
+  </div>
+  
   <div class="statistics">
     
     
@@ -446,35 +430,66 @@ kiōng-huā sin-phian.</code></pre>
   </div>
 
 
-    
+  
 
-    
-  </div>
+  
 </footer>
 
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- OpenCC -->
 <script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/data.t2cn.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.3/bundle-browser.min.js" ></script>
 
-<script  src="/js/main.js" ></script>
-
 <!-- Plugins -->
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -482,119 +497,78 @@ kiōng-huā sin-phian.</code></pre>
 
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
   
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/custom.js"></script>
 <script src="/js/jquery.cookie.js"></script>
 
 
 
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: 'article.markdown-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "八聲甘州·頌廈大百年華誕&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 </body>
