@@ -202,7 +202,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 5.1k 字
+      凡 5.2k 字
     </span>
   
 
@@ -212,7 +212,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      23
        分鐘
     </span>
   
@@ -250,7 +250,7 @@
 
 <h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><p>循环神经网络（Recurrent Neural Network, RNN）为带层间反馈的神经网络模型。其算法框架包含<strong>输入层</strong>、<strong>隐藏层</strong>和<strong>输出层</strong>。</p>
 <h2 id="基本原理（前馈计算）"><a href="#基本原理（前馈计算）" class="headerlink" title="基本原理（前馈计算）"></a>基本原理（前馈计算）</h2><p><strong>输入层</strong>：</p>
-<p>给定一个词向量序列${\pmb X} = ({\pmb e}(w_1),{\pmb e}(w_2),…,{\pmb e}(w_n))$，其中${\pmb e}(w_i)\in{\Bbb R}_k$为单词$w_i$的向量表示，$k$为向量维度。</p>
+<p>给定一个词向量序列${\pmb X} = ({\pmb e}(w_1),{\pmb e}(w_2),…,{\pmb e}(w_n))$，其中${\pmb e}(w_i)\in{\Bbb R}^k$为单词$w_i$的向量表示，$k$为向量维度。</p>
 <p><strong>隐藏层</strong>：</p>
 <p>RNN隐状态${\pmb h}_t \in {\Bbb R}_d$（$d$为隐状态向量维度）的更新：</p>
 <p>$$<br>{\pmb h}_t=<br>\begin{cases}<br>\begin{array}{ll}<br>0, &amp; t=0 \\ f_r({\pmb h}_{t-1}, {\pmb e}(w_t) ), &amp; t\ge 1<br>\end{array}<br>\end{cases}<br>$$</p>
@@ -367,7 +367,7 @@
 </ul>
 <h2 id="模型改进"><a href="#模型改进" class="headerlink" title="模型改进"></a>模型改进</h2><p><strong>缓存</strong>（Caching）<strong>机制</strong>：文本中刚出现过的词很可能在后面的句子中再次出现。</p>
 <p>$$P(y_t|Y_{&lt;t})=\lambda P_{\mathrm{LM}}(y_t|Y_{&lt;t})+(1-\lambda)P_{\mathrm{cache}}(y_t|Y_{&lt;t})$$</p>
-<p>$$P_{\mathrm{cache}}(y_t|Y_{&lt;t})=<br>\begin{cases}<br>    \begin{array}{ll}<br>        \frac{\#(y)}{t-1}, &amp; y\in Y_{&lt;t} \\ 0, &amp; 其他<br>    \end{array}<br>\end{cases}<br>$$</p>
+<p>$$P_{\mathrm{cache}}(y_t|Y_{&lt;t})=<br>\begin{cases}<br> \begin{array}{ll}<br>    \frac{\#(y)}{t-1}, &amp; y\in Y_{&lt;t} \\ 0, &amp; 其他<br>  \end{array}<br>\end{cases}<br>$$</p>
 <ul>
 <li>$\#(y)$：单词$y$在缓存中出现的次数。</li>
 </ul>
@@ -462,7 +462,7 @@
 <p>$$P(y|Y_{&lt;t},X)={\rm softmax}(\mathrm{MLP}({\hat {\pmb s}}_t ) / \tau ) |_y$$</p>
 <p>其中${\hat {\pmb s}}_t$为使用模型生成的前缀${\hat Y}_{&lt;t}$而非解码器隐状态。</p>
 <p>合理设置$\tau \in (0,1)$可避免随机采到概率较小的词。</p>
-<h3 id="Top-k-采样"><a href="#Top-k-采样" class="headerlink" title="Top-$k$采样"></a>Top-$k$采样</h3><p>选择概率最高的$k$个词作为候选词，根据相对概率随机采样。</p>
+<h3 id="Top-k-采样"><a href="#Top-k-采样" class="headerlink" title="Top-$k$采样"></a>Top-$k$采样</h3><p>Top-$k$采样（<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1805.04833">Fan et al., 2018</a>）：选择概率最高的$k$个词作为候选词，根据相对概率随机采样。</p>
 <p>设在$t$时刻模型预测的在词表${\cal V}$上的概率分布为$P(y|{\hat Y}_{&lt;t},X)$，则它的Top-$k$词表为${\cal V}^{(k)} = {\rm argmax}_{ {\cal V}’^{(k)} }\sum_{y \in {\cal V} ^{(k)} } P(y|{ Y}_{&lt;t},X) $，其中${\cal V}’^{(k)}\subset {\cal V}$。</p>
 <p>得新概率分布：</p>
 <p>$$<br>{\tilde P}(y|{\hat Y}_{&lt;t},X)=<br>\begin{cases}<br>    \begin{array}{ll}<br>        \frac{P(y_t|{ Y}_{&lt;t},X)}{\sum_{y\in {\cal V}^{(k)} } P(y|{ Y}_{&lt;t},X)}, &amp; y_t\in {\cal V}^{(k)} \\ 0, &amp; 其他<br>    \end{array}<br>\end{cases}<br>$$</p>
@@ -472,7 +472,10 @@
 <li>在概率分布较为<strong>平坦</strong>的情况下，词概率相差不大，实际可能存在超过$k$个合理的词。如果仍限制仅从Top-$k$个候选词中采样，可能会增加生成重复文本的风险。</li>
 <li>在概率分布<strong>集中</strong>的情况下，合理的可选词可能会少于$k$个。如果仍从Top-$k$个候选词中采样，可能得到与上下文无关的词。</li>
 </ul>
-<p>Top-$p$采样：修改采样范围为${\cal V}^{(p)}$，即满足$\sum_{y \in {\cal V}’^{(p)}} P(y|{\hat Y}_{&lt;t},X) \ge p$的所有${\cal V}’^{(p)}$中最小的集合，其中$p\in (0,1)$为预先设定的超参数。</p>
+<p>Top-$p$采样（即核采样（Nucleus sampling），<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.09751">Holtzman et al., 2019</a>）：修改采样范围为${\cal V}^{(p)}$，即满足$\sum_{y \in {\cal V}’^{(p)}} P(y|{\hat Y}_{&lt;t},X) \ge p$的所有${\cal V}’^{(p)}$中最小的集合，其中$p\in (0,1)$为预先设定的超参数，作为阈值。</p>
+<h3 id="惩罚采样"><a href="#惩罚采样" class="headerlink" title="惩罚采样"></a>惩罚采样</h3><p>惩罚采样（Penalized sampling，<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1909.05858">Keskar et al., 2019</a>）：为避免生成重复子串，对先前生成的token的分数进行打折，惩罚重复情况：</p>
+<p>$$<br>p_i=\frac{\exp (o_i/(T\cdot 1(i\in g)))}{ \sum_j \exp (o_j/(T\cdot 1(j\in g))) } \qquad 1(c)=\theta \text{ if the condition } c \text{ is True else 1}<br>$$</p>
+<p>其中$g$为先前生成token的集合，$1(\cdot)$为识别函数。论文发现取$\theta=1.2$时可在较少的重复和真实的生成之间取得良好平衡。</p>
 <h1 id="copy机制（待补充）"><a href="#copy机制（待补充）" class="headerlink" title="copy机制（待补充）"></a>copy机制（待补充）</h1><h1 id="Seq2Seq模型存在的问题"><a href="#Seq2Seq模型存在的问题" class="headerlink" title="Seq2Seq模型存在的问题"></a>Seq2Seq模型存在的问题</h1><ul>
 <li>一般基于RNN，编解码序列需按自回归方式从左至右依次进行，难以并行，处理较长序列时间复杂度较高（解决方案：CNN或Transformer作为编码器，非自回归语言生成模型作为解码器）</li>
 <li>RNN按照时间轴方向依次递归，位置较远的单词之间的隐状态关联衰减严重（Transformer全连接self-attention更佳，可直接建模序列中任意两个单词之间的依赖关系）</li>
@@ -482,7 +485,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>黄民烈等. 《现代自然语言生成》. 电子工业出版社, 2021.</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>[1] 黄民烈等. 《现代自然语言生成》. 电子工业出版社, 2021.<br>[2] <a target="_blank" rel="noopener" href="https://lilianweng.github.io/lil-log/2021/01/02/controllable-neural-text-generation.html#conditional-training">Controllable Neural Text Generation (lilianweng.github.io)</a></p>
 
             </div>
             <hr>

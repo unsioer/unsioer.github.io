@@ -202,7 +202,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 537 字
+      凡 563 字
     </span>
   
 
@@ -330,7 +330,7 @@
 <td align="center">$\underline{x}$</td>
 </tr>
 </tbody></table>
-<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p><code>&#123;\字体 &#123;字符&#125;&#125;</code>或<code>\math字体&#123;字符&#125;</code></p>
+<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p><code>&#123;\字体 &#123;字符&#125;&#125;</code>或<code>\math字体&#123;字符&#125;</code>等。</p>
 <table>
 <thead>
 <tr>
@@ -341,21 +341,21 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><code>\rm</code><br><code>\mathrm&#123;&#125;</code></td>
-<td align="center">${\rm {abcdABCD}}$<br>$\mathrm{abcdABCD}$</td>
+<td align="center"><code>\rm</code><br><code>\mathrm&#123;&#125;</code><br><code>\text&#123;&#125;</code></td>
+<td align="center">${\rm {abcdABCD}}$<br>$\mathrm{abcdABCD}$<br>$\text{abcdABCD}$</td>
 <td align="center">罗马体</td>
 <td align="center"></td>
-</tr>
-<tr>
-<td align="center"><code>\cal</code><br><code>\mathcal&#123;&#125;</code></td>
-<td align="center">${\cal {abcdABCD}}$<br>$\mathcal{abcdABCD}$</td>
-<td align="center">花体</td>
-<td align="center">Office：<code>\script字母</code></td>
 </tr>
 <tr>
 <td align="center"><code>\it</code><br><code>\mathit&#123;&#125;</code></td>
 <td align="center">${\it {abcdABCD}}$<br>$\mathit{abcdABCD}$</td>
 <td align="center">意大利体</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>\mit</code></td>
+<td align="center">${\mit {abcdABCD}}$<br></td>
+<td align="center">数学斜体</td>
 <td align="center"></td>
 </tr>
 <tr>
@@ -371,36 +371,6 @@
 <td align="center"></td>
 </tr>
 <tr>
-<td align="center"><code>\mit</code></td>
-<td align="center">${\mit {abcdABCD}}$<br></td>
-<td align="center">数学斜体</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><code>\sf</code></td>
-<td align="center">${\sf {abcdABCD}}$</td>
-<td align="center">等线体</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><code>\scr</code></td>
-<td align="center">${\scr {abcdABCD}}$</td>
-<td align="center">手写体</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><code>\tt</code></td>
-<td align="center">${\tt {abcdABCD}}$</td>
-<td align="center">打字机体</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><code>\frak</code><br><code>\mathfrak&#123;&#125;</code></td>
-<td align="center">${\frak {abcdABCD}}$<br>$\mathfrak{abcdABCD}$</td>
-<td align="center">旧德式字体</td>
-<td align="center">Office：<code>\fraktur字母</code></td>
-</tr>
-<tr>
 <td align="center"><code>\boldsymbol</code></td>
 <td align="center">${\boldsymbol {abcdABCD}}$</td>
 <td align="center">黑体</td>
@@ -411,6 +381,36 @@
 <td align="center">${\pmb {abcdABCD}}$</td>
 <td align="center">粗体（叠字符）</td>
 <td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>\cal</code><br><code>\mathcal&#123;&#125;</code></td>
+<td align="center">${\cal {abcdABCD}}$<br>$\mathcal{abcdABCD}$</td>
+<td align="center">花体</td>
+<td align="center">Office：<code>\script字母</code></td>
+</tr>
+<tr>
+<td align="center"><code>\scr</code><br><code>\mathscr&#123;&#125;</code></td>
+<td align="center">${\scr {abcdABCD}}$<br>$\mathscr{abcdABCD}$</td>
+<td align="center">手写体</td>
+<td align="center"><code>\scr</code>字距稍宽</td>
+</tr>
+<tr>
+<td align="center"><code>\sf</code><br><code>\mathsf&#123;&#125;</code></td>
+<td align="center">${\sf {abcdABCD}}$<br>$\mathsf{abcdABCD}$</td>
+<td align="center">等线体</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>\tt</code><br><code>\mathtt&#123;&#125;</code></td>
+<td align="center">${\tt {abcdABCD}}$<br>$\mathtt{abcdABCD}$</td>
+<td align="center">打字机体</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>\frak</code><br><code>\mathfrak&#123;&#125;</code></td>
+<td align="center">${\frak {abcdABCD}}$<br>$\mathfrak{abcdABCD}$</td>
+<td align="center">旧德式字体</td>
+<td align="center">Office：<code>\fraktur字母</code></td>
 </tr>
 </tbody></table>
 <h1 id="MathJax解析与Hexo冲突转义"><a href="#MathJax解析与Hexo冲突转义" class="headerlink" title="MathJax解析与Hexo冲突转义"></a>MathJax解析与Hexo冲突转义</h1><blockquote>
@@ -435,7 +435,10 @@
 </ul>
 </li>
 </ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/db7ed194e023">【Markdown】Markdown下的六种字体命令 - 简书 (jianshu.com)</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Annie_0321/article/details/115764983">Markdown编辑器花体字母问题_Annie_0321的博客-CSDN博客</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/db7ed194e023">【Markdown】Markdown下的六种字体命令 - 简书 (jianshu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Annie_0321/article/details/115764983">Markdown编辑器花体字母问题_Annie_0321的博客-CSDN博客</a></li>
+</ul>
 
             </div>
             <hr>
