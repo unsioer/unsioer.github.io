@@ -33,3 +33,5 @@ function initializeChineseConversion() {
 $(document).ready(function() {
   initializeChineseConversion();
 });
+
+document.getElementById("this_year").innerHTML=new Date().getFullYear().toString();
