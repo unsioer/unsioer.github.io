@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>230217 進程顯存佔用瑣記</title>
+    <link href="/gpu/230217GPUProcessTrifies/"/>
+    <url>/gpu/230217GPUProcessTrifies/</url>
+    
+    <content type="html"><![CDATA[<p>今天使用組裏服務器，發現某些顯卡利用率爲 0，但仍有不少顯存佔用，不管是<code>nvidia-smi</code>還是<code>gpustat</code>都看不出是誰的哪個進程。</p><p>解決方案：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo fuser -v /dev/nvidia*<br></code></pre></td></tr></table></figure><p>找到對應卡號的記錄（如 6 號卡）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">/dev/nvidia6:        nvidia-persistenced   1909 F.... nvidia-persiste<br>                     xxx       772677 F...m python<br>                     yyy       3591553 F.... python<br>                     yyy       3595089 F.... python<br>                     yyy       3595090 F.... python<br>                     yyy       3595091 F.... python<br></code></pre></td></tr></table></figure><p>找到那些<code>F...m</code>的進程，並確認它們不在<code>nvidia-smi</code>列出的進程中，殺死即可。</p><h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul><li><a href="https://forums.developer.nvidia.com/t/11-gb-of-gpu-ram-used-and-no-process-listed-by-nvidia-smi/44459/4">11 GB of GPU RAM used, and no process listed by nvidia-smi</a></li><li><a href="https://www.geeksforgeeks.org/fuser-command-in-linux/">fuser command in Linux</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>GPU</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Nvidia</tag>
+      
+      <tag>fuser</tag>
+      
+      <tag>GPU</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>《計算理論基礎》期末課程報告</title>
     <link href="/theory-of-computation/ComputationTheoryEssay/"/>
     <url>/theory-of-computation/ComputationTheoryEssay/</url>
