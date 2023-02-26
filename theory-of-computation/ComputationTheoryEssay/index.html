@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 3.1k 字
+      凡 3.2k 字
     </span>
   
 
@@ -338,9 +338,11 @@
 <li>B属于NP，并且</li>
 <li>NP中的每个A都多项式时间可归约到B。</li>
 </ul>
+<p>若B只满足条件2，则称它为NP难的。</p>
 <h2 id="空间复杂性-Space-Complexity"><a href="#空间复杂性-Space-Complexity" class="headerlink" title="空间复杂性 Space Complexity"></a>空间复杂性 Space Complexity</h2><p>PSPACE是在<strong>确定型图灵机</strong>上，在<strong>多项式空间内</strong>可判定的语言类。</p>
 <p>萨维奇定理：对于任何函数 $f:\bf{N}→\bf{R}^+$，其中$f(n)\ge{n}$，$\rm{NSPACE}(f(n))\subseteq\rm{SPACE}(f^2(n))$。</p>
-<p>语言类的关系<br>$\rm{P\subseteq NP\subseteq PSPACE=NPSPACE\subseteq EXPTIME}$</p>
+<p>语言类的关系</p>
+<p>$$\rm{P\subseteq NP\subseteq PSPACE=NPSPACE\subseteq EXPTIME\ \pmb{\subseteq EXPSPACE\subseteq SPACE \subseteq NSPACE}}$$</p>
 <p><strong>PSPACE完全性</strong>：如果语言B满足下面两个条件，就称为PSPACE完全的：</p>
 <ul>
 <li>B属于PSPACE</li>
