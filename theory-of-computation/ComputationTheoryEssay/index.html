@@ -15,7 +15,7 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="
-本文係個人《計算理論基礎》期末課程報告，就該課程知識系統作了一定梳理，並擴展了一些知識點的內容。正文採用簡體字。
+本文修訂自個人《計算理論基礎》期末課程報告，就該課程知識系統作了一定梳理，並擴展了一些知識點的內容。正文（包括增補部分）採用簡體字。本文並不是課程知識的完全總結。
 ">
   <meta name="author" content="Enatsu">
   <meta name="keywords" content="">
@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 2.9k 字
+      凡 3.1k 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      12
        分鐘
     </span>
   
@@ -248,20 +248,23 @@
             
             <div class="markdown-body">
               <blockquote>
-<p>本文係個人《計算理論基礎》期末課程報告，就該課程知識系統作了一定梳理，並擴展了一些知識點的內容。正文採用簡體字。</p>
+<p>本文修訂自個人《計算理論基礎》期末課程報告，就該課程知識系統作了一定梳理，並擴展了一些知識點的內容。正文（包括增補部分）採用簡體字。<br>本文並<strong>不是</strong>課程知識的完全總結。</p>
 </blockquote>
 <span id="more"></span>
 
+<blockquote>
+<p>230226跋：計算之學大有裨益，惜我輩淺嘗輒止耳。</p>
+</blockquote>
 <p>本学期的《计算理论基础》课程内容主要包含三个部分：计算模型、可计算性理论和计算复杂性理论。本报告尝试简要概括每部分的具体内容，并对部分知识点作一定扩展，体现个人对课程内容的思考。</p>
-<h1 id="计算模型"><a href="#计算模型" class="headerlink" title="计算模型"></a>计算模型</h1><ul>
+<h1 id="计算模型-Computional-Models"><a href="#计算模型-Computional-Models" class="headerlink" title="计算模型 Computional Models"></a>计算模型 Computional Models</h1><ul>
 <li>计算理论概要、数学概念和术语</li>
 <li>图灵机，确定性和非确定性，计算的形式化定义</li>
 <li>程序设计语言P，递归函数，递归集</li>
 <li>形式语言与自动机理论，LAMBDA-演算简介</li>
 <li>计算模型之间的等价以及层级关系；其他形式的计算模型</li>
 </ul>
-<h2 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h2><p>我们重点学习了有穷自动机（Finite Automata）、下推自动机（Push-Down Automata，PDA）、图灵机（Turing Machine）等计算模型，在之后的章节还补充了线性有界自动机（Linear Bounded Automata，LBA）的概念。</p>
-<p>我们重点学习了正则语言（Regular Language）、上下文无关语言（Context-Free Language, CFL）等，粗略提及了上下文有关语言（Context-Sensitive Language，CSL）的概念。</p>
+<h2 id="乔姆斯基层次结构-Chomsky-Hierarchy"><a href="#乔姆斯基层次结构-Chomsky-Hierarchy" class="headerlink" title="乔姆斯基层次结构 Chomsky Hierarchy"></a>乔姆斯基层次结构 Chomsky Hierarchy</h2><p>我们重点学习了有穷自动机（Finite Automata）、下推自动机（Push-Down Automata，PDA）、图灵机（Turing Machine）等计算模型，在之后的章节还补充了线性有界自动机（Linear Bounded Automata，LBA）的概念。</p>
+<p>我们重点学习了正则语言（Regular Language，RL）、上下文无关语言（Context-Free Language, CFL）等，粗略提及了上下文有关语言（Context-Sensitive Language，CSL）的概念。</p>
 <p>事实上，在本科阶段的《编译原理》课程中，我们知道语言学家乔姆斯基（Noam Chomsky）定义了四类文法和四种形式语言类，这与我们本部分学到的内容密切相关。几类文法的差别在于对产生式施加不同的限制。</p>
 <ul>
 <li>0型文法（短语结构文法，phrase structure grammars），产生的语言称为0型语言（即递归可枚举语言，recursive enumerable language）；</li>
@@ -270,25 +273,28 @@
 <li>3型文法（正则文法，regular grammars），产生的语言称为3型语言（即正则语言）。</li>
 </ul>
 <p>从0型文法到3型文法存在包含关系，即0型文法包含1型文法，1型文法包含2型文法，2型文法包含3型文法。事实上，我们所学的计算模型层次关系即对应Chomsky层次结构。下面的表格给出了计算模型和语言之间的对应关系，这里补充了对应的文法和产生式。其中，$a$为终结符，$A$, $B$为非终结符，$\alpha$, $\beta$, $\gamma$为终结符和非终结符构成的串。</p>
-<p>$$\begin{array}{|l|l|l|l|l|} \hline 计算模型 &amp; 语言 &amp; 文法 &amp; 产生式 &amp; 举例 \\ \hline \text{DFA} &amp; 正则语言 &amp; 3型文法 &amp; A\rightarrow{a}, A\rightarrow{aB} &amp; L=\{a^*b^*\} \\  \text{PDA} &amp; \text{CFL} &amp; 2型文法 &amp; A\rightarrow{\alpha} &amp; L=\{a^nb^n|n&gt;0\} \\ \text{LBA} &amp; \text{CSL} &amp; 1型文法 &amp; \alpha{A}\beta\rightarrow\alpha\gamma\beta &amp; L=\{a^nb^nc^n|n&gt;0\} \\ 图灵机 &amp; 递归可枚举语言 &amp; 0型文法 &amp; \gamma\rightarrow\alpha（\gamma非空） &amp; L=\{w|w描述了一个终止的图灵机\} \\ \hline \end{array} $$</p>
-<h2 id="CFG"><a href="#CFG" class="headerlink" title="CFG"></a>CFG</h2><p>上下文无关文法的概念在《编译原理》课程中已有所涉及。我们知道，对于对于任意一个CFG，不存在算法判定它是无二义性（歧义性，ambiguous）的；但能给出一组充分条件，满足这组充分条件的文法是无二义性的。有些歧义文法可以转化为非歧义文法，但有些文法是固有歧义的。</p>
+<p>$$\begin{array}{|l|l|l|l|l|} \hline 计算模型 &amp; 语言 &amp; 文法 &amp; 产生式 &amp; 举例 \\ \hline \text{DFA} &amp; \text{RL} &amp; 3型文法 &amp; A\rightarrow{a}, A\rightarrow{aB} &amp; L=\{a^*b^*\} \\  \text{PDA} &amp; \text{CFL} &amp; 2型文法 &amp; A\rightarrow{\alpha} &amp; L=\{a^nb^n|n&gt;0\} \\ \text{LBA} &amp; \text{CSL} &amp; 1型文法 &amp; \alpha{A}\beta\rightarrow\alpha\gamma\beta &amp; L=\{a^nb^nc^n|n&gt;0\} \\ 图灵机 &amp; 递归可枚举语言 &amp; 0型文法 &amp; \gamma\rightarrow\alpha（\gamma非空） &amp; L=\{w|w描述了一个终止的图灵机\} \\ \hline \end{array} $$</p>
+<p><em>230226补充：</em></p>
+<p>RL $\subseteq$ CFL $\subseteq$ CSL $\subseteq$ 图灵可判定语言 $\subseteq$ 图灵可识别语言 $\subseteq$ 图灵不可识别语言</p>
+<p>这里图灵可判定语言（Turing-decidable langauges）的范围大于CSL。</p>
+<h2 id="上下文无关文法-Context-free-Grammars"><a href="#上下文无关文法-Context-free-Grammars" class="headerlink" title="上下文无关文法 Context-free Grammars"></a>上下文无关文法 Context-free Grammars</h2><p>上下文无关文法的概念在《编译原理》课程中已有所涉及。我们知道，对于对于任意一个CFG，不存在算法判定它是无二义性（歧义性，ambiguous）的；但能给出一组充分条件，满足这组充分条件的文法是无二义性的。有些歧义文法可以转化为非歧义文法，但有些文法是固有歧义的。</p>
 <p>我们在使用CFG时，常常利用乔姆斯基范式来描述。可以通过规则将文法转化为乔姆斯基范式。</p>
-<h2 id="正则运算"><a href="#正则运算" class="headerlink" title="正则运算"></a>正则运算</h2><p>课程介绍了一些正则运算的概念。正则语言在正则运算下封闭。</p>
+<h2 id="正则运算-Regular-Operations"><a href="#正则运算-Regular-Operations" class="headerlink" title="正则运算 Regular Operations"></a>正则运算 Regular Operations</h2><p>课程介绍了一些正则运算的概念。正则语言在正则运算下封闭。</p>
 <p><strong>CFL在并、连接、星号、闭包、正闭包、同态等正则运算下封闭，但在交、补运算下不封闭。</strong></p>
-<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>课程所讲的 <strong>正则表达式（Regular Expression，Regex）</strong> 在计算机科学领域有广泛应用，主流的编程语言基本都支持正则表达式的处理。根据所学的计算理论知识，我们可以知道普通正则表达式的一些不足，比如不支持递归，从而不能匹配任意深度的嵌套（如上表的$L=\{a^nb^n|n&gt;0\}$）。某些编程语言正则表达式处理模块所支持的递归特性已经不属于传统正则表达式定义的范畴，文法至少已经是CFG。</p>
-<h2 id="确定性"><a href="#确定性" class="headerlink" title="确定性"></a>确定性</h2><p>当机器处于给定状态并读取下一个输入符号时，我们知道下一个状态将是什么，那么这个机器的计算是确定的。如果下一个状态可能存在多个选择，形成多个计算分支，那么机器就是非确定的。</p>
+<h2 id="正则表达式-Regular-Expressions"><a href="#正则表达式-Regular-Expressions" class="headerlink" title="正则表达式 Regular Expressions"></a>正则表达式 Regular Expressions</h2><p>课程所讲的 <strong>正则表达式（Regular Expression，Regex）</strong> 在计算机科学领域有广泛应用，主流的编程语言基本都支持正则表达式的处理。根据所学的计算理论知识，我们可以知道普通正则表达式的一些不足，比如不支持递归，从而不能匹配任意深度的嵌套（如上表的$L=\{a^nb^n|n&gt;0\}$）。某些编程语言正则表达式处理模块所支持的递归特性已经不属于传统正则表达式定义的范畴，文法至少已经是CFG。</p>
+<h2 id="确定性-Determinism"><a href="#确定性-Determinism" class="headerlink" title="确定性 Determinism"></a>确定性 Determinism</h2><p>当机器处于给定状态并读取下一个输入符号时，我们知道下一个状态将是什么，那么这个机器的计算是确定的。如果下一个状态可能存在多个选择，形成多个计算分支，那么机器就是非确定的。</p>
 <p>每一台非确定型有穷自动机（NFA）都等价于某一台确定型有穷自动机（DFA）。</p>
 <p>每一台非确定型图灵机都等价于某一台确定型图灵机。</p>
-<h2 id="泵引理"><a href="#泵引理" class="headerlink" title="泵引理"></a>泵引理</h2><p>正则语言和CFL的泵引理是一个必要不充分条件，当一个语言不满足对应泵引理的条件时，可以证明它不是正则语言或CFL。但是不能用泵引理证明某个语言属于正则语言或CFL。</p>
-<h2 id="lambda-演算"><a href="#lambda-演算" class="headerlink" title="$\lambda$演算"></a>$\lambda$演算</h2><p><strong>与不动点定理的关系</strong>：$\lambda$演算的共同主题是找到给出$\lambda$表达式的不动点。每个$\lambda$表达式都有一个不动点，不动点组合子是一个函数，即输入一个$\lambda$表达式并输出该表达式的一个不动点。</p>
+<h2 id="泵引理-Pumping-Lemma"><a href="#泵引理-Pumping-Lemma" class="headerlink" title="泵引理 Pumping Lemma"></a>泵引理 Pumping Lemma</h2><p>正则语言和CFL的泵引理是一个必要不充分条件，当一个语言不满足对应泵引理的条件时，可以证明它不是正则语言或CFL。但是不能用泵引理证明某个语言属于正则语言或CFL。</p>
+<h2 id="lambda-演算-lambda-calculus"><a href="#lambda-演算-lambda-calculus" class="headerlink" title="$\lambda$演算 $\lambda$-calculus"></a>$\lambda$演算 $\lambda$-calculus</h2><p><strong>与不动点定理的关系</strong>：$\lambda$演算的共同主题是找到给出$\lambda$表达式的不动点。每个$\lambda$表达式都有一个不动点，不动点组合子是一个函数，即输入一个$\lambda$表达式并输出该表达式的一个不动点。</p>
 <p><strong>应用</strong>：一些编程语言支持<strong>lambda表达式（又称匿名函数）</strong>，通常用于封装传递给算法或异步函数的少量代码行。</p>
-<h1 id="可计算性理论"><a href="#可计算性理论" class="headerlink" title="可计算性理论"></a>可计算性理论</h1><ul>
+<h1 id="可计算性理论-Theory-of-Computability"><a href="#可计算性理论-Theory-of-Computability" class="headerlink" title="可计算性理论 Theory of Computability"></a>可计算性理论 Theory of Computability</h1><ul>
 <li>Church-Turing论题 (Chap3)</li>
 <li>可判定性，可判定的计算问题 (Chap4)</li>
 <li>计算问题的可归约性 (Chap5)</li>
 <li>递归定理，逻辑理论的可判定性，Turing可归约 (Chap6)</li>
 </ul>
-<h2 id="可判定性"><a href="#可判定性" class="headerlink" title="可判定性"></a>可判定性</h2><p>图灵可识别语言是能被某个图灵机识别的语言，是递归可枚举的，这个图灵机可以接受或拒绝，也可以一直不停机。</p>
+<h2 id="可判定性-Decidability"><a href="#可判定性-Decidability" class="headerlink" title="可判定性 Decidability"></a>可判定性 Decidability</h2><p>图灵可识别语言是能被某个图灵机识别的语言，是递归可枚举的，这个图灵机可以接受或拒绝，也可以一直不停机。</p>
 <p>图灵可判定语言是能被某个图灵机判定的语言，这个图灵机一定要返回接受或拒绝的结果。我们称对所有输入都停机的图灵机为判定器。</p>
 <p>这里的定义显然不适用于DFA和PDA。</p>
 <p>每个CFL都是可判定的。</p>
@@ -298,16 +304,21 @@
 <p>$ALL_{CFG}$是不可判定的。</p>
 <p>$A_{TM}$等与图灵机相关的都是不可判定的。由赖斯定理可知，确定某一图灵机的语言是否具有属性P这一问题是不可判定的。</p>
 <p>通过康托对角化方法，我们可以证明，存在不能被任何图灵机识别的语言。</p>
-<h2 id="可归约性"><a href="#可归约性" class="headerlink" title="可归约性"></a>可归约性</h2><p>通过归约，我们将一个问题转化为另一个问题，这在本课程后半部分的证明中广泛应用。</p>
+<p><em>230226补充：</em></p>
+<p>$EQ_{TM}$，$\overline{EQ_{TM}}$ 都图灵不可识别。对于后者，我们也可以称$EQ_{TM}$不是补图灵可识别（co-Turing recognizable）的。</p>
+<h2 id="可归约性-Reducibility"><a href="#可归约性-Reducibility" class="headerlink" title="可归约性 Reducibility"></a>可归约性 Reducibility</h2><p>通过归约，我们将一个问题转化为另一个问题，这在本课程后半部分的证明中广泛应用。</p>
 <p>映射可归约则是一种归约的形式化定义。</p>
-<h2 id="递归定理与Quine程序"><a href="#递归定理与Quine程序" class="headerlink" title="递归定理与Quine程序"></a>递归定理与Quine程序</h2><p>课程介绍了图灵机$SELF$的自引用特性（忽略输入，且打印出它自己的描述），进而引出递归定理。</p>
+<p><em>230226补充：</em></p>
+<p>证明某语言A图灵不可识别：$\overline{A_{TM}}\leq_{m}{A} \Leftrightarrow A_{TM}\leq_{m}{\overline{A}}$</p>
+<p>证明某语言A图灵可识别：$A_{TM}\leq_{m}{A}$</p>
+<h2 id="递归定理与Quine程序-Recursive-Theorem-amp-Quine-Programs"><a href="#递归定理与Quine程序-Recursive-Theorem-amp-Quine-Programs" class="headerlink" title="递归定理与Quine程序 Recursive Theorem &amp; Quine Programs"></a>递归定理与Quine程序 Recursive Theorem &amp; Quine Programs</h2><p>课程介绍了图灵机$SELF$的自引用特性（忽略输入，且打印出它自己的描述），进而引出递归定理。</p>
 <p>事实上，人们把自复制程序（self-reproducing / self-replicating / self-copying programs）称为Quine，这类程序以美国哲学家奎恩（Willard Van Orman Quine）的姓氏命名。<strong>Quine程序不接受输入，生成自己的源代码副本作为唯一输出。</strong></p>
 <p>递归定理可以证明Quine程序的存在性，或者说，任何图灵完备的编程语言都可以构造出Quine程序。</p>
 <p>下面给出用C编写的Quine程序示例。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">char</span>*f=<span class="hljs-string">&quot;char*f=%c%s%c;main()&#123;printf(f,34,f,34,10);&#125;%c&quot;</span>;main()&#123;<span class="hljs-built_in">printf</span>(f,<span class="hljs-number">34</span>,f,<span class="hljs-number">34</span>,<span class="hljs-number">10</span>);&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="谕示"><a href="#谕示" class="headerlink" title="谕示"></a>谕示</h2><p>语言B的一个谕示（oracle）是一个能够报告某个串$w$是否为B的成员的外部装置，谕示图灵机具有询问谕示的额外能力。显然，这是一个抽象概念，比如由于$A_{TM}$的不可判定性，实际上并不存在判定$A_{TM}$的谕示图灵机。</p>
-<h1 id="计算复杂性理论"><a href="#计算复杂性理论" class="headerlink" title="计算复杂性理论"></a>计算复杂性理论</h1><ul>
+<h2 id="谕示-Oracle"><a href="#谕示-Oracle" class="headerlink" title="谕示 Oracle"></a>谕示 Oracle</h2><p>语言B的一个谕示（oracle）是一个能够报告某个串$w$是否为B的成员的外部装置，谕示图灵机具有询问谕示的额外能力。显然，这是一个抽象概念，比如由于$A_{TM}$的不可判定性，实际上并不存在判定$A_{TM}$的谕示图灵机。</p>
+<h1 id="计算复杂性理论-Theory-of-Computational-Complexity"><a href="#计算复杂性理论-Theory-of-Computational-Complexity" class="headerlink" title="计算复杂性理论 Theory of Computational Complexity"></a>计算复杂性理论 Theory of Computational Complexity</h1><ul>
 <li>算法优劣的渐进分析与复杂性的度量 (Chap7)</li>
 <li>时间复杂性及典型的问题，P与NP (Chap7)</li>
 <li>多项式时间规约，NP完全性；空间复杂性及典型的问题 (Chap7.4; Chap8.1)</li>
@@ -316,7 +327,7 @@
 <li>近似算法，概率算法，加强引理，交互式证明算法，抽象复杂性等 (Chap10)</li>
 <li>计算模型、可计算性、计算复杂性等计算理论的主要方法、结论以及未解问题，未来计算的可能发展讨论</li>
 </ul>
-<h2 id="渐进分析"><a href="#渐进分析" class="headerlink" title="渐进分析"></a>渐进分析</h2><p>大O记法（渐进记法）：一个函数渐进地不大于（$\leq$）另一个函数</p>
+<h2 id="渐进分析-Asymptotic-Analysis"><a href="#渐进分析-Asymptotic-Analysis" class="headerlink" title="渐进分析 Asymptotic Analysis"></a>渐进分析 Asymptotic Analysis</h2><p>大O记法（渐进记法）：一个函数渐进地不大于（$\leq$）另一个函数</p>
 <p>小o记法：一个函数渐进地小于另一个函数</p>
 <p>$$\begin{array}{ll} \hline  f(n)=O(g(n)) &amp; \le \\ f(n)=o(g(n)) &amp; &lt; \\ f(n)=\Omega(g(n)) &amp; \ge \\ f(n)=\omega(g(n)) &amp; &gt; \\ f(n)=\theta(g(n)) &amp; = \\ \hline \end{array}$$</p>
 <h2 id="P和NP"><a href="#P和NP" class="headerlink" title="P和NP"></a>P和NP</h2><p>P是<strong>确定型单带图灵机</strong>在<strong>多项式时间</strong>内可判定的语言类，存在多项式时间算法。</p>
@@ -327,7 +338,7 @@
 <li>B属于NP，并且</li>
 <li>NP中的每个A都多项式时间可归约到B。</li>
 </ul>
-<h2 id="空间复杂性"><a href="#空间复杂性" class="headerlink" title="空间复杂性"></a>空间复杂性</h2><p>PSPACE是在<strong>确定型图灵机</strong>上，在<strong>多项式空间内</strong>可判定的语言类。</p>
+<h2 id="空间复杂性-Space-Complexity"><a href="#空间复杂性-Space-Complexity" class="headerlink" title="空间复杂性 Space Complexity"></a>空间复杂性 Space Complexity</h2><p>PSPACE是在<strong>确定型图灵机</strong>上，在<strong>多项式空间内</strong>可判定的语言类。</p>
 <p>萨维奇定理：对于任何函数 $f:\bf{N}→\bf{R}^+$，其中$f(n)\ge{n}$，$\rm{NSPACE}(f(n))\subseteq\rm{SPACE}(f^2(n))$。</p>
 <p>语言类的关系<br>$\rm{P\subseteq NP\subseteq PSPACE=NPSPACE\subseteq EXPTIME}$</p>
 <p><strong>PSPACE完全性</strong>：如果语言B满足下面两个条件，就称为PSPACE完全的：</p>
@@ -336,9 +347,13 @@
 <li>PSPACE中的每一个语言A多项式时间可归约到B</li>
 </ul>
 <p>若B只满足条件2，则称它为PSPACE难的。</p>
-<h2 id="层次定理"><a href="#层次定理" class="headerlink" title="层次定理"></a>层次定理</h2><p><strong>空间层次定理</strong>：对于任何空间可构造函数$ f:\bf{N}\rightarrow\bf{N}$，存在语言$A$，在空<br>间 $O(f(n))$ 内可判定，但不能在空间 $o(f(n))$ 内判定。</p>
+<h2 id="层次定理-Hierarchy-Theorem"><a href="#层次定理-Hierarchy-Theorem" class="headerlink" title="层次定理 Hierarchy Theorem"></a>层次定理 Hierarchy Theorem</h2><p><strong>空间层次定理</strong>：对于任何空间可构造函数$ f:\bf{N}\rightarrow\bf{N}$，存在语言$A$，在空<br>间 $O(f(n))$ 内可判定，但不能在空间 $o(f(n))$ 内判定。</p>
 <p><strong>时间层次定理</strong>：对于任何时间可构造函数$ t:\bf{N}\rightarrow\bf{N}$，存在语言$A$，在时间$O(t(n))$ 内可判定，但在时间 $o(t(n)/\log{⁡t(n)})$ 内不可判定。</p>
 <h2 id="BPP"><a href="#BPP" class="headerlink" title="BPP"></a>BPP</h2><p>BPP是多项式时间的概率图灵机以错误概率$\frac{1}{3}$判定的语言类。根据引理10.5，我们可以通过错误概率为$\epsilon (0&lt;\epsilon&lt;\frac{1}{2})$的多项式时间概率图灵机构造判定BPP的多项式时间概率图灵机。</p>
+<h1 id="参考文献-References"><a href="#参考文献-References" class="headerlink" title="参考文献 References"></a>参考文献 References</h1><ul>
+<li>Sipser, Michael. <em>Introduction to the Theory of Computation</em>. Cengage Learning, 2012.</li>
+<li><a target="_blank" rel="noopener" href="https://www.pling.org.uk/cs/toc.html">Chris Northwood, Theory of Computation, Computer Science notes</a></li>
+</ul>
 
             </div>
             <hr>
