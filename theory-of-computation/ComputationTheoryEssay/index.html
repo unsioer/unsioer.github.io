@@ -256,7 +256,7 @@
 <p>230226跋：計算之學大有裨益，惜我輩淺嘗輒止耳。</p>
 </blockquote>
 <p>本学期的《计算理论基础》课程内容主要包含三个部分：计算模型、可计算性理论和计算复杂性理论。本报告尝试简要概括每部分的具体内容，并对部分知识点作一定扩展，体现个人对课程内容的思考。</p>
-<h1 id="计算模型-Computional-Models"><a href="#计算模型-Computional-Models" class="headerlink" title="计算模型 Computional Models"></a>计算模型 Computional Models</h1><ul>
+<h1 id="计算模型-Computational-Models"><a href="#计算模型-Computational-Models" class="headerlink" title="计算模型 Computational Models"></a>计算模型 Computational Models</h1><ul>
 <li>计算理论概要、数学概念和术语</li>
 <li>图灵机，确定性和非确定性，计算的形式化定义</li>
 <li>程序设计语言P，递归函数，递归集</li>
@@ -330,17 +330,17 @@
 <h2 id="渐进分析-Asymptotic-Analysis"><a href="#渐进分析-Asymptotic-Analysis" class="headerlink" title="渐进分析 Asymptotic Analysis"></a>渐进分析 Asymptotic Analysis</h2><p>大O记法（渐进记法）：一个函数渐进地不大于（$\leq$）另一个函数</p>
 <p>小o记法：一个函数渐进地小于另一个函数</p>
 <p>$$\begin{array}{ll} \hline  f(n)=O(g(n)) &amp; \le \\ f(n)=o(g(n)) &amp; &lt; \\ f(n)=\Omega(g(n)) &amp; \ge \\ f(n)=\omega(g(n)) &amp; &gt; \\ f(n)=\theta(g(n)) &amp; = \\ \hline \end{array}$$</p>
-<h2 id="P和NP"><a href="#P和NP" class="headerlink" title="P和NP"></a>P和NP</h2><p>P是<strong>确定型单带图灵机</strong>在<strong>多项式时间</strong>内可判定的语言类，存在多项式时间算法。</p>
+<h2 id="P和NP-P-amp-NP"><a href="#P和NP-P-amp-NP" class="headerlink" title="P和NP P &amp; NP"></a>P和NP P &amp; NP</h2><p>P是<strong>确定型单带图灵机</strong>在<strong>多项式时间</strong>内可判定的语言类，存在多项式时间算法。</p>
 <p>NP是具有多项式时间验证机的语言类，是非确定型单带图灵机在多项式时间内可判定的语言类。</p>
 <p>目前并无$\rm{P}\ne\rm{NP}$的证明。某些NP问题中任何一个如果存在多项式时间算法，那么所有NP问题都是多项式时间可解的。这类问题称为NP完全的。</p>
 <p><strong>NP完全性</strong>：如果语言B满足下面两个条件，就称为NP完全的：</p>
 <ul>
-<li>B属于NP，并且</li>
-<li>NP中的每个A都多项式时间可归约到B。</li>
+<li>B属于NP</li>
+<li>NP中的每个A都多项式时间可归约到B</li>
 </ul>
 <p>若B只满足条件2，则称它为NP难的。</p>
 <h2 id="空间复杂性-Space-Complexity"><a href="#空间复杂性-Space-Complexity" class="headerlink" title="空间复杂性 Space Complexity"></a>空间复杂性 Space Complexity</h2><p>PSPACE是在<strong>确定型图灵机</strong>上，在<strong>多项式空间内</strong>可判定的语言类。</p>
-<p>萨维奇定理：对于任何函数 $f:\bf{N}→\bf{R}^+$，其中$f(n)\ge{n}$，$\rm{NSPACE}(f(n))\subseteq\rm{SPACE}(f^2(n))$。</p>
+<p>萨维奇定理（Savitch’s Theorem）：对于任何函数 $f:\bf{N}→\bf{R}^+$，其中$f(n)\ge{n}$，$\rm{NSPACE}(f(n))\subseteq\rm{SPACE}(f^2(n))$。</p>
 <p>语言类的关系</p>
 <p>$$\rm{P\subseteq NP\subseteq PSPACE=NPSPACE\subseteq EXPTIME\ \pmb{\subseteq EXPSPACE\subseteq SPACE \subseteq NSPACE}}$$</p>
 <p><strong>PSPACE完全性</strong>：如果语言B满足下面两个条件，就称为PSPACE完全的：</p>
