@@ -310,7 +310,7 @@
 <p>映射可归约则是一种归约的形式化定义。</p>
 <p><em>230226补充：</em></p>
 <p>证明某语言A图灵不可识别：$\overline{A_{TM}}\leq_{m}{A} \Leftrightarrow A_{TM}\leq_{m}{\overline{A}}$</p>
-<p>证明某语言A图灵可识别：$A_{TM}\leq_{m}{A}$</p>
+<p>证明某语言A图灵可识别：$A\leq_{m}{A_{TM}}$</p>
 <h2 id="递归定理与Quine程序-Recursive-Theorem-amp-Quine-Programs"><a href="#递归定理与Quine程序-Recursive-Theorem-amp-Quine-Programs" class="headerlink" title="递归定理与Quine程序 Recursive Theorem &amp; Quine Programs"></a>递归定理与Quine程序 Recursive Theorem &amp; Quine Programs</h2><p>课程介绍了图灵机$SELF$的自引用特性（忽略输入，且打印出它自己的描述），进而引出递归定理。</p>
 <p>事实上，人们把自复制程序（self-reproducing / self-replicating / self-copying programs）称为Quine，这类程序以美国哲学家奎恩（Willard Van Orman Quine）的姓氏命名。<strong>Quine程序不接受输入，生成自己的源代码副本作为唯一输出。</strong></p>
 <p>递归定理可以证明Quine程序的存在性，或者说，任何图灵完备的编程语言都可以构造出Quine程序。</p>
