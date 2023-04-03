@@ -15,8 +15,7 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="
-彙整自個人OneNote筆記。
-僅記錄重點，不記例題。
+彙整自個人OneNote筆記。僅記錄重點，不記例題。
 ">
   <meta name="author" content="Enatsu">
   <meta name="keywords" content="">
@@ -249,14 +248,11 @@
             
             <div class="markdown-body">
               <blockquote>
-<p>彙整自個人OneNote筆記。<br>
-僅記錄重點，不記例題。</p>
+<p>彙整自個人OneNote筆記。<br>僅記錄重點，不記例題。</p>
 </blockquote>
 <span id="more"></span>
-<h1>二進制編碼</h1>
-<p>位 字節 字<br>
-進制 進制轉換<br>
-(略)</p>
+
+<h1 id="二進制編碼"><a href="#二進制編碼" class="headerlink" title="二進制編碼"></a>二進制編碼</h1><p>位 字節 字<br>進制 進制轉換<br>(略)</p>
 <ul>
 <li><strong>原碼</strong>：最高位表示符號（正0負1），其他位直接表示數值大小。</li>
 <li><strong>反碼</strong>：正數反碼與原碼相同；負數反碼爲它的相反數（正數）各位（含符號位）按位取反而形成。</li>
@@ -265,209 +261,147 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">十進制數</th>
-<th style="text-align:center">原碼</th>
-<th style="text-align:center">反碼</th>
-<th style="text-align:center">補碼</th>
+<th align="center">十進制數</th>
+<th align="center">原碼</th>
+<th align="center">反碼</th>
+<th align="center">補碼</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">21</td>
-<td style="text-align:center">00010101</td>
-<td style="text-align:center">00010101</td>
-<td style="text-align:center">00010101</td>
+<tbody><tr>
+<td align="center">21</td>
+<td align="center">00010101</td>
+<td align="center">00010101</td>
+<td align="center">00010101</td>
 </tr>
 <tr>
-<td style="text-align:center">-21</td>
-<td style="text-align:center">10010101</td>
-<td style="text-align:center">11101010</td>
-<td style="text-align:center">11101011</td>
+<td align="center">-21</td>
+<td align="center">10010101</td>
+<td align="center">11101010</td>
+<td align="center">11101011</td>
 </tr>
-</tbody>
-</table>
-<h1>BCD碼（8421 BCD碼）</h1>
-<p>十進制數位用4位二進制（1位十六進制）編碼表示，如用<code>88H</code>代表十進制的88。</p>
+</tbody></table>
+<h1 id="BCD碼（8421-BCD碼）"><a href="#BCD碼（8421-BCD碼）" class="headerlink" title="BCD碼（8421 BCD碼）"></a>BCD碼（8421 BCD碼）</h1><p>十進制數位用4位二進制（1位十六進制）編碼表示，如用<code>88H</code>代表十進制的88。</p>
 <ul>
 <li><strong>非壓縮BCD</strong>：1字節表達1位BCD碼（高4位爲0）。</li>
 <li><strong>壓縮BCD</strong>：1字節表達2位BCD碼。</li>
 </ul>
-<h1>ASCII</h1>
-<p>（略）</p>
-<h1>8086寄存器</h1>
-<h2>通用寄存器</h2>
-<h3>數據寄存器</h3>
-<ul>
+<h1 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h1><p>（略）</p>
+<h1 id="8086寄存器"><a href="#8086寄存器" class="headerlink" title="8086寄存器"></a>8086寄存器</h1><h2 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h2><h3 id="數據寄存器"><a href="#數據寄存器" class="headerlink" title="數據寄存器"></a>數據寄存器</h3><ul>
 <li><code>AX</code> (<code>AH</code>/<code>AL</code>) 累加器：算術、邏輯運算，與外設傳送信息</li>
 <li><code>BX</code> (<code>BH</code>/<code>BL</code>) 基址寄存器：存放存儲器地址</li>
 <li><code>CX</code> (<code>CH</code>/<code>CL</code>) 計數器：循環操作等指令中的計數器</li>
 <li><code>DX</code> (<code>DH</code>/<code>DL</code>) 數據寄存器：存放數據，在輸入輸出指令中存放外設端口地址</li>
 </ul>
-<h3>變址寄存器</h3>
-<ul>
+<h3 id="變址寄存器"><a href="#變址寄存器" class="headerlink" title="變址寄存器"></a>變址寄存器</h3><ul>
 <li><code>SI</code> 源變址寄存器： 指向源操作數</li>
 <li><code>DI</code> 目的變址寄存器：指向目的操作數</li>
 </ul>
-<h3>指針寄存器</h3>
-<ul>
+<h3 id="指針寄存器"><a href="#指針寄存器" class="headerlink" title="指針寄存器"></a>指針寄存器</h3><ul>
 <li><code>BP</code> 基址指針：默認指向堆棧數據，主要用於子程序中訪問通過堆棧傳遞的參數和局部變量</li>
 <li><code>SP</code> 堆棧指針：總是指向堆棧頂部，在涉及堆棧操作的指令中會自動增加或減少</li>
 </ul>
-<h2>標誌寄存器 <code>FLAGS</code></h2>
-<p>6狀態標誌 3控制標誌</p>
-<table>
-<thead>
-<tr>
-<th>11</th>
-<th>10</th>
-<th>9</th>
-<th>8</th>
-<th>7</th>
-<th>6</th>
-<th>4</th>
-<th>2</th>
-<th>0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OF</td>
-<td>DF</td>
-<td>IF</td>
-<td>TF</td>
-<td>SF</td>
-<td>ZF</td>
-<td>AF</td>
-<td>PF</td>
-<td>CF</td>
-</tr>
-</tbody>
-</table>
+<h2 id="標誌寄存器-FLAGS"><a href="#標誌寄存器-FLAGS" class="headerlink" title="標誌寄存器 FLAGS"></a>標誌寄存器 <code>FLAGS</code></h2><p>6狀態標誌 3控制標誌<br>|11|10|9|8|7|6|4|2|0|<br>|-|-|-|-|-|-|-|-|-|<br>|OF|DF|IF|TF|SF|ZF|AF|PF|CF|</p>
 <ul>
 <li>進位標誌 <code>CF</code> (Carry Flag)：反映（無符號數）加減運算最高位（$D_7$）有無進位/借位，有爲1。</li>
 <li>奇偶標誌 <code>PF</code> (Parity Flag)：最低字節1的奇偶個數，偶數爲1。</li>
 <li>零標誌 <code>ZF</code> (Zero Flag)：運算結果是否爲0，是爲1。</li>
 <li>符號標誌 <code>SF</code> (Sign Flag)：運算結果最高位爲1，<code>SF</code>=1；否則<code>SF</code>=0。對有符號數來說，相當於判斷正負。</li>
 <li>溢出標誌 <code>OF</code> (Overflow Flag)：反映（有符號數）運算結果是否溢出，有爲1。</li>
-<li>輔助進位標誌/調整標誌 <code>AF</code> (Auxiliary Carry Flag/Adjust Flag)：反映加減運算最低半字節（$D_3$向$D_4$）有無進位/借位，有爲1（由處理器內部使用，一般不必關心）。</li>
-<li>方向標誌 <code>DF</code> (Direction Flag)：用於串操作指令中控制地址的變化方向，0爲自動增加，1爲自動減少。
-<ul>
-<li><code>CLD</code>指令復位：<code>DF</code>=0</li>
+<li>輔助進位標誌/調整標誌 <code>AF</code> (Auxiliary Carry Flag/Adjust Flag)：反映加減運算最低半字節（$D_3$向$D_4$）有無進位/借位，有爲1（由處理器內部使用，一般不必關心）。  </li>
+<li>方向標誌 <code>DF</code> (Direction Flag)：用於串操作指令中控制地址的變化方向，0爲自動增加，1爲自動減少。<ul>
+<li><code>CLD</code>指令復位：<code>DF</code>=0 </li>
 <li><code>STD</code>指令置位：<code>DF</code>=1</li>
 </ul>
 </li>
-<li>中斷允許標誌 <code>IF</code> (Interrupt-enable Flag)：控制外部可屏蔽中斷是否可以被處理器響應，1爲允許中斷，0爲禁止中斷。
-<ul>
-<li><code>CLI</code>指令復位：<code>IF</code>=0</li>
+<li>中斷允許標誌 <code>IF</code> (Interrupt-enable Flag)：控制外部可屏蔽中斷是否可以被處理器響應，1爲允許中斷，0爲禁止中斷。<ul>
+<li><code>CLI</code>指令復位：<code>IF</code>=0 </li>
 <li><code>STI</code>指令置位：<code>IF</code>=1</li>
 </ul>
 </li>
 <li>陷阱標誌 <code>TF</code> (Trap Flag)：控制處理器是否進入單步操作方式，0爲正常工作，1爲單步執行指令。</li>
 </ul>
-<h2>指令指針寄存器 <code>IP</code></h2>
-<p>與代碼段寄存器<code>CS</code>聯用，確定下一條指令的物理地址。<br>
-計算機通過<code>CS:IP</code>控制指令序列執行流程。<br>
-而<code>IP</code>具有自動增量功能，不能直接賦值修改。</p>
-<h2>段寄存器</h2>
-<ul>
+<h2 id="指令指針寄存器-IP"><a href="#指令指針寄存器-IP" class="headerlink" title="指令指針寄存器 IP"></a>指令指針寄存器 <code>IP</code></h2><p>與代碼段寄存器<code>CS</code>聯用，確定下一條指令的物理地址。<br>計算機通過<code>CS:IP</code>控制指令序列執行流程。<br>而<code>IP</code>具有自動增量功能，不能直接賦值修改。</p>
+<h2 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h2><ul>
 <li><code>CS</code> 代碼段寄存器：指明代碼段起始地址</li>
 <li><code>SS</code> 堆棧段寄存器：指明堆棧段起始地址</li>
 <li><code>DS</code> 數據段寄存器：指明數據段起始地址</li>
 <li><code>ES</code> 附加段寄存器：指明附加段起始地址</li>
 </ul>
-<h1>存儲器組織</h1>
-<h2>數據存儲格式</h2>
-<ul>
-<li>Word 字：2字節</li>
+<h1 id="存儲器組織"><a href="#存儲器組織" class="headerlink" title="存儲器組織"></a>存儲器組織</h1><h2 id="數據存儲格式"><a href="#數據存儲格式" class="headerlink" title="數據存儲格式"></a>數據存儲格式</h2><ul>
+<li>Word 字：2字節  </li>
 <li>Double Word 雙字：4字節</li>
 </ul>
-<p>小端方式：字或雙字存放時，低字節存入低地址，高字節存入高地址；字或雙字單元的地址用它的低地址表示。<br>
-邊界對齊（Align）：16位2字節數據起始偶地址，32位4字節數據起始模4地址。</p>
-<h2>分段管理</h2>
-<p>8086CPU用16位字長可表達16位存儲器地址（0000H~FFFFH），即$2^{16}\rm{B}=64\rm{KB}$容量。但是，8086CPU的地址線有20位，最大可尋址空間爲$2^{20}\rm{B}=1\rm{MB}$，其物理地址範圍爲00000H~FFFFFH。</p>
-<p>邏輯段（Segment）：最大64KB。<br>
-段基地址（段地址）：邏輯段在主存中的起始位置。8086段地址必須是模16地址，即<code>xxxx0H</code>形式。<br>
-段內偏移地址：距離段起始位置的偏移量。</p>
-<p><strong>物理地址</strong>（絕對地址）：每個存儲器單元唯一的20位地址。<br>
-<strong>邏輯地址</strong>：形式爲「<code>段地址:偏移地址</code>」。如，邏輯地址<code>1460H:100H</code>表示物理地址<code>14700H</code>。</p>
-<h3>段超越前綴指令</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">cs:                         ; 代碼段超越，使用代碼段數據<br>ss:                         ; 堆棧段超越，使用堆棧段數據<br>ds:                         ; 數據段超越，使用數據段數據<br>es:                         ; 附加段超越，使用附加段數據<br></code></pre></td></tr></table></figure>
-<h1>尋址方式</h1>
-<h2>8086的機器代碼格式</h2>
-<table>
+<p>小端方式：字或雙字存放時，低字節存入低地址，高字節存入高地址；字或雙字單元的地址用它的低地址表示。<br>邊界對齊（Align）：16位2字節數據起始偶地址，32位4字節數據起始模4地址。</p>
+<h2 id="分段管理"><a href="#分段管理" class="headerlink" title="分段管理"></a>分段管理</h2><p>8086CPU用16位字長可表達16位存儲器地址（0000H<del>FFFFH），即$2^{16}\rm{B}=64\rm{KB}$容量。但是，8086CPU的地址線有20位，最大可尋址空間爲$2^{20}\rm{B}=1\rm{MB}$，其物理地址範圍爲00000H</del>FFFFFH。  </p>
+<p>邏輯段（Segment）：最大64KB。<br>段基地址（段地址）：邏輯段在主存中的起始位置。8086段地址必須是模16地址，即<code>xxxx0H</code>形式。<br>段內偏移地址：距離段起始位置的偏移量。</p>
+<p><strong>物理地址</strong>（絕對地址）：每個存儲器單元唯一的20位地址。<br><strong>邏輯地址</strong>：形式爲「<code>段地址:偏移地址</code>」。如，邏輯地址<code>1460H:100H</code>表示物理地址<code>14700H</code>。</p>
+<h3 id="段超越前綴指令"><a href="#段超越前綴指令" class="headerlink" title="段超越前綴指令"></a>段超越前綴指令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">cs:                         ; 代碼段超越，使用代碼段數據<br>ss:                         ; 堆棧段超越，使用堆棧段數據<br>ds:                         ; 數據段超越，使用數據段數據<br>es:                         ; 附加段超越，使用附加段數據<br></code></pre></td></tr></table></figure>
+
+<h1 id="尋址方式"><a href="#尋址方式" class="headerlink" title="尋址方式"></a>尋址方式</h1><h2 id="8086的機器代碼格式"><a href="#8086的機器代碼格式" class="headerlink" title="8086的機器代碼格式"></a>8086的機器代碼格式</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">1/2字節</th>
-<th style="text-align:center">0/1字節</th>
-<th style="text-align:center">0/1/2字節</th>
-<th style="text-align:center">0/1/2字節</th>
+<th align="center">1/2字節</th>
+<th align="center">0/1字節</th>
+<th align="center">0/1/2字節</th>
+<th align="center">0/1/2字節</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">操作碼</td>
-<td style="text-align:center">mod reg r/m</td>
-<td style="text-align:center">位移量</td>
-<td style="text-align:center">立即數</td>
+<tbody><tr>
+<td align="center">操作碼</td>
+<td align="center">mod reg r/m</td>
+<td align="center">位移量</td>
+<td align="center">立即數</td>
 </tr>
 <tr>
-<td style="text-align:center">指令</td>
-<td style="text-align:center">尋址方式</td>
-<td style="text-align:center">某些尋址方式需要的偏移量</td>
-<td style="text-align:center">立即尋址方式需要的數值本身</td>
+<td align="center">指令</td>
+<td align="center">尋址方式</td>
+<td align="center">某些尋址方式需要的偏移量</td>
+<td align="center">立即尋址方式需要的數值本身</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     dest, src<br></code></pre></td></tr></table></figure>
-<h2>立即數尋址方式</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     al, 05h<br>mov     ax, 0102h<br></code></pre></td></tr></table></figure>
-<h2>寄存器尋址方式</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, 1234h<br>mov     bx, ax<br></code></pre></td></tr></table></figure>
-<h2>存儲器尋址方式</h2>
-<h3>直接尋址方式</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, [2000h]<br></code></pre></td></tr></table></figure>
-<p>默認情況下，有效地址要與<code>DS</code>一起構成操作數所在物理單元的物理地址。<br>
-數據也可存放於附加段、代碼段、堆棧段中，此時指令應指明段超越前綴。</p>
+
+<h2 id="立即數尋址方式"><a href="#立即數尋址方式" class="headerlink" title="立即數尋址方式"></a>立即數尋址方式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     al, 05h<br>mov     ax, 0102h<br></code></pre></td></tr></table></figure>
+
+<h2 id="寄存器尋址方式"><a href="#寄存器尋址方式" class="headerlink" title="寄存器尋址方式"></a>寄存器尋址方式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, 1234h<br>mov     bx, ax<br></code></pre></td></tr></table></figure>
+
+<h2 id="存儲器尋址方式"><a href="#存儲器尋址方式" class="headerlink" title="存儲器尋址方式"></a>存儲器尋址方式</h2><h3 id="直接尋址方式"><a href="#直接尋址方式" class="headerlink" title="直接尋址方式"></a>直接尋址方式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, [2000h]<br></code></pre></td></tr></table></figure>
+
+<p>默認情況下，有效地址要與<code>DS</code>一起構成操作數所在物理單元的物理地址。<br>數據也可存放於附加段、代碼段、堆棧段中，此時指令應指明段超越前綴。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, es:[2000h]<br></code></pre></td></tr></table></figure>
-<h3>寄存器間接尋址方式</h3>
-<p>有效地址存放在寄存器中（<code>BX</code>/<code>SI</code>/<code>DI</code>），默認段地址在<code>DS</code>段寄存器中。</p>
+
+<h3 id="寄存器間接尋址方式"><a href="#寄存器間接尋址方式" class="headerlink" title="寄存器間接尋址方式"></a>寄存器間接尋址方式</h3><p>有效地址存放在寄存器中（<code>BX</code>/<code>SI</code>/<code>DI</code>），默認段地址在<code>DS</code>段寄存器中。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, [si]<br></code></pre></td></tr></table></figure>
-<h3>寄存器相對尋址方式</h3>
-<p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>/<code>SI</code>/<code>DI</code>+8/16位位移量。<br>
-基址寄存器使用<code>BX</code>/<code>SI</code>/<code>DI</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。</p>
+
+<h3 id="寄存器相對尋址方式"><a href="#寄存器相對尋址方式" class="headerlink" title="寄存器相對尋址方式"></a>寄存器相對尋址方式</h3><p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>/<code>SI</code>/<code>DI</code>+8/16位位移量。<br>基址寄存器使用<code>BX</code>/<code>SI</code>/<code>DI</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, [di+06h]<br>mov     ax, [bp+06h]<br>mov     ax, [bp]<br></code></pre></td></tr></table></figure>
-<h3>基址變址尋址方式</h3>
-<p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>+<code>SI</code>/<code>DI</code>。<br>
-基址寄存器使用<code>BX</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。</p>
+
+<h3 id="基址變址尋址方式"><a href="#基址變址尋址方式" class="headerlink" title="基址變址尋址方式"></a>基址變址尋址方式</h3><p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>+<code>SI</code>/<code>DI</code>。<br>基址寄存器使用<code>BX</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, [bx+si]<br>mov     ax, [bp]<br></code></pre></td></tr></table></figure>
-<h3>相對基址變址尋址方式</h3>
-<p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>+<code>SI</code>/<code>DI</code>+8/16位位移量。<br>
-基址寄存器使用<code>BX</code>/<code>SI</code>/<code>DI</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。</p>
+
+<h3 id="相對基址變址尋址方式"><a href="#相對基址變址尋址方式" class="headerlink" title="相對基址變址尋址方式"></a>相對基址變址尋址方式</h3><p>操作數有效地址<code>EA</code>=<code>BX</code>/<code>BP</code>+<code>SI</code>/<code>DI</code>+8/16位位移量。<br>基址寄存器使用<code>BX</code>/<code>SI</code>/<code>DI</code>，默認段爲<code>DS</code>；基址寄存器使用<code>BP</code>，默認段爲<code>SS</code>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov     ax, [bx+si+06h]<br></code></pre></td></tr></table></figure>
-<p><strong>注意</strong>：<br>
-位移量可用符號表示，如<code>mov      ax, [si+count]</code>。<br>
-統一尋址方式可寫成不同方式。</p>
-<h2>數據尋址的結合</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">指令助記符  reg, imm/reg/mem<br>指令助記符  mem, imm/reg<br></code></pre></td></tr></table></figure>
-<h1>常用<code>debug</code>指令</h1>
-<h2><code>a</code>（彙編）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-a                      ; 不指定地址  <br>-a [addr]               ; 指定地址<br></code></pre></td></tr></table></figure>
-<h2><code>u</code>（反彙編）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-u [start_addr]<br>-u [start_addr end_addr] <br></code></pre></td></tr></table></figure>
-<h2><code>t</code>（跟蹤）（單步執行）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-t                      ; 執行一條指令<br>-t 10                   ; 執行下面10H(16)條指令<br>-t=3 2                  ; 從指定IP=0003開始執行下面2條指令<br></code></pre></td></tr></table></figure>
-<h2><code>g</code>（斷點執行）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-g                      ; 從程序當前位置執行至斷點處，若無斷點則直到程序結束<br>-g 200                  ; 從程序當前位置執行至斷點處（200H）結束<br>-g=200 260              ; 從指定地址（200H）執行至斷點處（260H）結束 <br></code></pre></td></tr></table></figure>
-<h2><code>d</code>（數據顯示）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-d                      ; 顯示從上一次結果處開始80H個字節的內容    <br>-d 200                  ; 顯示從DS:200H處開始80H個字節的內容<br>...<br></code></pre></td></tr></table></figure>
-<h2><code>e</code>（修改數據）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-e                      ; 修改數據<br>-e 200 (xx..)           ; 修改從DS:200H處的內容爲兩位十六進制數xx（可修改多個）<br>...<br></code></pre></td></tr></table></figure>
-<h2><code>r</code>（寄存器）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-r                      ; 顯示所有寄存器內容  <br>...<br></code></pre></td></tr></table></figure>
-<h2><code>h</code>（十六進制運算）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-h 20 19                ; 輸出兩個數的加減運算結果<br>0039 0007<br></code></pre></td></tr></table></figure>
-<h2><code>q</code>（退出）</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-q<br></code></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：<br>位移量可用符號表示，如<code>mov      ax, [si+count]</code>。<br>統一尋址方式可寫成不同方式。</p>
+<h2 id="數據尋址的結合"><a href="#數據尋址的結合" class="headerlink" title="數據尋址的結合"></a>數據尋址的結合</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">指令助記符  reg, imm/reg/mem<br>指令助記符  mem, imm/reg<br></code></pre></td></tr></table></figure>
+
+<h1 id="常用debug指令"><a href="#常用debug指令" class="headerlink" title="常用debug指令"></a>常用<code>debug</code>指令</h1><h2 id="a（彙編）"><a href="#a（彙編）" class="headerlink" title="a（彙編）"></a><code>a</code>（彙編）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-a                      ; 不指定地址  <br>-a [addr]               ; 指定地址<br></code></pre></td></tr></table></figure>
+
+<h2 id="u（反彙編）"><a href="#u（反彙編）" class="headerlink" title="u（反彙編）"></a><code>u</code>（反彙編）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-u [start_addr]<br>-u [start_addr end_addr] <br></code></pre></td></tr></table></figure>
+
+<h2 id="t（跟蹤）（單步執行）"><a href="#t（跟蹤）（單步執行）" class="headerlink" title="t（跟蹤）（單步執行）"></a><code>t</code>（跟蹤）（單步執行）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-t                      ; 執行一條指令<br>-t 10                   ; 執行下面10H(16)條指令<br>-t=3 2                  ; 從指定IP=0003開始執行下面2條指令<br></code></pre></td></tr></table></figure>
+
+<h2 id="g（斷點執行）"><a href="#g（斷點執行）" class="headerlink" title="g（斷點執行）"></a><code>g</code>（斷點執行）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-g                      ; 從程序當前位置執行至斷點處，若無斷點則直到程序結束<br>-g 200                  ; 從程序當前位置執行至斷點處（200H）結束<br>-g=200 260              ; 從指定地址（200H）執行至斷點處（260H）結束 <br></code></pre></td></tr></table></figure>
+
+<h2 id="d（數據顯示）"><a href="#d（數據顯示）" class="headerlink" title="d（數據顯示）"></a><code>d</code>（數據顯示）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-d                      ; 顯示從上一次結果處開始80H個字節的內容    <br>-d 200                  ; 顯示從DS:200H處開始80H個字節的內容<br>...<br></code></pre></td></tr></table></figure>
+
+<h2 id="e（修改數據）"><a href="#e（修改數據）" class="headerlink" title="e（修改數據）"></a><code>e</code>（修改數據）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-e                      ; 修改數據<br>-e 200 (xx..)           ; 修改從DS:200H處的內容爲兩位十六進制數xx（可修改多個）<br>...<br></code></pre></td></tr></table></figure>
+
+<h2 id="r（寄存器）"><a href="#r（寄存器）" class="headerlink" title="r（寄存器）"></a><code>r</code>（寄存器）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-r                      ; 顯示所有寄存器內容  <br>...<br></code></pre></td></tr></table></figure>
+
+<h2 id="h（十六進制運算）"><a href="#h（十六進制運算）" class="headerlink" title="h（十六進制運算）"></a><code>h</code>（十六進制運算）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-h 20 19                ; 輸出兩個數的加減運算結果<br>0039 0007<br></code></pre></td></tr></table></figure>
+
+<h2 id="q（退出）"><a href="#q（退出）" class="headerlink" title="q（退出）"></a><code>q</code>（退出）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">-q<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>

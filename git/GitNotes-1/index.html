@@ -202,7 +202,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 508 字
+      凡 507 字
     </span>
   
 
@@ -247,18 +247,22 @@
             <div class="markdown-body">
               <p>介紹兩種：重鍊/變基。</p>
 <span id="more"></span>
-<h1>重鍊（Reinitialize）：完全删除以往所有commit記錄</h1>
-<p>罔摕家己無用兮repository做例：</p>
+
+<h1 id="重鍊（Reinitialize）：完全删除以往所有commit記錄"><a href="#重鍊（Reinitialize）：完全删除以往所有commit記錄" class="headerlink" title="重鍊（Reinitialize）：完全删除以往所有commit記錄"></a>重鍊（Reinitialize）：完全删除以往所有commit記錄</h1><p>罔摕家己無用兮repository做例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># Clone your git repo</span><br>git <span class="hljs-built_in">clone</span> https://github.com/unsioer/uselessgittest.git<br><span class="hljs-comment"># Enter your local repo</span><br><span class="hljs-built_in">cd</span> UselessGitTest<br><span class="hljs-comment"># Checkout</span><br>git checkout --orphan latest_branch<br><span class="hljs-comment"># Add all the files</span><br>git add -A<br><span class="hljs-comment"># Commit the changes</span><br>git commit -am <span class="hljs-string">&quot;Reinitialize&quot;</span><br><span class="hljs-comment"># Delete the branch</span><br>git branch -D master<br><span class="hljs-comment"># Rename the current branch to master</span><br>git branch -m master<br></code></pre></td></tr></table></figure>
+
 <p>上尾，汝只需要<code>push</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># Finally, force update your repository</span><br>git push -f origin master;<br></code></pre></td></tr></table></figure>
-<h1>變基（Rebase）：重整以往一寡commit記錄</h1>
-<p>若汝毋急於執行頂橛上尾彼句（執行矣也毋畏，再添加厘仔commit做試驗），來試看覓如何通過<ruby>變基<rt>piàn-ki</rt></ruby>（<code>rebase</code>）囥汝以前commit兮烏歷史(XD)，又欲保持其他commit記錄：</p>
+
+<h1 id="變基（Rebase）：重整以往一寡commit記錄"><a href="#變基（Rebase）：重整以往一寡commit記錄" class="headerlink" title="變基（Rebase）：重整以往一寡commit記錄"></a>變基（Rebase）：重整以往一寡commit記錄</h1><p>若汝毋急於執行頂橛上尾彼句（執行矣也毋畏，再添加厘仔commit做試驗），來試看覓如何通過<ruby>變基<rt>piàn-ki</rt></ruby>（<code>rebase</code>）囥汝以前commit兮烏歷史(XD)，又欲保持其他commit記錄：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># Switch to `master` branch</span><br>git checkout master<br><span class="hljs-comment"># Find commit log. Press q to quit.</span><br>git <span class="hljs-built_in">log</span><br></code></pre></td></tr></table></figure>
+
 <p>選擇汝欲修改兮commit(s)之前的任意一條commit記錄：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># Rebase a commit</span><br>git rebase -i c8b2314c0b1768bc1443ae4cdb82ab29878a626e<br></code></pre></td></tr></table></figure>
+
 <p>咱來看跳出來兮<code>git-rebase-todo</code>，着是聽候汝處理這條commit之後所有commit記錄：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs Bash">pick 75198ef Update readme.md<br>pick c119c5b Update readme.md<br>pick ef9700f Update readme.md<br><br><span class="hljs-comment"># Rebase c8b2314..ef9700f onto c8b2314 (3 commands)</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Commands:</span><br><span class="hljs-comment"># p, pick &lt;commit&gt; = use commit</span><br><span class="hljs-comment"># r, reword &lt;commit&gt; = use commit, but edit the commit message</span><br><span class="hljs-comment"># e, edit &lt;commit&gt; = use commit, but stop for amending</span><br><span class="hljs-comment"># s, squash &lt;commit&gt; = use commit, but meld into previous commit</span><br><span class="hljs-comment"># f, fixup &lt;commit&gt; = like &quot;squash&quot;, but discard this commit&#x27;s log message</span><br><span class="hljs-comment"># x, exec &lt;command&gt; = run command (the rest of the line) using shell</span><br><span class="hljs-comment"># b, break = stop here (continue rebase later with &#x27;git rebase --continue&#x27;)</span><br><span class="hljs-comment"># d, drop &lt;commit&gt; = remove commit</span><br><span class="hljs-comment"># l, label &lt;label&gt; = label current HEAD with a name</span><br><span class="hljs-comment"># t, reset &lt;label&gt; = reset HEAD to a label</span><br><span class="hljs-comment"># m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]</span><br><span class="hljs-comment"># .       create a merge commit using the original merge commit&#x27;s</span><br><span class="hljs-comment"># .       message (or the oneline, if no original merge commit was</span><br><span class="hljs-comment"># .       specified). Use -c &lt;commit&gt; to reword the commit message.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># These lines can be re-ordered; they are executed from top to bottom.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># If you remove a line here THAT COMMIT WILL BE LOST.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># However, if you remove everything, the rebase will be aborted.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Note that empty commits are commented out</span><br></code></pre></td></tr></table></figure>
+
 <p>所以，若汝欲刪除以往一寡commits，可以改做<code>squash</code>合併，順紲可以<code>reword</code> 、<code>edit</code>等等。</p>
 <p>改好了後，<code>push</code>，收工：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># Finally, force update your repository</span><br>git push -f origin master<br></code></pre></td></tr></table></figure>
@@ -279,9 +283,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Git/">Git</a>
+                      <a class="hover-with-bg" href="/tags/git/">Git</a>
                     
-                      <a class="hover-with-bg" href="/tags/GitHub/">GitHub</a>
+                      <a class="hover-with-bg" href="/tags/github/">GitHub</a>
                     
                   </div>
                 

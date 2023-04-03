@@ -14,7 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="　">
   <meta name="author" content="Enatsu">
   <meta name="keywords" content="">
   
@@ -202,7 +202,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 237 字
+      凡 236 字
     </span>
   
 
@@ -245,22 +245,23 @@
             <h1 style="display: none">CentOS安裝WordPress</h1>
             
             <div class="markdown-body">
-              <p></p>
+              <p>　</p>
 <span id="more"></span>
 <p>原早only配過Ubuntu server兮WordPress，今伺服器系統是CentOS 7，也來試下。</p>
-<h2>基礎工課</h2>
-<p>CentOS默認有mariadb（mysql一款分支）</p>
+<h2 id="基礎工課"><a href="#基礎工課" class="headerlink" title="基礎工課"></a>基礎工課</h2><p>CentOS默認有mariadb（mysql一款分支）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Bash">yum install -y httpd mariadb-server mysql wordpress php php-mysql<br>systemctl start httpd <span class="hljs-comment">#service httpd start嘛解使</span><br>systemctl <span class="hljs-built_in">enable</span> httpd <span class="hljs-comment">#開機自啓動</span><br>systemctl start mariadb<br>systemctl <span class="hljs-built_in">enable</span> mariadb<br></code></pre></td></tr></table></figure>
-<h2>配mysql</h2>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p<br><span class="hljs-keyword">CREATE</span> DATABASE wordpress;<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> wordpressuser<span class="hljs-variable">@localhost</span>;<br><span class="hljs-keyword">SET</span> PASSWORD <span class="hljs-keyword">FOR</span> wordpressuser<span class="hljs-variable">@localhost</span><span class="hljs-operator">=</span> PASSWORD(&quot;password&quot;);<br></code></pre></td></tr></table></figure>
+
+<h2 id="配mysql"><a href="#配mysql" class="headerlink" title="配mysql"></a>配mysql</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p<br><span class="hljs-keyword">CREATE</span> DATABASE wordpress;<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> wordpressuser<span class="hljs-variable">@localhost</span>;<br><span class="hljs-keyword">SET</span> PASSWORD <span class="hljs-keyword">FOR</span> wordpressuser<span class="hljs-variable">@localhost</span><span class="hljs-operator">=</span> PASSWORD(&quot;password&quot;);<br></code></pre></td></tr></table></figure>
+
 <p>然後對應修改<code>/usr/share/wordpress/wp-config.php</code></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// ** MySQL settings - You can get this info from your web host ** //</span><br><span class="hljs-comment">/** The name of the database for WordPress */</span><br>define(<span class="hljs-string">&#x27;DB_NAME&#x27;</span>, <span class="hljs-string">&#x27;wordpress&#x27;</span>);<br><br><span class="hljs-comment">/** MySQL database username */</span><br>define(<span class="hljs-string">&#x27;DB_USER&#x27;</span>, <span class="hljs-string">&#x27;wordpressuser&#x27;</span>);<br><br><span class="hljs-comment">/** MySQL database password */</span><br>define(<span class="hljs-string">&#x27;DB_PASSWORD&#x27;</span>, <span class="hljs-string">&#x27;password&#x27;</span>);<br></code></pre></td></tr></table></figure>
-<h2>改httpd</h2>
-<p>修改 <code>/etc/httpd/conf/httpd.conf</code>。<br>
-比如汝欲將wordpress放佇<code>/wordpress</code>路徑：</p>
+
+<h2 id="改httpd"><a href="#改httpd" class="headerlink" title="改httpd"></a>改httpd</h2><p>修改 <code>/etc/httpd/conf/httpd.conf</code>。<br>比如汝欲將wordpress放佇<code>/wordpress</code>路徑：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Shell">AcceptFilter http none<br>AcceptFilter https none<br><br>Alias /wordpress /usr/share/wordpress<br>&lt;Directory /usr/share/wordpress&gt;<br>    Options FollowSymLinks<br>    AllowOverride Limit Options FileInfo<br>    DirectoryIndex index.php<br>    Require all granted <br>&lt;/Directory&gt;<br>&lt;Directory /usr/share/wordpress/wp-content&gt;<br>    Options FollowSymLinks<br>    Require all granted<br>&lt;/Directory&gt;<br></code></pre></td></tr></table></figure>
+
 <p>佇Apache 2.4版本，單</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Shell">Order allow, deny<br>Allow from all<br></code></pre></td></tr></table></figure>
+
 <p>兩句袂行（報權限錯誤403），只好加</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">Require all granted<br></code></pre></td></tr></table></figure>
 
@@ -280,11 +281,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/tags/linux/">Linux</a>
                     
-                      <a class="hover-with-bg" href="/tags/CentOS/">CentOS</a>
+                      <a class="hover-with-bg" href="/tags/centos/">CentOS</a>
                     
-                      <a class="hover-with-bg" href="/tags/WordPress/">WordPress</a>
+                      <a class="hover-with-bg" href="/tags/wordpress/">WordPress</a>
                     
                   </div>
                 

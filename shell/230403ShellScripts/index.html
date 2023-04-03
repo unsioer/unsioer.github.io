@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="本篇不定期更新 Shell/Bash 的實用腳本，方便速查。">
   <meta name="author" content="Enatsu">
   <meta name="keywords" content="">
   
-  <title>Shell/Bash 腳本板子 - Enatsu&#39;s Site</title>
+  <title>Shell/Bash 腳本板子速查 - Enatsu&#39;s Site</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
 
@@ -180,7 +180,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Shell/Bash 腳本板子">
+            <span class="h2" id="subtitle" title="Shell/Bash 腳本板子速查">
               
             </span>
 
@@ -202,7 +202,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 123 字
+      凡 214 字
     </span>
   
 
@@ -242,16 +242,21 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Shell/Bash 腳本板子</h1>
+            <h1 style="display: none">Shell/Bash 腳本板子速查</h1>
             
             <div class="markdown-body">
               <p>本篇不定期更新 Shell/Bash 的實用腳本，方便速查。</p>
+<span id="more"></span>
+
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">stri=<span class="hljs-string">&quot;abcdABCD1234&quot;</span><br><br><span class="hljs-comment"># 獲取字符串長度</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;#stri&#125;</span><br><span class="hljs-comment"># 預期輸出：12</span><br><br><span class="hljs-comment"># 匹配字符串開頭的子串長度</span><br><span class="hljs-comment"># 不支持 Regex 操作如：</span><br><span class="hljs-comment">#   a+ (aa*)</span><br><span class="hljs-comment">#  \d ([0-9]) 等</span><br><span class="hljs-built_in">echo</span> $(expr match <span class="hljs-string">&quot;<span class="hljs-variable">$stri</span>&quot;</span> <span class="hljs-string">&#x27;[a-z]*ABCD[0-9]*&#x27;</span>)<br><span class="hljs-comment"># 預期輸出：12</span><br><br></code></pre></td></tr></table></figure>
+
 <h2 id="文件切割合併"><a href="#文件切割合併" class="headerlink" title="文件切割合併"></a>文件切割合併</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a><code>cat</code></h3><h3 id="split"><a href="#split" class="headerlink" title="split"></a><code>split</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 指定文件行數，逐 300 行分割</span><br><span class="hljs-comment"># 默認文件名：`xaa`，`xab`, ...</span><br>split -l 300 log.txt<br><br><span class="hljs-comment"># 指定文件大小，每 300M 分割</span><br><span class="hljs-comment"># 指定新文件名前綴 `newfile`</span><br><span class="hljs-comment"># 文件名：`newfileaa`, `newfileab`, ...</span><br>split -b 500m log.txt newfile<br></code></pre></td></tr></table></figure>
 
 <h2 id="批量刪除進程"><a href="#批量刪除進程" class="headerlink" title="批量刪除進程"></a>批量刪除進程</h2><h3 id="指定進程號範圍"><a href="#指定進程號範圍" class="headerlink" title="指定進程號範圍"></a>指定進程號範圍</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> (( c=3452000; c&lt;=3455000; c++ )); <span class="hljs-keyword">do</span>  <span class="hljs-built_in">kill</span> -9 <span class="hljs-variable">$c</span>; <span class="hljs-keyword">done</span>;<br></code></pre></td></tr></table></figure>
 
 <h3 id="指定關鍵詞"><a href="#指定關鍵詞" class="headerlink" title="指定關鍵詞"></a>指定關鍵詞</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> $(ps aux | grep <span class="hljs-string">&#x27;train_task.py&#x27;</span> | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
+<h2 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls mono<span class="hljs-regexp">/bpe-cased-$name | xargs -t -i mv mono/</span>bpe-cased-<span class="hljs-variable">$name</span><span class="hljs-regexp">/&#123;&#125; mono/</span>bpe-cased-<span class="hljs-variable">$name</span>/&#123;&#125;.<span class="hljs-variable">$tgt</span><br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -265,6 +270,15 @@
                   </div>
                 
                 
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/shell/">shell</a>
+                    
+                      <a class="hover-with-bg" href="/tags/bash/">bash</a>
+                    
+                  </div>
+                
               </div>
               
                 <p class="note note-warning">
@@ -277,6 +291,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/git/230403GitConfig/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git 配置板子速查</span>
+                        <span class="visible-mobile">前篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
