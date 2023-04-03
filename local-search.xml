@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Shell/Bash 腳本板子</title>
+    <link href="/shell/230403ShellScripts/"/>
+    <url>/shell/230403ShellScripts/</url>
+    
+    <content type="html"><![CDATA[<p>本篇不定期更新 Shell/Bash 的實用腳本，方便速查。</p><h2 id="文件切割合併"><a href="#文件切割合併" class="headerlink" title="文件切割合併"></a>文件切割合併</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a><code>cat</code></h3><h3 id="split"><a href="#split" class="headerlink" title="split"></a><code>split</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 指定文件行數，逐 300 行分割</span><br><span class="hljs-comment"># 默認文件名：`xaa`，`xab`, ...</span><br>split -l 300 log.txt<br><br><span class="hljs-comment"># 指定文件大小，每 300M 分割</span><br><span class="hljs-comment"># 指定新文件名前綴 `newfile`</span><br><span class="hljs-comment"># 文件名：`newfileaa`, `newfileab`, ...</span><br>split -b 500m log.txt newfile<br></code></pre></td></tr></table></figure><h2 id="批量刪除進程"><a href="#批量刪除進程" class="headerlink" title="批量刪除進程"></a>批量刪除進程</h2><h3 id="指定進程號範圍"><a href="#指定進程號範圍" class="headerlink" title="指定進程號範圍"></a>指定進程號範圍</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> (( c=3452000; c&lt;=3455000; c++ )); <span class="hljs-keyword">do</span>  <span class="hljs-built_in">kill</span> -9 <span class="hljs-variable">$c</span>; <span class="hljs-keyword">done</span>;<br></code></pre></td></tr></table></figure><h3 id="指定關鍵詞"><a href="#指定關鍵詞" class="headerlink" title="指定關鍵詞"></a>指定關鍵詞</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> $(ps aux | grep <span class="hljs-string">&#x27;train_task.py&#x27;</span> | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>shell</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>230217 進程顯存佔用瑣記</title>
     <link href="/gpu/230217GPUProcessTrifies/"/>
     <url>/gpu/230217GPUProcessTrifies/</url>
@@ -56,6 +75,8 @@
       <tag>喬姆斯基</tag>
       
       <tag>計算複雜性</tag>
+      
+      <tag>理論計算機科學</tag>
       
     </tags>
     
@@ -585,6 +606,31 @@
       <tag>socket</tag>
       
       <tag>異常處理</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Git 配置板子</title>
+    <link href="/git/230403GitConfig/"/>
+    <url>/git/230403GitConfig/</url>
+    
+    <content type="html"><![CDATA[<p>本篇不定期更新 Git 的實用配置，方便速查。</p><h2 id="大小寫敏感"><a href="#大小寫敏感" class="headerlink" title="大小寫敏感"></a>大小寫敏感</h2><p>背景：Windows 環境下，<code>git</code> 不區分大小寫</p><p>目的：讓 <code>git</code> 識別文件名大小寫的變動</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config core.ignorecase <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Git</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Git</tag>
       
     </tags>
     
