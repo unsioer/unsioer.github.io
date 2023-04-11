@@ -14,7 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="（不定時擴充）本篇主要介绍如何利用MathJax输入数学公式，并额外补充一些LaTeX和Office公式的输入方法。此外还会涉及MathJax解析与Hexo的Markdown解析冲突时的解决办法。">
+  <meta name="description" content="（不定時擴充）本篇主要介绍如何利用 MathJax 输入数学公式，并额外补充一些 LaTeX 和 Office 公式的输入方法。此外还会涉及 MathJax 解析与 Hexo 的 Markdown 解析冲突时的解决办法。">
   <meta name="author" content="Enatsu">
   <meta name="keywords" content="">
   
@@ -202,7 +202,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 1k 字
+      凡 1.1k 字
     </span>
   
 
@@ -245,10 +245,10 @@
             <h1 style="display: none">MathJax数学符号支持</h1>
             
             <div class="markdown-body">
-              <p>（不定時擴充）本篇主要介绍如何利用MathJax输入数学公式，并额外补充一些LaTeX和Office公式的输入方法。此外还会涉及MathJax解析与Hexo的Markdown解析冲突时的解决办法。</p>
+              <p>（不定時擴充）本篇主要介绍如何利用 MathJax 输入数学公式，并额外补充一些 LaTeX 和 Office 公式的输入方法。此外还会涉及 MathJax 解析与 Hexo 的 Markdown 解析冲突时的解决办法。</p>
 <span id="more"></span>
 
-<p>在Markdown中：</p>
+<p>在 Markdown 中：</p>
 <ul>
 <li>行内插入公式：<code>$ 公式 $</code></li>
 <li>独立公式：<code>$$ 公式 $$</code></li>
@@ -256,89 +256,89 @@
 <h1 id="上下标"><a href="#上下标" class="headerlink" title="上下标"></a>上下标</h1><ul>
 <li><code>^</code>上标，<code>_</code>下标</li>
 <li>内容多于一个字符，则需用<code>&#123;&#125;</code>包括</li>
-<li>可嵌套使用（Hexo中需注意多个<code>_</code>带来的<a href="#MathJax%E8%A7%A3%E6%9E%90%E4%B8%8EHexo%E5%86%B2%E7%AA%81%E8%BD%AC%E4%B9%89">转义</a>问题）</li>
+<li>可嵌套使用（Hexo 中需注意多个<code>_</code>带来的<a href="#MathJax%E8%A7%A3%E6%9E%90%E4%B8%8EHexo%E5%86%B2%E7%AA%81%E8%BD%AC%E4%B9%89">转义</a>问题）</li>
 </ul>
 <h1 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h1><p>一些希腊字母大写与拉丁字母同形，对应 MathJax 改用 <code>\rm</code>。</p>
 <table>
 <thead>
 <tr>
-<th align="center">显示</th>
 <th align="center">输入</th>
 <th align="center">显示</th>
 <th align="center">输入</th>
+<th align="center">显示</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">$\rm{A}$ $\alpha$</td>
 <td align="center"><code>\rm&#123;A&#125;</code> <code>\alpha</code></td>
-<td align="center">$\rm{N}$ $\nu$</td>
+<td align="center">$\rm{A}$ $\alpha$</td>
 <td align="center"><code>\rm&#123;N&#125;</code> <code>\nu</code></td>
+<td align="center">$\rm{N}$ $\nu$</td>
 </tr>
 <tr>
-<td align="center">$\rm{B}$ $\beta$</td>
 <td align="center"><code>\rm&#123;B&#125;</code> <code>\beta</code></td>
-<td align="center">$\Xi$ $\xi$</td>
+<td align="center">$\rm{B}$ $\beta$</td>
 <td align="center"><code>\Xi</code> <code>\xi</code></td>
+<td align="center">$\Xi$ $\xi$</td>
 </tr>
 <tr>
-<td align="center">$\Gamma$ $\gamma$</td>
 <td align="center"><code>\Gamma</code> <code>\gamma</code></td>
-<td align="center">$\rm{O}$ $\omicron$</td>
+<td align="center">$\Gamma$ $\gamma$</td>
 <td align="center"><code>\rm&#123;O&#125;</code> <code>\omicron</code></td>
+<td align="center">$\rm{O}$ $\omicron$</td>
 </tr>
 <tr>
-<td align="center">$\Delta$ $\delta$</td>
 <td align="center"><code>\Delta</code> <code>\delta</code></td>
-<td align="center">$\Pi$ $\pi$ $\varpi$</td>
+<td align="center">$\Delta$ $\delta$</td>
 <td align="center"><code>\Pi</code> <code>\pi</code> <code>\varpi</code></td>
+<td align="center">$\Pi$ $\pi$ $\varpi$</td>
 </tr>
 <tr>
-<td align="center">$\rm{E}$ $\epsilon$ $\varepsilon$</td>
 <td align="center"><code>\rm&#123;E&#125;</code> <code>\epsilon</code> <code>\varepsilon</code></td>
-<td align="center">$\rm{P}$ $\rho$ $\varrho$</td>
+<td align="center">$\rm{E}$ $\epsilon$ $\varepsilon$</td>
 <td align="center"><code>\rm&#123;P&#125;</code> <code>\rho</code> <code>\varrho</code></td>
+<td align="center">$\rm{P}$ $\rho$ $\varrho$</td>
 </tr>
 <tr>
-<td align="center">$\rm{Z}$ $\zeta$</td>
 <td align="center"><code>\rm&#123;Z&#125;</code> <code>\zeta</code></td>
-<td align="center">$\Sigma$ $\sigma$ $\varsigma$</td>
+<td align="center">$\rm{Z}$ $\zeta$</td>
 <td align="center"><code>\Sigma</code> <code>\sigma</code> <code>\varsigma</code></td>
+<td align="center">$\Sigma$ $\sigma$ $\varsigma$</td>
 </tr>
 <tr>
-<td align="center">$\rm{H}$ $\eta$</td>
 <td align="center"><code>\rm&#123;H&#125;</code> <code>\eta</code></td>
-<td align="center">$\rm{T}$ $\tau$</td>
+<td align="center">$\rm{H}$ $\eta$</td>
 <td align="center"><code>\rm&#123;T&#125;</code> <code>\tau</code></td>
+<td align="center">$\rm{T}$ $\tau$</td>
 </tr>
 <tr>
-<td align="center">$\Theta$ $\theta$ $\vartheta$</td>
 <td align="center"><code>\Theta</code> <code>\theta</code> <code>\vartheta</code></td>
-<td align="center">$\Upsilon$ $\upsilon$</td>
+<td align="center">$\Theta$ $\theta$ $\vartheta$</td>
 <td align="center"><code>\Upsilon</code> <code>\upsilon</code></td>
+<td align="center">$\Upsilon$ $\upsilon$</td>
 </tr>
 <tr>
-<td align="center">$\rm{I}$ $\iota$</td>
 <td align="center"><code>\rm&#123;I&#125;</code> <code>\iota</code></td>
-<td align="center">$\Phi$ $\phi$ $\varphi$</td>
+<td align="center">$\rm{I}$ $\iota$</td>
 <td align="center"><code>\Phi</code> <code>\phi</code> <code>\varphi</code></td>
+<td align="center">$\Phi$ $\phi$ $\varphi$</td>
 </tr>
 <tr>
-<td align="center">$\rm{K}$ $\kappa$ $\varkappa$</td>
 <td align="center"><code>\rm&#123;K&#125;</code> <code>\kappa</code> <code>\varkappa</code></td>
-<td align="center">$\rm{X}$ $\chi$</td>
+<td align="center">$\rm{K}$ $\kappa$ $\varkappa$</td>
 <td align="center"><code>\rm&#123;X&#125;</code> <code>\chi</code></td>
+<td align="center">$\rm{X}$ $\chi$</td>
 </tr>
 <tr>
-<td align="center">$\Lambda$ $\lambda$</td>
 <td align="center"><code>\Lambda</code> <code>\lambda</code></td>
-<td align="center">$\Psi$ $\psi$</td>
+<td align="center">$\Lambda$ $\lambda$</td>
 <td align="center"><code>\Psi</code> <code>\psi</code></td>
+<td align="center">$\Psi$ $\psi$</td>
 </tr>
 <tr>
-<td align="center">$\rm{M}$ $\mu$</td>
 <td align="center"><code>\rm&#123;M&#125;</code> <code>\mu</code></td>
-<td align="center">$\Omega$ $\omega$</td>
+<td align="center">$\rm{M}$ $\mu$</td>
 <td align="center"><code>\Omega</code> <code>\omega</code></td>
+<td align="center">$\Omega$ $\omega$</td>
 </tr>
 </tbody></table>
 <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><table>
@@ -483,7 +483,7 @@
 <td align="center">$\lbrace a\rbrace$</td>
 </tr>
 </tbody></table>
-<h1 id="重音符号"><a href="#重音符号" class="headerlink" title="重音符号"></a>重音符号</h1><p>MathJax不一定支持某些简写形式。</p>
+<h1 id="重音符号"><a href="#重音符号" class="headerlink" title="重音符号"></a>重音符号</h1><p>MathJax 不一定支持某些简写形式。</p>
 <table>
 <thead>
 <tr>
@@ -552,7 +552,7 @@
 <td align="center">$\cos$</td>
 <td align="center"><code>\arccos</code></td>
 <td align="center">$\arccos$</td>
-<td align="center"><code>sec</code></td>
+<td align="center"><code>\sec</code></td>
 <td align="center">$\sec$</td>
 </tr>
 <tr>
@@ -560,7 +560,7 @@
 <td align="center">$\tan$</td>
 <td align="center"><code>\arctan</code></td>
 <td align="center">$\arctan$</td>
-<td align="center"><code>cot</code></td>
+<td align="center"><code>\cot</code></td>
 <td align="center">$\cot$</td>
 </tr>
 </tbody></table>
@@ -648,10 +648,10 @@
 </tr>
 </tbody></table>
 <h1 id="MathJax解析与Hexo冲突转义"><a href="#MathJax解析与Hexo冲突转义" class="headerlink" title="MathJax解析与Hexo冲突转义"></a>MathJax解析与Hexo冲突转义</h1><blockquote>
-<p>Hexo中如需使用公式，需在Markdown开头需附上<code>mathjax:true</code>（如<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">NexT主题</a>）或<code>math:true</code>（如<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">Fuild主题</a>）。</p>
+<p>Hexo 中如需使用公式，需在 Markdown 开头需附上<code>mathjax:true</code>（如<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">NexT 主题</a>）或<code>math:true</code>（如<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">Fuild 主题</a>）。</p>
 </blockquote>
 <ul>
-<li>一行MathJax公式中出现多个<code>_</code><ul>
+<li>一行 MathJax 公式中出现多个<code>_</code><ul>
 <li><code>$&#123;\rm a&#125;_b&#123;\rm a&#125;_b$</code>: ${\rm a}<em>{b}{\rm a}</em>{b}$</li>
 <li><code>$&#123;\rm a&#125;\_b&#123;\rm a&#125;\_b$</code>✅: ${\rm a}_{b}{\rm a}_{b}$</li>
 </ul>
