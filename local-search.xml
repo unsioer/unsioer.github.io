@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>230427NvidiaMismatch</title>
+    <link href="/gpu/230427NvidiaMismatch/"/>
+    <url>/gpu/230427NvidiaMismatch/</url>
+    
+    <content type="html"><![CDATA[<p>有時執行<code>nvidia-smi</code>會報錯：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">Failed to initialize NVML: Driver/library version mismatch<br></code></pre></td></tr></table></figure><p>如果重啓不能解決，此時可通過 <code>sudo dmesg |tail -4</code> 命令確認客戶端和內核驅動版本的差異：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[   27.998032] NVRM: API mismatch: the client has the version 470.182.03, but<br>               NVRM: this kernel module has the version 470.161.03.  Please<br>               NVRM: make sure that this kernel module and all NVIDIA driver<br>               NVRM: components have the same version.<br></code></pre></td></tr></table></figure><p>一般地，安裝與客戶端匹配的對應版本號最新版 nvidia 驅動可解決：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install nvidia-driver-470<br></code></pre></td></tr></table></figure><p>如果 <code>initramfs</code> 報錯導致內核更新失敗，提示如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">dpkg: error processing package initramfs-tools (--configure):<br> subprocess installed post-installation script returned error <span class="hljs-built_in">exit</span> status 1<br>Errors were encountered <span class="hljs-keyword">while</span> processing:<br> initramfs-tools<br></code></pre></td></tr></table></figure><p>可嘗試重新配置<code>initramfs-tools</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo rm -f /var/lib/dpkg/info/initramfs-tools.post*<br>sudo rm -f /var/lib/dpkg/info/initramfs-tools.pre*<br>sudo rm -f /var/lib/dpkg/info/bcmwl-kernel-source.post*<br>sudo rm -f /var/lib/dpkg/info/bcmwl-kernel-source.pre*<br>sudo dpkg --configure -a<br></code></pre></td></tr></table></figure><p>如果由於上述原因導致安裝<code>nvidia-driver-&#123;version&#125;</code>失敗，執行<code>sudo update-initramfs -u</code>時發現<code>/boot</code>分區內存不足：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">~$ sudo update-initramfs -u<br>update-initramfs: Generating /boot/initrd.img-5.15.0-43-generic<br>Error 24 : Write error : cannot write compressed block<br>E: mkinitramfs failure cpio 141 lz4 -9 -l 24<br>update-initramfs: failed <span class="hljs-keyword">for</span> /boot/initrd.img-5.15.0-43-generic with 1.<br></code></pre></td></tr></table></figure><p>此時嘗試備份後刪除<code>/boot</code>分區的<code>old</code>內容，重新執行<code>sudo update-initramfs -u</code>即可。</p><p><code>sudo dkms status</code> 可檢查當前狀態。</p><h2 id="知識點總結"><a href="#知識點總結" class="headerlink" title="知識點總結"></a>知識點總結</h2><ul><li><code>dkms</code>：Dynamic Kernel Module Support，動態內核模塊支持。可生成 Linux 內核模塊。</li><li><code>dmeag</code>：Diagnostic message，診斷信息</li></ul><h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul><li><a href="https://blog.csdn.net/weixin_43825748/article/details/112979312">Failed to initialize NVML: Driver/library version mismatch解决</a></li><li><a href="https://forums.developer.nvidia.com/t/nvidia-smi-failed-to-initialize-nvml-driver-library-version-mismatch/222848">Nvidia-smi failed to initialize NVML (driver/library version mismatch)</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>GPU</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>GPU</tag>
+      
+      <tag>Nvidia</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Shell/Bash 腳本板子速查</title>
     <link href="/shell/230403ShellScripts/"/>
     <url>/shell/230403ShellScripts/</url>

@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="本篇不定期更新 Shell/Bash 的實用腳本，方便速查。">
+  <meta name="description" content="">
   <meta name="author" content="Enatsu">
   <meta name="keywords" content="">
   
-  <title>Shell/Bash 腳本板子速查 - Enatsu&#39;s Site</title>
+  <title>230427NvidiaMismatch - Enatsu&#39;s Site</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
 
@@ -180,7 +180,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Shell/Bash 腳本板子速查">
+            <span class="h2" id="subtitle" title="230427NvidiaMismatch">
               
             </span>
 
@@ -190,8 +190,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-04-03 14:19" pubdate>
-        2023年4月3日 下午
+      <time datetime="2023-04-27 15:20" pubdate>
+        2023年4月27日 下午
       </time>
     </span>
   
@@ -202,7 +202,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      凡 214 字
+      凡 388 字
     </span>
   
 
@@ -212,7 +212,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分鐘
     </span>
   
@@ -242,21 +242,38 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Shell/Bash 腳本板子速查</h1>
+            <h1 style="display: none">230427NvidiaMismatch</h1>
             
             <div class="markdown-body">
-              <p>本篇不定期更新 Shell/Bash 的實用腳本，方便速查。</p>
-<span id="more"></span>
+              <p>有時執行<code>nvidia-smi</code>會報錯：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">Failed to initialize NVML: Driver/library version mismatch<br></code></pre></td></tr></table></figure>
 
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">stri=<span class="hljs-string">&quot;abcdABCD1234&quot;</span><br><br><span class="hljs-comment"># 獲取字符串長度</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;#stri&#125;</span><br><span class="hljs-comment"># 預期輸出：12</span><br><br><span class="hljs-comment"># 匹配字符串開頭的子串長度</span><br><span class="hljs-comment"># 不支持 Regex 操作如：</span><br><span class="hljs-comment">#   a+ (aa*)</span><br><span class="hljs-comment">#  \d ([0-9]) 等</span><br><span class="hljs-built_in">echo</span> $(expr match <span class="hljs-string">&quot;<span class="hljs-variable">$stri</span>&quot;</span> <span class="hljs-string">&#x27;[a-z]*ABCD[0-9]*&#x27;</span>)<br><span class="hljs-comment"># 預期輸出：12</span><br><br></code></pre></td></tr></table></figure>
+<p>如果重啓不能解決，此時可通過 <code>sudo dmesg |tail -4</code> 命令確認客戶端和內核驅動版本的差異：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[   27.998032] NVRM: API mismatch: the client has the version 470.182.03, but<br>               NVRM: this kernel module has the version 470.161.03.  Please<br>               NVRM: make sure that this kernel module and all NVIDIA driver<br>               NVRM: components have the same version.<br></code></pre></td></tr></table></figure>
 
-<h2 id="文件切割合併"><a href="#文件切割合併" class="headerlink" title="文件切割合併"></a>文件切割合併</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a><code>cat</code></h3><h3 id="split"><a href="#split" class="headerlink" title="split"></a><code>split</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 指定文件行數，逐 300 行分割</span><br><span class="hljs-comment"># 默認文件名：`xaa`，`xab`, ...</span><br>split -l 300 log.txt<br><br><span class="hljs-comment"># 指定文件大小，每 300M 分割</span><br><span class="hljs-comment"># 指定新文件名前綴 `newfile`</span><br><span class="hljs-comment"># 文件名：`newfileaa`, `newfileab`, ...</span><br>split -b 500m log.txt newfile<br></code></pre></td></tr></table></figure>
+<p>一般地，安裝與客戶端匹配的對應版本號最新版 nvidia 驅動可解決：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install nvidia-driver-470<br></code></pre></td></tr></table></figure>
 
-<h2 id="批量刪除進程"><a href="#批量刪除進程" class="headerlink" title="批量刪除進程"></a>批量刪除進程</h2><h3 id="指定進程號範圍"><a href="#指定進程號範圍" class="headerlink" title="指定進程號範圍"></a>指定進程號範圍</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> (( c=3452000; c&lt;=3455000; c++ )); <span class="hljs-keyword">do</span>  <span class="hljs-built_in">kill</span> -9 <span class="hljs-variable">$c</span>; <span class="hljs-keyword">done</span>;<br></code></pre></td></tr></table></figure>
+<p>如果 <code>initramfs</code> 報錯導致內核更新失敗，提示如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">dpkg: error processing package initramfs-tools (--configure):<br> subprocess installed post-installation script returned error <span class="hljs-built_in">exit</span> status 1<br>Errors were encountered <span class="hljs-keyword">while</span> processing:<br> initramfs-tools<br></code></pre></td></tr></table></figure>
 
-<h3 id="指定關鍵詞"><a href="#指定關鍵詞" class="headerlink" title="指定關鍵詞"></a>指定關鍵詞</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> $(ps aux | grep <span class="hljs-string">&#x27;train_task.py&#x27;</span> | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>可嘗試重新配置<code>initramfs-tools</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo rm -f /var/lib/dpkg/info/initramfs-tools.post*<br>sudo rm -f /var/lib/dpkg/info/initramfs-tools.pre*<br>sudo rm -f /var/lib/dpkg/info/bcmwl-kernel-source.post*<br>sudo rm -f /var/lib/dpkg/info/bcmwl-kernel-source.pre*<br>sudo dpkg --configure -a<br></code></pre></td></tr></table></figure>
 
-<h2 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls mono<span class="hljs-regexp">/bpe-cased-$name | xargs -t -i mv mono/</span>bpe-cased-<span class="hljs-variable">$name</span><span class="hljs-regexp">/&#123;&#125; mono/</span>bpe-cased-<span class="hljs-variable">$name</span>/&#123;&#125;.<span class="hljs-variable">$tgt</span><br></code></pre></td></tr></table></figure>
+<p>如果由於上述原因導致安裝<code>nvidia-driver-&#123;version&#125;</code>失敗，執行<code>sudo update-initramfs -u</code>時發現<code>/boot</code>分區內存不足：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">~$ sudo update-initramfs -u<br>update-initramfs: Generating /boot/initrd.img-5.15.0-43-generic<br>Error 24 : Write error : cannot write compressed block<br>E: mkinitramfs failure cpio 141 lz4 -9 -l 24<br>update-initramfs: failed <span class="hljs-keyword">for</span> /boot/initrd.img-5.15.0-43-generic with 1.<br></code></pre></td></tr></table></figure>
+
+<p>此時嘗試備份後刪除<code>/boot</code>分區的<code>old</code>內容，重新執行<code>sudo update-initramfs -u</code>即可。</p>
+<p><code>sudo dkms status</code> 可檢查當前狀態。</p>
+<h2 id="知識點總結"><a href="#知識點總結" class="headerlink" title="知識點總結"></a>知識點總結</h2><ul>
+<li><code>dkms</code>：Dynamic Kernel Module Support，動態內核模塊支持。可生成 Linux 內核模塊。</li>
+<li><code>dmeag</code>：Diagnostic message，診斷信息</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43825748/article/details/112979312">Failed to initialize NVML: Driver/library version mismatch解决</a></li>
+<li><a target="_blank" rel="noopener" href="https://forums.developer.nvidia.com/t/nvidia-smi-failed-to-initialize-nvml-driver-library-version-mismatch/222848">Nvidia-smi failed to initialize NVML (driver/library version mismatch)</a></li>
+</ul>
+
             </div>
             <hr>
             <div>
@@ -265,7 +282,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/shell/">shell</a>
+                      <a class="hover-with-bg" href="/categories/gpu/">GPU</a>
                     
                   </div>
                 
@@ -273,9 +290,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/shell/">shell</a>
+                      <a class="hover-with-bg" href="/tags/linux/">Linux</a>
                     
-                      <a class="hover-with-bg" href="/tags/bash/">bash</a>
+                      <a class="hover-with-bg" href="/tags/gpu/">GPU</a>
+                    
+                      <a class="hover-with-bg" href="/tags/nvidia/">Nvidia</a>
                     
                   </div>
                 
@@ -292,18 +311,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/gpu/230427NvidiaMismatch/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">230427NvidiaMismatch</span>
-                        <span class="visible-mobile">前篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/gpu/230217GPUProcessTrifies/">
-                        <span class="hidden-mobile">230217 進程顯存佔用瑣記</span>
+                      <a href="/shell/230403ShellScripts/">
+                        <span class="hidden-mobile">Shell/Bash 腳本板子速查</span>
                         <span class="visible-mobile">後篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
