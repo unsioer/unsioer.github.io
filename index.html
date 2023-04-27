@@ -200,7 +200,7 @@
       <h1 class="index-header">
         
         <a href="/gpu/230427NvidiaMismatch/" target="_self">
-          230427NvidiaMismatch
+          230427 Nvidia 驅動程序/庫版本不匹配
         </a>
       </h1>
 
@@ -210,11 +210,7 @@
           
             
           
-          有時執行nvidia-smi會報錯：
-1Failed to initialize NVML: Driver/library version mismatch
-
-如果重啓不能解決，此時可通過 sudo dmesg |tail -4 命令確認客戶端和內核驅動版本的差異：
-1234[   27.998032] NVRM: API mismatch: the client has the version 
+          Failed to initialize NVML: Driver/library version mismatch 的一點解決方案總結。
         </a>
       </p>
 
